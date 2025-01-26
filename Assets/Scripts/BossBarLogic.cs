@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BossBarLogic : MonoBehaviour
 {
-    public int padding;
+    public uint padding;
     public RectTransform progress_bar_transform;
     public Image winning_bar;
     public Image losing_bar;
