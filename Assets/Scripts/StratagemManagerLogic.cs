@@ -70,7 +70,7 @@ public class StratagemManagerLogic : MonoBehaviour
 
         // Trigger the first combo that matches!
         for (int i=0; i<stratagem_combos.Count; i++){
-            
+
         }
 
         // Finally, if the stratagem combo is
@@ -101,7 +101,7 @@ public class StratagemManagerLogic : MonoBehaviour
         // Loop through each combo 
         for (int i=0; i < stratagem_combos.Count; i++) {
             List<stratagem_input_t> combo = stratagem_combos[i];
-            for (int j=0; i<combo.Count; j++) {
+            for (int j=0; j<combo.Count; j++) {
                 // If we are longer than the current combo, break.
                 if (j >= current_combo.Count) {
                     break;
