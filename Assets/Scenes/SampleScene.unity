@@ -172,7 +172,7 @@ MonoBehaviour:
   base_pitch: 0.5
   pitch_range: 2
   fight_state: 0
-  ding: {fileID: 8300000, guid: 64e8cd7c2697cf4449ea56cff2576d4b, type: 3}
+  ding: {fileID: 8300000, guid: 2d80f83198796164db240fef419dddbb, type: 3}
 --- !u!114 &103442649
 MonoBehaviour:
   m_ObjectHideFlags: 0
