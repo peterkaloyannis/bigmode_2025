@@ -1,4 +1,0 @@
-repository "bigmode_2025@H0l0gram@cloud"
-  path "/"
-    br "/main"
-    co "/main"

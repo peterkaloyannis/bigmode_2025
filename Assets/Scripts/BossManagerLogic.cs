@@ -53,10 +53,12 @@ public class BossManagerLogic : MonoBehaviour
 
             case fight_state_t.WON:
                 // Idle in WON
+                meter = 1f;
                 break;
 
             case fight_state_t.LOST:
                 // Idle in LOST
+                meter = 0f;
                 break;
 
             case fight_state_t.RESET:
