@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3400137626183353550
+--- !u!1001 &4657719107335963055
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,11 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 657843283089367982, guid: 67f38f7f817f7654cb08136508d40f61, type: 3}
       propertyPath: cooldown
-      value: 20
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 657843283089367982, guid: 67f38f7f817f7654cb08136508d40f61, type: 3}
+      propertyPath: stratagem_type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 657843283089367982, guid: 67f38f7f817f7654cb08136508d40f61, type: 3}
       propertyPath: combo.Array.size
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 657843283089367982, guid: 67f38f7f817f7654cb08136508d40f61, type: 3}
+      propertyPath: 'combo.Array.data[1]'
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 657843283089367982, guid: 67f38f7f817f7654cb08136508d40f61, type: 3}
       propertyPath: 'combo.Array.data[2]'
@@ -22,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 657843283089367982, guid: 67f38f7f817f7654cb08136508d40f61, type: 3}
       propertyPath: 'combo.Array.data[3]'
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3676229084271933238, guid: 67f38f7f817f7654cb08136508d40f61, type: 3}
       propertyPath: m_Name
-      value: Mash Rush Variant
+      value: Meter Chunk Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7741788650882789258, guid: 67f38f7f817f7654cb08136508d40f61, type: 3}
       propertyPath: m_LocalPosition.x

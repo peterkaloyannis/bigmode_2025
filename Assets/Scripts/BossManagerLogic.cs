@@ -28,6 +28,11 @@ public class BossManagerLogic : MonoBehaviour
     public float pitch_range; // The range for values spanned by the pitch.
     public fight_state_t fight_state = fight_state_t.INIT; // The boss state.
     public AudioClip ding; // The sound effect for mashing.
+    public StratagemManagerLogic stratagem_manager; // The stratagem manager
+    public float mash_rush_multiplier; // Mash Rush Multiplier
+    public float meter_chunk_power; // Meter chunk
+    public float meter_chunk_mash_block_time; // Countdown time (s) to block mashing.
+    private float mash_block_countdown; // The actual countdown for meter chunk
     private last_key_pressed_t last_key_pressed = last_key_pressed_t.NONE; // The last key pressed for the mash logic.
     private float pitch_integral = 0f; // An integral of the mashing.
 
@@ -87,21 +92,42 @@ public class BossManagerLogic : MonoBehaviour
         // First, boss burns down the decay rate meter by a rate constant.
         meter -= meter_subtraction_rate * Time.deltaTime;
 
+        // The meter chunk stratagem is applied here.
+        // We check for meter_chunks and then destroy them.
+        float mash_addition_modified = mash_addition;
+        foreach (stratagem_types_t stratagem_type in stratagem_manager.active_stratgems){
+            if (stratagem_type == stratagem_types_t.meter_chunk){
+                meter += meter_chunk_power;
+                mash_block_countdown = meter_chunk_mash_block_time;
+            }
+            else if (stratagem_type == stratagem_types_t.mash_rush){
+                mash_addition_modified *= mash_rush_multiplier;
+            }
+        }
+        stratagem_manager.active_stratgems.RemoveAll(item => item == stratagem_types_t.meter_chunk);
+
+        // Zero mashing if mashing is blocked.
+        mash_addition_modified = (mash_block_countdown>0) ? 0f: mash_addition_modified;
+
         // Fight the boss every time we alternate keys.
         bool a_is_alternated_to = (last_key_pressed != last_key_pressed_t.A) && Input.GetKeyDown(KeyCode.A);
         bool s_is_alternated_to = (last_key_pressed != last_key_pressed_t.S) && Input.GetKeyDown(KeyCode.S);
         if (a_is_alternated_to){
             last_key_pressed = last_key_pressed_t.A;
-            meter += mash_addition;
+            meter += mash_addition_modified;
             mash_ding();
         }
         else if (s_is_alternated_to){
             last_key_pressed = last_key_pressed_t.S;
-            meter += mash_addition;
+            meter += mash_addition_modified;
             mash_ding();
         }
         // Decay the pitch on every frame.
         exponential_pitch_decay();
+
+        // Update the mash blocker decay
+        mash_block_countdown -= Time.deltaTime;
+        mash_block_countdown = Mathf.Clamp(mash_block_countdown,0,100);
 
         // Meter is clamped to [0,1] for other functions to use it safely.
         meter = Mathf.Clamp(meter, 0f, 1f);
