@@ -292,6 +292,8 @@ MonoBehaviour:
   current_combo: 
   stratagem_names: []
   stratagem_matches: 
+  invalid_combo_noise: {fileID: 8300000, guid: eac87dace5296eb43b4eb7e28cf1d47c, type: 3}
+  valid_combo_noise: {fileID: 8300000, guid: 1eb21176de9cd674a910796ae3b69ca7, type: 3}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
