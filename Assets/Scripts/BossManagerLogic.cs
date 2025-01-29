@@ -95,16 +95,15 @@ public class BossManagerLogic : MonoBehaviour
         // The meter chunk stratagem is applied here.
         // We check for meter_chunks and then destroy them.
         float mash_addition_modified = mash_addition;
-        foreach (stratagem_types_t stratagem_type in stratagem_manager.active_stratgems){
-            if (stratagem_type == stratagem_types_t.meter_chunk){
+        foreach (effect_type_t effect in stratagem_manager.active_effects){
+            if (effect == effect_type_t.meter_chunk){
                 meter += meter_chunk_power;
                 mash_block_countdown = meter_chunk_mash_block_time;
             }
-            else if (stratagem_type == stratagem_types_t.mash_rush){
+            else if (effect == effect_type_t.mash_rush){
                 mash_addition_modified *= mash_rush_multiplier;
             }
         }
-        stratagem_manager.active_stratgems.RemoveAll(item => item == stratagem_types_t.meter_chunk);
 
         // Zero mashing if mashing is blocked.
         mash_addition_modified = (mash_block_countdown>0) ? 0f: mash_addition_modified;
