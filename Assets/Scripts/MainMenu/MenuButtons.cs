@@ -9,6 +9,15 @@ using UnityEditor;
 
 public class MenuButtons : MonoBehaviour
 {
+    public Transform MainScreen;
+    public Transform AchievementScreen;
+    public bool AchievementsLocked;
+
+    void Start()
+    {
+        AchievementsLocked = false;
+        AchievementScreen.gameObject.SetActive(false);
+    }
 
     public void StartGame()
     {
@@ -23,5 +32,18 @@ public class MenuButtons : MonoBehaviour
         #endif
 
         Application.Quit();
+    }
+
+    public void OpenAchievements()
+    {
+        if (!AchievementsLocked){
+            AchievementScreen.gameObject.SetActive(true);
+            AchievementScreen.GetComponent<AchievementsButtons>().ResetBox();
+        }
+    }
+
+    public void BackToMenuFromAchievements()
+    {
+        AchievementScreen.gameObject.SetActive(false);
     }
 }
