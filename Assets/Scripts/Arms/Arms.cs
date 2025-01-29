@@ -7,30 +7,36 @@ public class Arms : MonoBehaviour
     public BossManagerLogic boss_manager;
     public Image image;
     private int currentAngle = 50;
-    private Dictionary<int, string> pathRef;
     public float rumbleIntensity = 0.1f;  // How far the sprite will move during the rumble
     private float maxRumbleIntensity = 0.5f;
     private float minRumbleIntensity = 0.1f;
     public float rumbleSpeed = 10f;       // How quickly the sprite will rumble
     private Vector3 originalPosition;
     private float last_boss_value = 0f;
+    private int numberImages;
+    private Dictionary<int, Sprite> ArmSprites;
+    public RectTransform progress_bar_transform;
+    private Material barMat;
+    private Material armMat;
 
     void Start(){
         originalPosition = transform.position;
-        pathRef = new Dictionary<int, string>();
-        for (int i = 0; i < 10; i++){
-            pathRef.Add(i, "Sprites/Arms/Arm00" + (10*i).ToString());
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Arms");
+        System.Array.Reverse(sprites);
+        int count = 0;
+        ArmSprites = new Dictionary<int, Sprite>();
+        foreach (Sprite sprite in sprites){
+            ArmSprites.Add(count, sprite);
+            count+=1;
         }
+        numberImages = count;
+        barMat = progress_bar_transform.GetComponent<Image>().material;
+        armMat = image.material;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentAngle != (int)(boss_manager.meter*10)){
-            image.sprite = Resources.Load<Sprite>(pathRef[(int)(boss_manager.meter*10)]);
-        }
-
-
         float offsetX = Random.Range(-rumbleIntensity, rumbleIntensity);
         float offsetY = Random.Range(-rumbleIntensity, rumbleIntensity);
         
@@ -39,7 +45,24 @@ public class Arms : MonoBehaviour
         float effort = Mathf.Clamp(boss_manager.meter - last_boss_value, 0f, 1f);
         rumbleIntensity = Mathf.Clamp( rumbleIntensity - 0.05f*Time.deltaTime + effort, minRumbleIntensity, maxRumbleIntensity);
 
-        currentAngle = (int)(boss_manager.meter*10);
+        UpdateShaderBar();
+        UpdateShaderArm();
+
+        // Update the values for the next call
+        currentAngle = (int)(boss_manager.meter*numberImages);
         last_boss_value = boss_manager.meter;
+    }
+
+    void UpdateShaderBar(){
+        barMat.SetFloat("_Angle", boss_manager.meter);
+        barMat.SetFloat("_Shake", rumbleIntensity);
+    }
+
+    void UpdateShaderArm(){
+        armMat.SetFloat("_Meter", boss_manager.meter);
+        if (currentAngle != (int)(boss_manager.meter*numberImages)){
+            armMat.SetTexture("_TextureArm", ArmSprites[(int)(Mathf.Clamp(boss_manager.meter*numberImages, 0, numberImages-1))].texture);
+            // image.sprite = ArmSprites[(int)(Mathf.Clamp(boss_manager.meter*numberImages, 0, numberImages-1))];
+        }
     }
 }
