@@ -937,8 +937,8 @@ Canvas:
   m_GameObject: {fileID: 1307026007}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 330585545}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1219,8 +1219,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   padding: 10
   progress_bar_transform: {fileID: 1728320438}
-  winning_bar: {fileID: 1371756982}
-  losing_bar: {fileID: 1014507948}
   boss_manager: {fileID: 103442648}
 --- !u!1 &1804162387
 GameObject:
