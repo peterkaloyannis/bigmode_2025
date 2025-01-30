@@ -21,7 +21,7 @@ public class BossManagerLogic : MonoBehaviour
 {
     public float meter; // The boss meter [0,1]
     public float mash_addition; // The amount to add on each mash.
-    public float meter_subtraction_rate; // The boss decay rate.
+    public float boss_dps; // The boss decay rate.
     public float max_pitch_integral; // The point when the pitch integral gives the max pitch.
     public float pitch_integral_decay_time; // The rate of decay of the pitch integral.
     public float base_pitch; // The base pitch of the mashing.
@@ -89,47 +89,61 @@ public class BossManagerLogic : MonoBehaviour
             return;
         }
 
-        // First, boss burns down the decay rate meter by a rate constant.
-        meter -= meter_subtraction_rate * Time.deltaTime;
+        // Keep track of player damage and boss damage separately.
+        float meter_additions = 0;
+        float meter_subtractions = 0;
 
         // The meter chunk stratagem is applied here.
         // We check for meter_chunks and then destroy them.
         float mash_addition_modified = mash_addition;
+        float boss_dps_modified = boss_dps;
         foreach (effect_type_t effect in stratagem_manager.active_effects){
+            // Chunk the bar!
             if (effect == effect_type_t.meter_chunk){
-                meter += meter_chunk_power;
-                mash_block_countdown = meter_chunk_mash_block_time;
+                meter_additions += meter_chunk_power;
             }
+            // More mash power!
             else if (effect == effect_type_t.mash_rush){
                 mash_addition_modified *= mash_rush_multiplier;
             }
+            // No more played damage!
+            else if (effect == effect_type_t.mash_block){
+                mash_addition_modified *= 0;
+            }
+            // A lot of boss damage! Negated by breaks.
+            else if (effect == effect_type_t.boss_chunk) {
+                boss_dps_modified *= 50;
+            }
+            // No more boss damage!
+            else if (effect == effect_type_t.meter_break){
+                boss_dps_modified *= 0;
+            }
         }
-
-        // Zero mashing if mashing is blocked.
-        mash_addition_modified = (mash_block_countdown>0) ? 0f: mash_addition_modified;
 
         // Fight the boss every time we alternate keys.
         bool a_is_alternated_to = (last_key_pressed != last_key_pressed_t.A) && Input.GetKeyDown(KeyCode.A);
         bool s_is_alternated_to = (last_key_pressed != last_key_pressed_t.S) && Input.GetKeyDown(KeyCode.S);
         if (a_is_alternated_to){
             last_key_pressed = last_key_pressed_t.A;
-            meter += mash_addition_modified;
+            meter_additions += mash_addition_modified;
             mash_ding();
         }
         else if (s_is_alternated_to){
             last_key_pressed = last_key_pressed_t.S;
-            meter += mash_addition_modified;
+            meter_additions += mash_addition_modified;
             mash_ding();
         }
+
+        // Compute boss damage.
+        meter_subtractions = boss_dps_modified * Time.deltaTime;
+
+        // Update the meter.
+        // Meter is clamped to [0,1] for other functions to use it safely.
+        meter += meter_additions - meter_subtractions;
+        meter = Mathf.Clamp(meter, 0f, 1f);
+
         // Decay the pitch on every frame.
         exponential_pitch_decay();
-
-        // Update the mash blocker decay
-        mash_block_countdown -= Time.deltaTime;
-        mash_block_countdown = Mathf.Clamp(mash_block_countdown,0,100);
-
-        // Meter is clamped to [0,1] for other functions to use it safely.
-        meter = Mathf.Clamp(meter, 0f, 1f);
     }
 
     void reset_state_update() {
