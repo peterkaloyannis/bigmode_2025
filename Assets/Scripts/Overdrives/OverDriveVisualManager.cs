@@ -12,18 +12,22 @@ public class OverDriveVisualManager : MonoBehaviour
     public Transform Container;
     public StratagemManagerLogic stratagem_manager;
     public GameObject stratagemPrefab;
-    public Dictionary<string, Material> loadingBars;
-    public Dictionary<string, List<Image>> HorizontalGroups;
-    public Dictionary<string, Transform> Titles;
+    private List<List<Image>> HorizontalGroups;
+    private List<Transform> Titles;
+    private Sprite[] Logos;
+    private List<Material> LogoMats;
+    private List<Transform> LogoTransforms;
     private Color arrowColor;
     private Vector3 titleOriginalPosition = Vector3.zero;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ColorUtility.TryParseHtmlString( "#00FDFF" , out arrowColor);
-        loadingBars = new Dictionary<string, Material>();
-        HorizontalGroups = new Dictionary<string, List<Image>>();
-        Titles = new Dictionary<string, Transform>();
+        HorizontalGroups = new List<List<Image>>();
+        Titles = new List<Transform>();
+        Logos = Resources.LoadAll<Sprite>("Sprites/Stratagems");
+        LogoMats = new List<Material>();
+        LogoTransforms = new List<Transform>();
         RedoLayout();
     }
 
@@ -51,18 +55,23 @@ public class OverDriveVisualManager : MonoBehaviour
             GameObject newInput = Instantiate(stratagemPrefab, Container.transform);
             newInput.name = stratagem_manager.stratagem_names[i];
 
-            GameObject loadingBar = newInput.transform.Find("LoadingBar").gameObject;
-            loadingBar.GetComponent<Image>().material = new Material(loadingBar.GetComponent<Image>().material);
-            loadingBars.Add(stratagem_manager.stratagem_names[i], loadingBar.GetComponent<Image>().material);
-
             GameObject HorizontalGroup = newInput.transform.Find("HorizontalGroup").gameObject;
             GameObject Title = newInput.transform.Find("Title").gameObject;
             titleOriginalPosition = Title.transform.localPosition;
-            Titles.Add(stratagem_manager.stratagem_names[i], Title.transform);
+            Titles.Add(Title.transform);
             GameObject Arrow = HorizontalGroup.transform.Find("Arrow").gameObject;
 
+            LogoTransforms.Add(newInput.transform.Find("Logo"));
+            LogoTransforms[i].GetComponent<Image>().material = new Material(LogoTransforms[i].GetComponent<Image>().material);
+            LogoMats.Add(LogoTransforms[i].GetComponent<Image>().material);
+            foreach (Sprite sprite in Logos){
+                if (sprite.name == stratagem_manager.stratagem_names[i]){
+                    newInput.transform.Find("Logo").GetComponent<Image>().sprite = sprite;
+                    LogoMats[i].SetTexture("_MainTex", sprite.texture);
+                }
+            }
+
             Title.GetComponent<TextMeshProUGUI>().text = stratagem_manager.stratagem_names[i];
-            loadingBar.GetComponent<Image>().fillAmount = 0f;
             int count = 0;
 
             List<Image> images = new List<Image>();
@@ -79,7 +88,7 @@ public class OverDriveVisualManager : MonoBehaviour
                 count+=1;
             }
 
-            HorizontalGroups.Add(stratagem_manager.stratagem_names[i], images);
+            HorizontalGroups.Add(images);
         }
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(Container.GetComponent<RectTransform>());
@@ -91,17 +100,22 @@ public class OverDriveVisualManager : MonoBehaviour
         for (int i = 0; i < stratagem_manager.stratagem_matches.Count; i++){
             for (int j = 0; j < stratagem_manager.stratagem_combos[i].Count; j++){
                 if (j < stratagem_manager.stratagem_matches[i]){
-                    HorizontalGroups[stratagem_manager.stratagem_names[i]][j].color = arrowColor;
+                    HorizontalGroups[i][j].color = arrowColor;
                 } else {
-                    HorizontalGroups[stratagem_manager.stratagem_names[i]][j].color = Color.white;
+                    HorizontalGroups[i][j].color = Color.white;
                 }
             }
+            LogoMats[i].SetFloat("_Cooldown", (float)stratagem_manager.stratagem_cooldown_timers[i] / (float)stratagem_manager.stratagem_cooldowns[i]);
 
-            loadingBars[stratagem_manager.stratagem_names[i]].SetFloat("_Cooldown", (float)stratagem_manager.stratagem_cooldown_timers[i] / (float)stratagem_manager.stratagem_cooldowns[i]);
+            if (stratagem_manager.stratagem_cooldown_timers[i] > 0){
+                LogoTransforms[i].localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            } else {
+                LogoTransforms[i].localScale = new Vector3(0.4f, 0.4f, 0.4f);
+            }
         } 
 
 
-        foreach (Transform title in Titles.Values)
+        foreach (Transform title in Titles)
         {
             title.localPosition = titleOriginalPosition;
             title.GetComponent<TextMeshProUGUI>().color = arrowColor;
@@ -113,8 +127,8 @@ public class OverDriveVisualManager : MonoBehaviour
                     float offsetX = Random.Range(-0.5f, 0.5f);
                     float offsetY = Random.Range(-0.5f, 0.5f);
                     
-                    Titles[stratagem_manager.stratagem_names[j]].localPosition += new Vector3(offsetX, 0, offsetY);
-                    Titles[stratagem_manager.stratagem_names[j]].GetComponent<TextMeshProUGUI>().color = Color.white;
+                    Titles[j].localPosition += new Vector3(offsetX, 0, offsetY);
+                    Titles[j].GetComponent<TextMeshProUGUI>().color = Color.white;
                 }
             }
         }
