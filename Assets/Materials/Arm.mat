@@ -71,7 +71,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureArm:
-        m_Texture: {fileID: 2800000, guid: c8691b34222055a41a6e0a788cdd69a7, type: 3}
+        m_Texture: {fileID: 2800000, guid: c124bf5f8780bf64f842245cac872160, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -108,7 +108,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Meter: 0.4535146
+    - _Meter: 0
     - _OcclusionStrength: 1
     - _Offset: 0.005
     - _Parallax: 0.005

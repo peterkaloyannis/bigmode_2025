@@ -5,11 +5,14 @@ public class FightAudioManager : MonoBehaviour
     private AudioClip[] Loops;
     private AudioSource[] MusicSources;
     private double goalTime = 0f;
+    private double initGoalTime = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Loops = Resources.LoadAll<AudioClip>("Sounds/Music/FightScene");
         MusicSources = new AudioSource[2*Loops.Length];
+        initGoalTime = AudioSettings.dspTime + 1;
+        goalTime = AudioSettings.dspTime + 1 + (double)(Loops[0].samples) / Loops[0].frequency;
         foreach (AudioClip loop in Loops){
             GameObject audioObject = new GameObject(loop.name);
             audioObject.transform.SetParent(this.transform);
@@ -18,9 +21,8 @@ public class FightAudioManager : MonoBehaviour
             AudioSource audioSource2 = audioObject.AddComponent<AudioSource>();
             MusicSources[2*System.Array.IndexOf(Loops, loop)+1] = audioSource2;
             audioSource.clip = loop;
+            MusicSources[2*System.Array.IndexOf(Loops, loop)].PlayScheduled(initGoalTime);
 
-            MusicSources[2*System.Array.IndexOf(Loops, loop)].PlayScheduled(AudioSettings.dspTime + 1);
-            goalTime = AudioSettings.dspTime + 1 + (double)(loop.samples) / loop.frequency;
             MusicSources[2*System.Array.IndexOf(Loops, loop)].volume = 0f;
             MusicSources[2*System.Array.IndexOf(Loops, loop)+1].volume = 0f;
         }

@@ -14,9 +14,11 @@ public class OverDriveVisualManager : MonoBehaviour
     public GameObject stratagemPrefab;
     public Dictionary<string, Material> loadingBars;
     public Dictionary<string, List<Image>> HorizontalGroups;
+    private Color arrowColor;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ColorUtility.TryParseHtmlString( "#00FDFF" , out arrowColor);
         loadingBars = new Dictionary<string, Material>();
         HorizontalGroups = new Dictionary<string, List<Image>>();
         RedoLayout();
@@ -84,13 +86,13 @@ public class OverDriveVisualManager : MonoBehaviour
         for (int i = 0; i < stratagem_manager.stratagem_matches.Count; i++){
             for (int j = 0; j < stratagem_manager.stratagem_combos[i].Count; j++){
                 if (j < stratagem_manager.stratagem_matches[i]){
-                    HorizontalGroups[stratagem_manager.stratagem_names[i]][j].color = Color.red;
+                    HorizontalGroups[stratagem_manager.stratagem_names[i]][j].color = arrowColor;
                 } else {
                     HorizontalGroups[stratagem_manager.stratagem_names[i]][j].color = Color.white;
                 }
             }
 
             loadingBars[stratagem_manager.stratagem_names[i]].SetFloat("_Cooldown", (float)stratagem_manager.stratagem_cooldown_timers[i] / (float)stratagem_manager.stratagem_cooldowns[i]);
-        }
+        } 
     }
 }

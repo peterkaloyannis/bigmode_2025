@@ -1162,9 +1162,9 @@ MonoBehaviour:
   Title1: {fileID: 1889957878}
   Title2: {fileID: 138923505}
   Title3: {fileID: 382441940}
-  TitleMusic: {fileID: 8300000, guid: f7691b9dfa029014385092ac42406b83, type: 3}
-  TransitionMusic: {fileID: 8300000, guid: 58e4e49384af97d43952fc51aedbc8b5, type: 3}
-  MenuMusic: {fileID: 8300000, guid: 65cfddbc75fd61046a949c7868619d88, type: 3}
+  TitleMusic: {fileID: 8300000, guid: 7b6692af4320d26439ebfc9d91452657, type: 3}
+  TransitionMusic: {fileID: 8300000, guid: f67bcc7cf938e8d4c9ca86e4937cb519, type: 3}
+  MenuMusic: {fileID: 8300000, guid: 0047d650aa544f940baaad86ce468112, type: 3}
   Music1: {fileID: 543801796}
   Music2: {fileID: 543801797}
 --- !u!4 &543801795
@@ -1189,7 +1189,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543801793}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -4755,7 +4755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1955242047
 RectTransform:
   m_ObjectHideFlags: 0
