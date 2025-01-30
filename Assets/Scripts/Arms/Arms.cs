@@ -9,7 +9,7 @@ public class Arms : MonoBehaviour
     private int currentAngle = 50;
     public float rumbleIntensity = 0.1f;  // How far the sprite will move during the rumble
     private float maxRumbleIntensity = 0.5f;
-    private float minRumbleIntensity = 0.1f;
+    private float minRumbleIntensity = 0f;
     public float rumbleSpeed = 10f;       // How quickly the sprite will rumble
     private Vector3 originalPosition;
     private float last_boss_value = 0f;
@@ -32,6 +32,7 @@ public class Arms : MonoBehaviour
         numberImages = count;
         barMat = progress_bar_transform.GetComponent<Image>().material;
         armMat = image.material;
+        last_boss_value = boss_manager.meter;
     }
 
     // Update is called once per frame
@@ -56,6 +57,13 @@ public class Arms : MonoBehaviour
     void UpdateShaderBar(){
         barMat.SetFloat("_Angle", boss_manager.meter);
         barMat.SetFloat("_Shake", rumbleIntensity);
+        if (rumbleIntensity > 0.2f){
+            barMat.SetFloat("_ElectricityMain", 1f);
+            barMat.SetFloat("_ElectricityVillain", 1f);
+        } else {
+            barMat.SetFloat("_ElectricityMain", 0f);
+            barMat.SetFloat("_ElectricityVillain", 0f);
+        }
     }
 
     void UpdateShaderArm(){
