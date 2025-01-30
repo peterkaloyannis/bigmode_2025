@@ -14,13 +14,16 @@ public class OverDriveVisualManager : MonoBehaviour
     public GameObject stratagemPrefab;
     public Dictionary<string, Material> loadingBars;
     public Dictionary<string, List<Image>> HorizontalGroups;
+    public Dictionary<string, Transform> Titles;
     private Color arrowColor;
+    private Vector3 titleOriginalPosition = Vector3.zero;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ColorUtility.TryParseHtmlString( "#00FDFF" , out arrowColor);
         loadingBars = new Dictionary<string, Material>();
         HorizontalGroups = new Dictionary<string, List<Image>>();
+        Titles = new Dictionary<string, Transform>();
         RedoLayout();
     }
 
@@ -54,6 +57,8 @@ public class OverDriveVisualManager : MonoBehaviour
 
             GameObject HorizontalGroup = newInput.transform.Find("HorizontalGroup").gameObject;
             GameObject Title = newInput.transform.Find("Title").gameObject;
+            titleOriginalPosition = Title.transform.localPosition;
+            Titles.Add(stratagem_manager.stratagem_names[i], Title.transform);
             GameObject Arrow = HorizontalGroup.transform.Find("Arrow").gameObject;
 
             Title.GetComponent<TextMeshProUGUI>().text = stratagem_manager.stratagem_names[i];
@@ -94,5 +99,24 @@ public class OverDriveVisualManager : MonoBehaviour
 
             loadingBars[stratagem_manager.stratagem_names[i]].SetFloat("_Cooldown", (float)stratagem_manager.stratagem_cooldown_timers[i] / (float)stratagem_manager.stratagem_cooldowns[i]);
         } 
+
+
+        foreach (Transform title in Titles.Values)
+        {
+            title.localPosition = titleOriginalPosition;
+            title.GetComponent<TextMeshProUGUI>().color = arrowColor;
+        }
+
+        for (int i=0; i<stratagem_manager.active_effects.Count; i++){
+            for (int j=0; j<stratagem_manager.stratagem_effects.Count; j++){
+                if (stratagem_manager.stratagem_effects[j].Contains(stratagem_manager.active_effects[i])){
+                    float offsetX = Random.Range(-0.5f, 0.5f);
+                    float offsetY = Random.Range(-0.5f, 0.5f);
+                    
+                    Titles[stratagem_manager.stratagem_names[j]].localPosition += new Vector3(offsetX, 0, offsetY);
+                    Titles[stratagem_manager.stratagem_names[j]].GetComponent<TextMeshProUGUI>().color = Color.white;
+                }
+            }
+        }
     }
 }
