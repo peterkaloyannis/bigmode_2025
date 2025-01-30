@@ -5,6 +5,7 @@ using UnityEngine;
 public class Stratagem:MonoBehaviour
 {
     public List<stratagem_input_t> combo; // The button combo of the stratagem.
+    public string description; // The stratagem behaviour.
     public float cooldown; // The cooldown of the stratagem.
     public List<effect_type_t> effects; // Enumerator designating which effects the stratagem applies.
     public List<float> effect_durations; // Enumerator designating the duration of each effect.

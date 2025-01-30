@@ -17,6 +17,8 @@ public enum effect_type_t {
     meter_chunk,
     mash_block,
     cooldown_refresh,
+    stratagem_block,
+    boss_chunk,
 }
 
 public class StratagemManagerLogic : MonoBehaviour
@@ -56,6 +58,17 @@ public class StratagemManagerLogic : MonoBehaviour
         // Collect the current combo
         collect_current_combo();
 
+        // Handle effects for stratagems before the effects
+        // are emptied so 1 frame effects can be applied.
+        foreach (effect_type_t effect in active_effects) {
+            if (effect == effect_type_t.cooldown_refresh){
+                list_fill<float>(stratagem_cooldown_timers, 0f);
+            }
+            if (effect == effect_type_t.stratagem_block){
+                list_fill<float>(stratagem_cooldown_timers, 600f);
+            }
+        }
+
         // Loop through the active effects to check if they
         // are still valid. We loop through backwards to prevent
         // index shifting after removal.
@@ -83,15 +96,15 @@ public class StratagemManagerLogic : MonoBehaviour
             cooldown_timer = Mathf.Clamp(
                 cooldown_timer - Time.deltaTime,
                 0,
-                stratagem_cooldowns[i]
+                600
             );
             stratagem_cooldown_timers[i] = cooldown_timer;
 
-            // If the current combo is 0, reset.
+            // If the current combo has 0 length, set the number
+            // of matches to 0 and return early.
             if (current_combo.Count == 0) {
                 stratagem_matches[i] = 0;
                 matches_available = true;
-                continue;
             }
 
             // Loop through the combo of the stratagem and check how well
@@ -147,6 +160,12 @@ public class StratagemManagerLogic : MonoBehaviour
         if (!matches_available) {
             make_combo_noise(invalid_combo_noise);
             current_combo.Clear();
+        }
+    }
+
+    void list_fill<T>(List<T> list, T value){
+        for (int i=0; i<list.Count; i++) {
+            list[i] = value;
         }
     }
 
