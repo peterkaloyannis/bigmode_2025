@@ -1,0 +1,56 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "NPC",
+                "text": [
+                    "Hello, traveler! What brings you here?",
+                    "I am a lowly NPC. I don't know jack."
+                ]
+            },
+            {
+                "speaker": "NPC2",
+                "text": [
+                    "I am here to learn.",
+                    "Will you help me?",
+                    "Even if I say sooooooooo many things and i neeeever stop talking and talking and talking and"
+                ]
+            }
+        ]
+    },
+    {
+        "achievements_needed": [0],
+        "lines": [
+            {
+                "speaker": "NPC",
+                "text": [
+                    "blah blah blah"
+                ]
+            },
+            {
+                "speaker": "NPC2",
+                "text": [
+                    "nothing to see here"
+                ]
+            }
+        ]
+    },
+    {
+        "achievements_needed": [0, 1],
+        "lines": [
+            {
+                "speaker": "NPC",
+                "text": [
+                    "me neither"
+                ]
+            },
+            {
+                "speaker": "NPC2",
+                "text": [
+                    "me, me neither"
+                ]
+            }
+        ]
+    }
+]}
