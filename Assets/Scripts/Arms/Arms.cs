@@ -61,6 +61,7 @@ public class Arms : MonoBehaviour
         barMat.SetFloat("_Angle", boss_manager.meter);
         frameMat.SetFloat("_Angle", boss_manager.meter);
         barMat.SetFloat("_Shake", rumbleIntensity);
+        frameMat.SetFloat("_Shake", rumbleIntensity);
         if (rumbleIntensity > 0.2f){
             barMat.SetFloat("_ElectricityMain", 1f);
             barMat.SetFloat("_ElectricityVillain", 1f);
