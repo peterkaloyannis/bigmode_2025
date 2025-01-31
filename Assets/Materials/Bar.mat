@@ -112,9 +112,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _ElectricityMain: 0
+    - _ElectricityMain: 1
     - _ElectricityScale: 0
-    - _ElectricityVillain: 0
+    - _ElectricityVillain: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -126,7 +126,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Shake: 0.17340633
+    - _Shake: 0.42899412
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

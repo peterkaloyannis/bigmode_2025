@@ -110,7 +110,7 @@ Material:
     - _Metallic: 0
     - _Meter: 1
     - _OcclusionStrength: 1
-    - _Offset: 0.005
+    - _Offset: 0.007
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0

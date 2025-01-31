@@ -20,9 +20,14 @@ public class Arms : MonoBehaviour
     private Material armMat;
     public Transform Frame;
     private Material frameMat;
+    public Transform boss;
+    private Image boss_image;
+    private Dictionary<int, Sprite> BossSprites;
 
     void Start(){
         originalPosition = transform.position;
+
+        // load arm
         Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Arms");
         System.Array.Reverse(sprites);
         int count = 0;
@@ -31,11 +36,23 @@ public class Arms : MonoBehaviour
             ArmSprites.Add(count, sprite);
             count+=1;
         }
+
+        // load boss
+        sprites = Resources.LoadAll<Sprite>("Sprites/Boss");
+        System.Array.Reverse(sprites);
+        count = 0;
+        BossSprites = new Dictionary<int, Sprite>();
+        foreach (Sprite sprite in sprites){
+            BossSprites.Add(count, sprite);
+            count+=1;
+        }
+
         numberImages = count;
         barMat = progress_bar_transform.GetComponent<Image>().material;
         armMat = image.material;
         last_boss_value = boss_manager.meter;
         frameMat = Frame.GetComponent<Image>().material;
+        boss_image = boss.GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -51,6 +68,7 @@ public class Arms : MonoBehaviour
 
         UpdateShaderBar();
         UpdateShaderArm();
+        UpdateBoss();
 
         // Update the values for the next call
         currentAngle = (int)(boss_manager.meter*numberImages);
@@ -75,7 +93,10 @@ public class Arms : MonoBehaviour
         armMat.SetFloat("_Meter", boss_manager.meter);
         if (currentAngle != (int)(boss_manager.meter*numberImages)){
             armMat.SetTexture("_TextureArm", ArmSprites[(int)(Mathf.Clamp(boss_manager.meter*numberImages, 0, numberImages-1))].texture);
-            // image.sprite = ArmSprites[(int)(Mathf.Clamp(boss_manager.meter*numberImages, 0, numberImages-1))];
         }
+    }
+
+    void UpdateBoss(){
+        boss_image.sprite = BossSprites[(int)(Mathf.Clamp(boss_manager.meter*numberImages, 0, numberImages-1))];
     }
 }
