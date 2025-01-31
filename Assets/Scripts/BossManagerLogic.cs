@@ -126,12 +126,16 @@ public class BossManagerLogic : MonoBehaviour
         if (a_is_alternated_to){
             last_key_pressed = last_key_pressed_t.A;
             meter_additions += mash_addition_modified;
-            mash_ding();
+            if (mash_addition_modified > 0){
+                mash_ding();
+            }
         }
         else if (s_is_alternated_to){
             last_key_pressed = last_key_pressed_t.S;
             meter_additions += mash_addition_modified;
-            mash_ding();
+            if (mash_addition_modified > 0){
+                mash_ding();
+            }
         }
 
         // Compute boss damage.

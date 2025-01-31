@@ -2139,6 +2139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emptyKey: {fileID: 21300000, guid: be1da0c9e4b034e44a4c835836098111, type: 3}
   fullKey: {fileID: 21300000, guid: 4c1437bd38c881d41ba6dff380eed8b4, type: 3}
+  stratagemManagerLogic: {fileID: 718602942}
 --- !u!1 &1234776521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3370,6 +3371,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7465417944742377850, guid: e4f936c6d8a091f4f99fb0033de107fb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -39.81
+      objectReference: {fileID: 0}
     - target: {fileID: 8001842514997010211, guid: e4f936c6d8a091f4f99fb0033de107fb, type: 3}
       propertyPath: m_Name
       value: StratagemPrefab
@@ -3405,18 +3410,6 @@ PrefabInstance:
     - target: {fileID: 8751856443922565779, guid: e4f936c6d8a091f4f99fb0033de107fb, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8751856443922565779, guid: e4f936c6d8a091f4f99fb0033de107fb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8751856443922565779, guid: e4f936c6d8a091f4f99fb0033de107fb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8751856443922565779, guid: e4f936c6d8a091f4f99fb0033de107fb, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8751856443922565779, guid: e4f936c6d8a091f4f99fb0033de107fb, type: 3}
       propertyPath: m_LocalPosition.x
