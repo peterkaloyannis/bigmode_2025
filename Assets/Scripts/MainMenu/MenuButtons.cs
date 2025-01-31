@@ -46,4 +46,9 @@ public class MenuButtons : MonoBehaviour
     {
         AchievementScreen.gameObject.SetActive(false);
     }
+
+    public void ResetProgress()
+    {
+        
+    }
 }

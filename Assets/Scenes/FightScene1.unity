@@ -1521,13 +1521,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meter: 0.5
   mash_addition: 0.01
-  boss_dps: 0
+  boss_dps: 0.05
   max_pitch_integral: 15
   pitch_integral_decay_time: 0.7
   base_pitch: 0.5
   pitch_range: 2
   fight_state: 0
-  ding: {fileID: 8300000, guid: 4d329c189dd641344acce335323afa96, type: 3}
+  ding: {fileID: 8300000, guid: d1344b937610150439438b597b8666bc, type: 3}
   stratagem_manager: {fileID: 718602942}
   mash_rush_multiplier: 2
   meter_chunk_power: 0.2

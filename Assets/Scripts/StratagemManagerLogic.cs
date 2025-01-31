@@ -226,6 +226,8 @@ public class StratagemManagerLogic : MonoBehaviour
         // Play the audio
         GameObject tempAudio = new GameObject("TempAudioSource");
         AudioSource audioSource = tempAudio.AddComponent<AudioSource>();
+        audioSource.volume = 0.6f;
+        audioSource.priority = 130;
         audioSource.clip = noise;
         audioSource.Play();
 

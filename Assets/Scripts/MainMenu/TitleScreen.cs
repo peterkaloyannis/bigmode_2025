@@ -13,6 +13,7 @@ public class TitleScreen : MonoBehaviour
     private float flicker = 0f;
     private bool disappear = false;
     public Transform Cinema;
+    public Transform Buttons;
     void Start()
     {
 
@@ -46,6 +47,7 @@ public class TitleScreen : MonoBehaviour
             if (trackerCountDown > countDown)
             {
                 gameObject.SetActive(false);
+                Buttons.gameObject.SetActive(true);
             }
         }
     }
