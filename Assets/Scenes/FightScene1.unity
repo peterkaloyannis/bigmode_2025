@@ -1438,7 +1438,7 @@ MonoBehaviour:
   stratagem_matches: 
   active_effects: 
   active_effect_timers: []
-  invalid_combo_noise: {fileID: 8300000, guid: 1eb21176de9cd674a910796ae3b69ca7, type: 3}
+  invalid_combo_noise: {fileID: 8300000, guid: f02d8c0118cab054fb95b07501342909, type: 3}
   valid_combo_noise: {fileID: 8300000, guid: 64e8cd7c2697cf4449ea56cff2576d4b, type: 3}
 --- !u!114 &718602943
 MonoBehaviour:
@@ -2417,6 +2417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c87fdda18c2d44096aa828c79072af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 2295465777413504527, guid: 616d9df46ff2f6445adf650d7981ceba, type: 2}
+  bossManagerLogic: {fileID: 718602943}
 --- !u!4 &1888065285
 Transform:
   m_ObjectHideFlags: 0
@@ -2778,7 +2780,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 256.6, y: 1030.5}
+  m_AnchoredPosition: {x: 256.60004, y: 1030.5}
   m_SizeDelta: {x: 1410.7, y: 45.77}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2101994528

@@ -1,24 +1,34 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class FightAudioManager : MonoBehaviour
 {
     private AudioClip[] Loops;
     private AudioSource[] MusicSources;
-    private double goalTime = 0f;
+    private List<double> goalTime;
     private double initGoalTime = 0f;
+    public AudioMixerGroup mixerGroup;
+    public BossManagerLogic bossManagerLogic;
+    private bool fighting = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Loops = Resources.LoadAll<AudioClip>("Sounds/Music/FightScene");
         MusicSources = new AudioSource[2*Loops.Length];
         initGoalTime = AudioSettings.dspTime + 1;
-        goalTime = AudioSettings.dspTime + 1 + (double)(Loops[0].samples) / Loops[0].frequency;
+        goalTime = new List<double>();
+        for (int i=0; i<Loops.Length; i++){goalTime.Add(AudioSettings.dspTime + 1 + (double)(Loops[0].samples) / Loops[0].frequency);}
+
         foreach (AudioClip loop in Loops){
             GameObject audioObject = new GameObject(loop.name);
             audioObject.transform.SetParent(this.transform);
             AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+            audioSource.outputAudioMixerGroup = mixerGroup;
             MusicSources[2*System.Array.IndexOf(Loops, loop)] = audioSource;
             AudioSource audioSource2 = audioObject.AddComponent<AudioSource>();
+            audioSource2.outputAudioMixerGroup = mixerGroup;
             MusicSources[2*System.Array.IndexOf(Loops, loop)+1] = audioSource2;
             audioSource.clip = loop;
             MusicSources[2*System.Array.IndexOf(Loops, loop)].PlayScheduled(initGoalTime);
@@ -40,6 +50,14 @@ public class FightAudioManager : MonoBehaviour
         MusicSources[2*track+1].volume = 1f;
     }
 
+    void toggle_hp_filter()
+    {
+        foreach (AudioSource MusicSource in MusicSources){
+            MusicSource.bypassEffects = !MusicSource.bypassEffects;
+            MusicSource.outputAudioMixerGroup.audioMixer.SetFloat("HPCutoff", MusicSource.bypassEffects ? 0f : 1476f);
+        }
+    }
+
     int osc;
     // Update is called once per frame
     void Update()
@@ -54,21 +72,32 @@ public class FightAudioManager : MonoBehaviour
             SelectTrack(3);
         } else if (Input.GetKeyDown(KeyCode.Alpha5)){
             SelectTrack(4);
-        } 
+        }
 
-        if (AudioSettings.dspTime > goalTime - 1)
-        {
-            if (MusicSources[0].isPlaying){
-                osc = 1;
-            } else {
-                osc = 0;
+        if (fighting){
+            if (bossManagerLogic.fight_state == fight_state_t.PAUSED || bossManagerLogic.fight_state == fight_state_t.WON || bossManagerLogic.fight_state == fight_state_t.LOST){
+                fighting = false;
+                toggle_hp_filter();
             }
+        } else {
+            if (bossManagerLogic.fight_state == fight_state_t.PLAY || bossManagerLogic.fight_state == fight_state_t.INIT){
+                fighting = true;
+                toggle_hp_filter();
+            }
+        }
 
-            foreach (AudioClip loop in Loops){
-                MusicSources[2*System.Array.IndexOf(Loops, loop)+osc].clip = loop;
-                MusicSources[2*System.Array.IndexOf(Loops, loop)+osc].PlayScheduled(goalTime);
+        for (int i=0; i<goalTime.Count; i++){
+            if (AudioSettings.dspTime > goalTime[i] - 1)
+            {
+                if (MusicSources[2*i].isPlaying){
+                    osc = 1;
+                } else {
+                    osc = 0;
+                }
+                MusicSources[2*System.Array.IndexOf(Loops, Loops[i])+osc].clip = Loops[i];
+                MusicSources[2*System.Array.IndexOf(Loops, Loops[i])+osc].PlayScheduled(goalTime[i]);
+                goalTime[i] = goalTime[i] + (double)(Loops[0].samples) / Loops[0].frequency;
             }
-            goalTime = goalTime + (double)(Loops[0].samples) / Loops[0].frequency;
         }
     }
 }
