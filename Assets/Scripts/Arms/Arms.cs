@@ -23,6 +23,7 @@ public class Arms : MonoBehaviour
     public Transform boss;
     private Image boss_image;
     private Dictionary<int, Sprite> BossSprites;
+    private Vector3 centralPosition;
 
     void Start(){
         originalPosition = transform.position;
@@ -53,6 +54,8 @@ public class Arms : MonoBehaviour
         last_boss_value = boss_manager.meter;
         frameMat = Frame.GetComponent<Image>().material;
         boss_image = boss.GetComponent<Image>();
+
+        centralPosition = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -69,6 +72,7 @@ public class Arms : MonoBehaviour
         UpdateShaderBar();
         UpdateShaderArm();
         UpdateBoss();
+        UpdateArmPosition();
 
         // Update the values for the next call
         currentAngle = (int)(boss_manager.meter*numberImages);
@@ -98,5 +102,21 @@ public class Arms : MonoBehaviour
 
     void UpdateBoss(){
         boss_image.sprite = BossSprites[(int)(Mathf.Clamp(boss_manager.meter*numberImages, 0, numberImages-1))];
+    }
+
+    void UpdateArmPosition(){
+        if (boss_manager.fight_state == fight_state_t.PLAY || boss_manager.fight_state == fight_state_t.INIT){
+            if (Input.GetKey(KeyCode.LeftArrow)){
+                transform.localPosition = new Vector3(centralPosition.x - 8f, centralPosition.y, centralPosition.z);
+            } else if (Input.GetKey(KeyCode.RightArrow)){
+                transform.localPosition = new Vector3(centralPosition.x + 8f, centralPosition.y, centralPosition.z);
+            } else if (Input.GetKey(KeyCode.UpArrow)){
+                transform.localPosition = new Vector3(centralPosition.x, centralPosition.y + 8f, centralPosition.z);
+            } else if (Input.GetKey(KeyCode.DownArrow)){
+                transform.localPosition = new Vector3(centralPosition.x, centralPosition.y - 8f, centralPosition.z);
+            } else {
+                transform.localPosition = centralPosition;
+            }
+        }
     }
 }
