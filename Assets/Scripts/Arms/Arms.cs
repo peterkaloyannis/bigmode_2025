@@ -18,6 +18,8 @@ public class Arms : MonoBehaviour
     public RectTransform progress_bar_transform;
     private Material barMat;
     private Material armMat;
+    public Transform Frame;
+    private Material frameMat;
 
     void Start(){
         originalPosition = transform.position;
@@ -33,6 +35,7 @@ public class Arms : MonoBehaviour
         barMat = progress_bar_transform.GetComponent<Image>().material;
         armMat = image.material;
         last_boss_value = boss_manager.meter;
+        frameMat = Frame.GetComponent<Image>().material;
     }
 
     // Update is called once per frame
@@ -56,6 +59,7 @@ public class Arms : MonoBehaviour
 
     void UpdateShaderBar(){
         barMat.SetFloat("_Angle", boss_manager.meter);
+        frameMat.SetFloat("_Angle", boss_manager.meter);
         barMat.SetFloat("_Shake", rumbleIntensity);
         if (rumbleIntensity > 0.2f){
             barMat.SetFloat("_ElectricityMain", 1f);

@@ -436,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Source1: {fileID: 53300972}
   Source2: {fileID: 53300971}
-  TitleMusic: {fileID: 8300000, guid: 7b6692af4320d26439ebfc9d91452657, type: 3}
+  TitleMusic: {fileID: 8300000, guid: 42c8c33be1797124c91ec572089755e1, type: 3}
   TransitionMusic: {fileID: 8300000, guid: f67bcc7cf938e8d4c9ca86e4937cb519, type: 3}
   MenuMusic: {fileID: 8300000, guid: 0047d650aa544f940baaad86ce468112, type: 3}
   Ending1: {fileID: 8300000, guid: 4441ad8cdc55de743ae77adfb116e24e, type: 3}
@@ -1574,15 +1574,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Diamond Drive
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0f2aaca842cfb143a4ac9eb589c662b, type: 2}
-  m_sharedMaterial: {fileID: 958665065890738993, guid: d0f2aaca842cfb143a4ac9eb589c662b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 777b6c2edb87c264fba0959078567004, type: 2}
+  m_sharedMaterial: {fileID: 5499568134085205325, guid: 777b6c2edb87c264fba0959078567004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294966528
-  m_fontColor: {r: 0, g: 0.9903259, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0.99215686, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1605,7 +1605,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535

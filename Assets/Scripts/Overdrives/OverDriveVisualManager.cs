@@ -18,7 +18,10 @@ public class OverDriveVisualManager : MonoBehaviour
     private List<Material> LogoMats;
     private List<Transform> LogoTransforms;
     private Color arrowColor;
+    public Color coolDownArrowColor;
     private Vector3 titleOriginalPosition = Vector3.zero;
+    public Transform ActiveStratagemsContainer;
+    public Transform ActiveStratagemsPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -94,13 +97,69 @@ public class OverDriveVisualManager : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(Container.GetComponent<RectTransform>());
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateActiveEffects()
+    {
+        for (int i=0; i<stratagem_manager.active_effects.Count; i++){
+            for (int j=0; j<stratagem_manager.stratagem_effects.Count; j++){
+                int indxOfStratagem = stratagem_manager.stratagem_names.IndexOf(Titles[j].GetComponent<TextMeshProUGUI>().text);
+                if (stratagem_manager.stratagem_effects[j].Contains(stratagem_manager.active_effects[i])){
+                    // Logos in overdrive menu
+                    float offsetX = Random.Range(-0.5f, 0.5f);
+                    float offsetY = Random.Range(-0.5f, 0.5f);
+                    
+                    Titles[j].localPosition += new Vector3(offsetX, 0, offsetY);
+                    Titles[j].GetComponent<TextMeshProUGUI>().color = Color.white;
+
+                    
+                    // Active effect icons
+                    bool isEffectAlreadyInContainer = false;
+                    foreach (Transform child in ActiveStratagemsContainer)
+                    {
+                        if (child.name == stratagem_manager.stratagem_names[j])
+                        {
+                            isEffectAlreadyInContainer = true;
+                        }
+                    }
+
+                    if (!isEffectAlreadyInContainer && stratagem_manager.active_effect_timers[i] > 0)
+                    {
+                        Transform newEffect = Instantiate(ActiveStratagemsPrefab, ActiveStratagemsContainer);
+                        newEffect.name = stratagem_manager.stratagem_names[indxOfStratagem];
+                        newEffect.GetComponent<Image>().sprite = LogoTransforms[indxOfStratagem].GetComponent<Image>().sprite;
+                    }
+
+                }
+            }
+        }
+        foreach (Transform child in ActiveStratagemsContainer)
+        {
+            int indxOfStratagem = stratagem_manager.stratagem_names.IndexOf(child.name);
+            int total = 0;
+            foreach (effect_type_t effect in stratagem_manager.active_effects)
+            {
+                if (stratagem_manager.stratagem_effects[indxOfStratagem].Contains(effect))
+                {
+                    total += 1;
+                }
+            }
+            if (total == 0)
+            {
+                Destroy(child.gameObject);
+            } else {
+                child.GetChild(0).GetComponent<TextMeshProUGUI>().text = total.ToString();
+            }
+        }
+    }
+
+    void UpdateCooldowns()
     {
         for (int i = 0; i < stratagem_manager.stratagem_matches.Count; i++){
+            bool isInCooldown = (stratagem_manager.stratagem_cooldown_timers[i]!=0);
             for (int j = 0; j < stratagem_manager.stratagem_combos[i].Count; j++){
                 if (j < stratagem_manager.stratagem_matches[i]){
                     HorizontalGroups[i][j].color = arrowColor;
+                } else if (isInCooldown){
+                    HorizontalGroups[i][j].color = coolDownArrowColor;
                 } else {
                     HorizontalGroups[i][j].color = Color.white;
                 }
@@ -113,7 +172,14 @@ public class OverDriveVisualManager : MonoBehaviour
                 LogoTransforms[i].localScale = new Vector3(0.4f, 0.4f, 0.4f);
             }
         } 
+    }
+    
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+        UpdateCooldowns();
 
         foreach (Transform title in Titles)
         {
@@ -121,16 +187,7 @@ public class OverDriveVisualManager : MonoBehaviour
             title.GetComponent<TextMeshProUGUI>().color = arrowColor;
         }
 
-        for (int i=0; i<stratagem_manager.active_effects.Count; i++){
-            for (int j=0; j<stratagem_manager.stratagem_effects.Count; j++){
-                if (stratagem_manager.stratagem_effects[j].Contains(stratagem_manager.active_effects[i])){
-                    float offsetX = Random.Range(-0.5f, 0.5f);
-                    float offsetY = Random.Range(-0.5f, 0.5f);
-                    
-                    Titles[j].localPosition += new Vector3(offsetX, 0, offsetY);
-                    Titles[j].GetComponent<TextMeshProUGUI>().color = Color.white;
-                }
-            }
-        }
+        UpdateActiveEffects();
+        
     }
 }
