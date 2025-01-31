@@ -2432,7 +2432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Source1: {fileID: 988317580}
   pressStart: {fileID: 8300000, guid: 0be21e417c6fc2d4b91bdbf95be3a2d1, type: 3}
-  pressStartText: {fileID: 1504240798}
+  pressStartText: {fileID: 1504240799}
   Cinema: {fileID: 1427631786}
 --- !u!1 &995931585
 GameObject:
