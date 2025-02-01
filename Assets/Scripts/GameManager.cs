@@ -35,6 +35,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager Start() called");
     }
 
+    private void AchievementsCheck()
+    {
+        if (!PlayerPrefs.HasKey("Achievements")){
+            PlayerPrefs.SetInt("Achievements", 0);
+        }
+    }
+
     // Given a list of integers (treated as a set), check if that
     // list is a subset of the list of unlocked achievements.
     public bool branchIsValid(int[] branchAchievements)
