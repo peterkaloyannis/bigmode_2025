@@ -47,9 +47,11 @@ public static class DialogueJsonHelper
 public class Dialogue : MonoBehaviour
 {
     // Settings public to the Unity GUI.
-    public TextMeshProUGUI speakerComponent;
-    public TextMeshProUGUI textComponent;
-    public float textSpeed;
+    // public TextMeshProUGUI speakerComponent;
+    // public TextMeshProUGUI textComponent;
+    public Transform bubblePrefab;
+    private Transform currentBubble;
+    public AudioClip audioClip;
     public string dialogueFile;
 
     // On Start(), dialogue is loaded in from a json file at "Assets/Resources/Dialogue/" + dialogueFile
@@ -60,9 +62,7 @@ public class Dialogue : MonoBehaviour
     // that set of Lines you are.
     private DialogueLine[] dialogueLines;
     private int line_idx;
-
-    // Index denoting which line of text is currently active.
-    private int text_idx;
+    private int text_idx = 0;
 
 
     // Check that the desired file exists.
@@ -113,84 +113,56 @@ public class Dialogue : MonoBehaviour
         }
 
         // Now we have our desired dialogueLines! Set the text boxes to empty, then start.
-        textComponent.text = string.Empty;
-        speakerComponent.text = string.Empty;
-        StartDialogue();
+        // textComponent.text = string.Empty;
+        // speakerComponent.text = string.Empty;
+
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        
+        line_idx = 0;
+        InstantiateBubble(dialogueLines[line_idx].speaker, ConcText(dialogueLines[line_idx]), audioClip, true);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Click spacebar to proceed.
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && currentBubble != null && line_idx <= dialogueLines.Length - 1)
         {
             // Extract the current set of lines for convenience.
             string[] text_lines = dialogueLines[line_idx].text;
-            if (textComponent.text == text_lines[text_idx])
+            if (currentBubble.GetComponent<Bubble>().tracker >= currentBubble.GetComponent<Bubble>().numChar && line_idx <= dialogueLines.Length - 2)
             {
-                // If this line of text is complete, move to the next line of text.
-                // This includes moving to the next speaker.
-                NextLine();
+                line_idx++;
+                InstantiateBubble(dialogueLines[line_idx].speaker, ConcText(dialogueLines[line_idx]), audioClip, true);
             }
             else
             {
-                // If this line of text is incomplete,
-                // immediately complete it.
-                StopAllCoroutines();
-                textComponent.text = text_lines[text_idx];
+                currentBubble.GetComponent<Bubble>().FinishSentence();
             }
         }
     }
 
-    void StartDialogue()
+    string ConcText(DialogueLine text_lines)
     {
-        line_idx = 0;
-        text_idx = 0;
-        speakerComponent.text = getCurrentSpeaker();
-        StartCoroutine(TypeLine());
+        string concText = "";
+        foreach (string line in text_lines.text)
+        {
+            concText += line + "\n";
+        }
+        return concText;
     }
 
-    IEnumerator TypeLine()
+    void InstantiateBubble(string speaker, string text, AudioClip tempSound, bool alignmentLeft)
     {
-        // Type each character 1 by 1
-        foreach (char c in dialogueLines[line_idx].text[text_idx].ToCharArray())
-        {
-            textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
-        }
-    }
-
-    void NextLine()
-    {
-        if (text_idx < dialogueLines[line_idx].text.Length - 1)
-        {
-            // If we haven't reached the end of the current block of text,
-            // we need to display the next bit of text in this block.
-            // Increment the text index, empty the displayed text in this component,
-            // and start displaying the next line.
-            text_idx++;
-            textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
-        }
-        else if (line_idx < dialogueLines.Length - 1)
-        {
-            // In this case, we have reached the end of the current speaker's block
-            // of text, and there exists another speaker.
-            // Reset the text index, and increment the line index.
-            // Empty the component's text, and set the new speaker.
-            // Finally, start displaying the next line.
-            text_idx = 0;
-            line_idx++;
-            textComponent.text = string.Empty;
-            speakerComponent.text = getCurrentSpeaker();
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
-            // This logic defines whatever should happen after the dialogue
-            // is done; i.e. "move to the next screen".
-            gameObject.SetActive(false);
-        }
+        Transform bubble = Instantiate(bubblePrefab, transform);
+        bubble.gameObject.SetActive(true);
+        bubble.GetComponent<Bubble>().AssignVariables(speaker, text, tempSound, true);
+        RectTransform rt = bubble.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, 40 + 18*text.Split('\n').Length);
+        currentBubble = bubble;
     }
 
     // Getter for the currently active speaker.

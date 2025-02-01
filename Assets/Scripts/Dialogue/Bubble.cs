@@ -4,22 +4,19 @@ using UnityEngine;
 public class Bubble : MonoBehaviour
 {
     private TextMeshProUGUI Title;
-    private TextMeshProUGUI Text;
-    private int numChar;
-    private int tracker = 0;
+    public TextMeshProUGUI Text;
+    public int numChar;
+    public int tracker = 0;
     private float timer = 0;
     private float TimeToLive = 0.08f;
     private float TimeToLiveSpace = 0.1f;
     private float TimeToLiveDot = 1f;
     private float bopFrequency = 0.08f;
     private float bopTimer = 0f;
-    private Transform BopContainer;
     private AudioClip audioClip;
-    public Transform BopPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        BopContainer = transform.Find("BopContainer");
         Title = transform.Find("Title").GetComponent<TextMeshProUGUI>();
         Text = transform.Find("Text").GetComponent<TextMeshProUGUI>();
         Text.maxVisibleCharacters = 0;
@@ -64,13 +61,13 @@ public class Bubble : MonoBehaviour
         if (tracker < numChar){
             timer += Time.deltaTime;
             bopTimer += Time.deltaTime;
-            if (checkTimetoLive(timer, Text.text[tracker].ToString()))
+            if (checkTimetoLive(timer, Text.text[Mathf.Min(tracker, numChar-1)].ToString()))
             {
                 timer = 0f;
                 tracker += 1;
                 Text.maxVisibleCharacters = tracker;
             }
-            if (checkforBop(bopTimer, Text.text[tracker].ToString())){
+            if (checkforBop(bopTimer, Text.text[Mathf.Min(tracker, numChar-1)].ToString())){
                 createBop();
                 bopTimer = 0f;
             }
@@ -94,5 +91,11 @@ public class Bubble : MonoBehaviour
         audioSource.Play();
 
         Destroy(tempAudio, audioClip.length);
+    }
+
+    public void FinishSentence()
+    {
+        Text.maxVisibleCharacters = numChar;
+        tracker = numChar;
     }
 }

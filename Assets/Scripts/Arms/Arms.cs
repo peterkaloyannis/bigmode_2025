@@ -102,7 +102,7 @@ public class Arms : MonoBehaviour
         updateScene();
     }
 
-    void updateScene()
+    public void updateScene()
     {
         last_boss_value = fight_manager.meter;
         frameMat.SetColor("_Main", colorMain1);

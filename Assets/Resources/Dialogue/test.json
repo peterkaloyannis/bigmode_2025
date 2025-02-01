@@ -42,11 +42,21 @@
             {
                 "speaker": "NPC",
                 "text": [
-                    "me neither"
+                    "me neither",
+                    "test lines",
+                    "me neither",
+                    "test lines",
+                    "will it fit?"
                 ]
             },
             {
                 "speaker": "NPC2",
+                "text": [
+                    "me, me neither"
+                ]
+            },
+            {
+                "speaker": "Goon",
                 "text": [
                     "me, me neither"
                 ]
