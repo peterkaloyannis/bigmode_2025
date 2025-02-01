@@ -10,7 +10,7 @@ public class FightAudioManager : MonoBehaviour
     private List<double> goalTime;
     private double initGoalTime = 0f;
     public AudioMixerGroup mixerGroup;
-    public BossManagerLogic bossManagerLogic;
+    public FightManager fight_manager;
     private bool fighting = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -75,12 +75,12 @@ public class FightAudioManager : MonoBehaviour
         }
 
         if (fighting){
-            if (bossManagerLogic.fight_state == fight_state_t.PAUSED || bossManagerLogic.fight_state == fight_state_t.WON || bossManagerLogic.fight_state == fight_state_t.LOST){
+            if (fight_manager.fight_state == fight_state_t.PAUSED || fight_manager.fight_state == fight_state_t.WON || fight_manager.fight_state == fight_state_t.LOST){
                 fighting = false;
                 toggle_hp_filter();
             }
         } else {
-            if (bossManagerLogic.fight_state == fight_state_t.PLAY || bossManagerLogic.fight_state == fight_state_t.INIT){
+            if (fight_manager.fight_state == fight_state_t.PLAY || fight_manager.fight_state == fight_state_t.INIT){
                 fighting = true;
                 toggle_hp_filter();
             }

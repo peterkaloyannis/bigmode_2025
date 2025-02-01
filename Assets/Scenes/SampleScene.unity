@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 103442647}
   - component: {fileID: 103442648}
   - component: {fileID: 103442649}
+  - component: {fileID: 103442650}
   m_Layer: 0
   m_Name: LogicManager
   m_TagString: Untagged
@@ -227,6 +228,8 @@ Transform:
   - {fileID: 1868684054}
   - {fileID: 1113560594}
   - {fileID: 1124424439}
+  - {fileID: 132171017}
+  - {fileID: 1764196420}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &103442648
@@ -242,6 +245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meter: 0.5
+  active_effects: 
+  active_effect_timers: []
   mash_addition: 0.01
   boss_dps: 0.03
   max_pitch_integral: 15
@@ -253,7 +258,6 @@ MonoBehaviour:
   stratagem_manager: {fileID: 103442649}
   mash_rush_multiplier: 2
   meter_chunk_power: 0.2
-  meter_chunk_mash_block_time: 1
 --- !u!114 &103442649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,16 +270,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4326410846a1144badfefbaa710a896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss_manager: {fileID: 103442648}
+  fight_manager: {fileID: 103442648}
   current_combo: 
   stratagem_names: []
   stratagem_cooldowns: []
   stratagem_cooldown_timers: []
   stratagem_matches: 
-  active_effects: 
-  active_effect_timers: []
+  stratagem_success_noises: []
   invalid_combo_noise: {fileID: 8300000, guid: 1eb21176de9cd674a910796ae3b69ca7, type: 3}
   valid_combo_noise: {fileID: 8300000, guid: 64e8cd7c2697cf4449ea56cff2576d4b, type: 3}
+--- !u!114 &103442650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103442645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52ec1352205dde46a4be77d1d7db0a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move_names: []
+  next_move_countdown: 4
+  next_move_countdown_timer: 0
+  move_windup_times: []
+  move_cooldowns: []
+  move_cooldown_timers: []
+  move_trigger_noises: []
+  move_activation_noises: []
+  active_move: 0
+  active_move_windup_timer: 0
+  fight_manager: {fileID: 103442648}
 --- !u!1001 &121604935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,14 +350,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5296983177936790017, guid: 3ca935bba26039a4a948a47ea58eca17, type: 3}
-      propertyPath: description
-      value: Change out your heat discharge cartridge to reset your other abilities.
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296983177936790017, guid: 3ca935bba26039a4a948a47ea58eca17, type: 3}
-      propertyPath: 'combo.Array.data[1]'
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8333660448921728665, guid: 3ca935bba26039a4a948a47ea58eca17, type: 3}
       propertyPath: m_Name
       value: Cartridge Change
@@ -341,6 +359,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca935bba26039a4a948a47ea58eca17, type: 3}
+--- !u!4 &132171017 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+  m_PrefabInstance: {fileID: 7962760830365062987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &189175548 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5998245328390229253, guid: 440697f44ed1dc2408a9a6ddfadd06ff, type: 3}
@@ -1462,7 +1485,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   padding: 10
   progress_bar_transform: {fileID: 1728320438}
-  boss_manager: {fileID: 103442648}
+  fight_manager: {fileID: 103442648}
+--- !u!4 &1764196420 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+  m_PrefabInstance: {fileID: 8240666006722045447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1804162387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,6 +1647,120 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &7962760830365062987
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 103442647}
+    m_Modifications:
+    - target: {fileID: 4788888389020711181, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_Name
+      value: Overdrive Block (Boss)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 130.052
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -224.1022
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -303.68964
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327531377128962692, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3efa894af53a3d649ad181fba364d3fe, type: 3}
+--- !u!1001 &8240666006722045447
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 103442647}
+    m_Modifications:
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 130.052
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -224.1022
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -303.68964
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437691707829092249, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
+      propertyPath: m_Name
+      value: Meter Chunk (Boss)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

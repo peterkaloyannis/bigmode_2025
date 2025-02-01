@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,12 +15,24 @@ public enum fight_state_t {
     PLAY,
     WON,
     LOST,
-    RESET,
 }
 
-public class BossManagerLogic : MonoBehaviour
+// These are the effects.
+public enum effect_type_t {
+    mash_rush,
+    meter_break,
+    meter_chunk,
+    mash_block,
+    cooldown_refresh,
+    stratagem_block,
+    boss_chunk,
+}
+
+public class FightManager : MonoBehaviour
 {
-    public float meter; // The boss meter [0,1]
+    public float meter; // The fight meter [0,1]
+    public List<effect_type_t> active_effects; // The list of active effects.
+    public List<float> active_effect_timers; // The timers of each active effect.
     public float mash_addition; // The amount to add on each mash.
     public float boss_dps; // The boss decay rate.
     public float max_pitch_integral; // The point when the pitch integral gives the max pitch.
@@ -28,11 +41,9 @@ public class BossManagerLogic : MonoBehaviour
     public float pitch_range; // The range for values spanned by the pitch.
     public fight_state_t fight_state = fight_state_t.INIT; // The boss state.
     public AudioClip ding; // The sound effect for mashing.
-    public StratagemManagerLogic stratagem_manager; // The stratagem manager
+    public StratagemManager stratagem_manager; // The stratagem manager
     public float mash_rush_multiplier; // Mash Rush Multiplier
     public float meter_chunk_power; // Meter chunk
-    public float meter_chunk_mash_block_time; // Countdown time (s) to block mashing.
-    private float mash_block_countdown; // The actual countdown for meter chunk
     private last_key_pressed_t last_key_pressed = last_key_pressed_t.NONE; // The last key pressed for the mash logic.
     private float pitch_integral = 0f; // An integral of the mashing.
 
@@ -44,6 +55,8 @@ public class BossManagerLogic : MonoBehaviour
             case fight_state_t.INIT:
                 // Tansition to play in INIT
                 fight_state = fight_state_t.PLAY;
+                meter= 0.5f;
+                clear_active_effects();
                 break;
 
             case fight_state_t.PAUSED:
@@ -58,22 +71,19 @@ public class BossManagerLogic : MonoBehaviour
 
             case fight_state_t.WON:
                 // Idle in WON
+                clear_active_effects();
                 meter = 1f;
                 break;
 
             case fight_state_t.LOST:
                 // Idle in LOST
+                clear_active_effects();
                 meter = 0f;
-                break;
-
-            case fight_state_t.RESET:
-                // In reset, we reset the meter and set to init.
-                reset_state_update();
                 break;
 
             default:
                 // If we get here, bug.
-                Debug.Log("[ERROR]: Invalid boss state reached.");
+                Debug.Assert(false, "[ERROR]: Invalid boss state reached.");
                 break;            
         }
     }
@@ -97,26 +107,32 @@ public class BossManagerLogic : MonoBehaviour
         // We check for meter_chunks and then destroy them.
         float mash_addition_modified = mash_addition;
         float boss_dps_modified = boss_dps;
-        foreach (effect_type_t effect in stratagem_manager.active_effects){
-            // Chunk the bar!
-            if (effect == effect_type_t.meter_chunk){
-                meter_additions += meter_chunk_power;
-            }
-            // More mash power!
-            else if (effect == effect_type_t.mash_rush){
-                mash_addition_modified *= mash_rush_multiplier;
-            }
-            // No more played damage!
-            else if (effect == effect_type_t.mash_block){
-                mash_addition_modified *= 0;
-            }
-            // A lot of boss damage! Negated by breaks.
-            else if (effect == effect_type_t.boss_chunk) {
-                boss_dps_modified *= 50;
-            }
-            // No more boss damage!
-            else if (effect == effect_type_t.meter_break){
-                boss_dps_modified *= 0;
+        foreach (effect_type_t effect in active_effects){
+            switch (effect) {
+                case effect_type_t.meter_chunk:
+                    meter_additions += meter_chunk_power;
+                    break;
+                case effect_type_t.mash_rush:
+                    mash_addition_modified *= mash_rush_multiplier;
+                    break;
+                case effect_type_t.mash_block:
+                    mash_addition_modified *= 0;
+                    break;
+                case effect_type_t.boss_chunk:
+                    boss_dps_modified += meter_chunk_power / Time.deltaTime;
+                    break;
+                case effect_type_t.meter_break:
+                    boss_dps_modified *= 0;
+                    break;
+                case effect_type_t.cooldown_refresh:
+                    stratagem_manager.set_stratagem_cooldown_timers(0f);
+                    break;
+                case effect_type_t.stratagem_block:
+                    stratagem_manager.set_stratagem_cooldown_timers(600f);
+                    break;
+                default:
+                    Debug.Assert(false, "[ERROR]: Unhandled effect in active effects.");
+                    break;
             }
         }
 
@@ -139,7 +155,7 @@ public class BossManagerLogic : MonoBehaviour
         }
 
         // Compute boss damage.
-        meter_subtractions = boss_dps_modified * Time.deltaTime;
+        meter_subtractions += boss_dps_modified * Time.deltaTime;
 
         // Update the meter.
         // Meter is clamped to [0,1] for other functions to use it safely.
@@ -148,14 +164,38 @@ public class BossManagerLogic : MonoBehaviour
 
         // Decay the pitch on every frame.
         exponential_pitch_decay();
+
+        // Active effects are updated at the end of the frame.
+        update_active_effects();
     }
 
-    void reset_state_update() {
-        // In reset, we set the meter to 0.5 again.
-        meter = 0.5f;
+    void update_active_effects(){
+        // Loop through the active effects to check if they
+        // are still valid. We loop through backwards to prevent
+        // index shifting after removal.
+        //
+        // We also check if the lists stay synced in size.
+        Debug.Assert(active_effects.Count == active_effect_timers.Count);
+        for (int i=active_effects.Count - 1; i>=0; i--) {
+            // Update the effect timer.
+            active_effect_timers[i] -= Time.deltaTime;
 
-        // Then we set the state back to init.
-        fight_state = fight_state_t.INIT;
+            // If this effect has a negative effect timer, mark it for removal.
+            if (active_effect_timers[i] < 0f){
+                active_effects.RemoveAt(i);
+                active_effect_timers.RemoveAt(i);
+            }
+        }
+    }
+
+    public void add_active_effect(List<effect_type_t> effects, List<float> durations) {
+        active_effects.AddRange(effects);
+        active_effect_timers.AddRange(durations);
+    }
+
+    public void clear_active_effects() {
+        active_effect_timers.Clear();
+        active_effects.Clear();
     }
 
     void mash_ding() {

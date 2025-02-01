@@ -9,6 +9,7 @@ public class Stratagem:MonoBehaviour
     public float cooldown; // The cooldown of the stratagem.
     public List<effect_type_t> effects; // Enumerator designating which effects the stratagem applies.
     public List<float> effect_durations; // Enumerator designating the duration of each effect.
+    public AudioClip success_noise; // The sound to play on successful completion of this stratagem combo.
 
     void Start(){
         // Make sure the number of effect durations is the same

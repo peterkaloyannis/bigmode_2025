@@ -7,7 +7,7 @@ public class BossBarLogic : MonoBehaviour
     public RectTransform progress_bar_transform;
     // public Image winning_bar;
     // public Image losing_bar;
-    public BossManagerLogic boss_manager;
+    public FightManager fight_manager;
     private Material barMat;
 
     void Start()
@@ -23,7 +23,7 @@ public class BossBarLogic : MonoBehaviour
         // float progress_bar_height = progress_bar_transform.rect.height - (2*padding);
 
         // // Adjust the winning bar width according to the meter.
-        // float winning_bar_width = progress_bar_width * boss_manager.meter;
+        // float winning_bar_width = progress_bar_width * fight_manager.meter;
         // float losing_bar_width = progress_bar_width - winning_bar_width;
 
         // Set the width of the winning bar according to the meter.
@@ -35,7 +35,7 @@ public class BossBarLogic : MonoBehaviour
         // float y_position = winning_bar.rectTransform.position.y;
         // losing_bar.rectTransform.position = new Vector2(left_most_point, y_position); 
 
-        barMat.SetFloat("_Angle", boss_manager.meter);
+        barMat.SetFloat("_Angle", fight_manager.meter);
 
     }
 

@@ -10,7 +10,8 @@ public class OverDriveVisualManager : MonoBehaviour
     public Sprite downSprite;
     public Sprite leftSprite;
     public Transform Container;
-    public StratagemManagerLogic stratagem_manager;
+    public StratagemManager stratagem_manager;
+    public FightManager fight_manager;
     public GameObject stratagemPrefab;
     private List<List<Image>> HorizontalGroups;
     private List<Transform> Titles;
@@ -99,10 +100,10 @@ public class OverDriveVisualManager : MonoBehaviour
 
     void UpdateActiveEffects()
     {
-        for (int i=0; i<stratagem_manager.active_effects.Count; i++){
+        for (int i=0; i<fight_manager.active_effects.Count; i++){
             for (int j=0; j<stratagem_manager.stratagem_effects.Count; j++){
                 int indxOfStratagem = stratagem_manager.stratagem_names.IndexOf(Titles[j].GetComponent<TextMeshProUGUI>().text);
-                if (stratagem_manager.stratagem_effects[j].Contains(stratagem_manager.active_effects[i])){
+                if (stratagem_manager.stratagem_effects[j].Contains(fight_manager.active_effects[i])){
                     // Logos in overdrive menu
                     float offsetX = Random.Range(-0.5f, 0.5f);
                     float offsetY = Random.Range(-0.5f, 0.5f);
@@ -121,7 +122,7 @@ public class OverDriveVisualManager : MonoBehaviour
                         }
                     }
 
-                    if (!isEffectAlreadyInContainer && stratagem_manager.active_effect_timers[i] > 0)
+                    if (!isEffectAlreadyInContainer && fight_manager.active_effect_timers[i] > 0)
                     {
                         Transform newEffect = Instantiate(ActiveStratagemsPrefab, ActiveStratagemsContainer);
                         newEffect.name = stratagem_manager.stratagem_names[indxOfStratagem];
@@ -135,7 +136,7 @@ public class OverDriveVisualManager : MonoBehaviour
         {
             int indxOfStratagem = stratagem_manager.stratagem_names.IndexOf(child.name);
             int total = 0;
-            foreach (effect_type_t effect in stratagem_manager.active_effects)
+            foreach (effect_type_t effect in fight_manager.active_effects)
             {
                 if (stratagem_manager.stratagem_effects[indxOfStratagem].Contains(effect))
                 {

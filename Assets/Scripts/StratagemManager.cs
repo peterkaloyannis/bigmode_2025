@@ -10,20 +10,9 @@ public enum stratagem_input_t {
     LEFT=3,
 }
 
-// These are the effects.
-public enum effect_type_t {
-    mash_rush,
-    meter_break,
-    meter_chunk,
-    mash_block,
-    cooldown_refresh,
-    stratagem_block,
-    boss_chunk,
-}
-
-public class StratagemManagerLogic : MonoBehaviour
+public class StratagemManager : MonoBehaviour
 {
-    public BossManagerLogic boss_manager; // The boss manager.
+    public FightManager fight_manager; // The fight manager.
     public List<stratagem_input_t> current_combo; // The current stratagem combo
     public List<string> stratagem_names; // List of human readable stratagem names.
     public List<float> stratagem_cooldowns; // List of stratagem cooldowns.
@@ -33,8 +22,7 @@ public class StratagemManagerLogic : MonoBehaviour
                                                                  // the current combo.
     public List<List<effect_type_t>> stratagem_effects; // List encoding which effects are applied by a stratagem.
     public List<List<float>> stratagem_effect_durations; // List of stratagem effect durations.
-    public List<effect_type_t> active_effects; // The list of active stratagems.
-    public List<float> active_effect_timers; // The activation timers of each active stratagem.
+    public List<AudioClip> stratagem_success_noises;
     public AudioClip invalid_combo_noise; // What to play when combo chain is invalid.
     public AudioClip valid_combo_noise; // What to play on successful combo chain, might be combo specific.
 
@@ -42,49 +30,31 @@ public class StratagemManagerLogic : MonoBehaviour
         // Initiate the combo array
         current_combo = new List<stratagem_input_t>();
 
-        // Load in the stratagems (TODO)
-        load_stratagem_combos();
+        // Load in the stratagems
+        load_stratagems();
     }
 
     // Update is called once per frame
     void Update(){
         // If the fight is not happening, clear out the buffer
         // and return early.
-        if (boss_manager.fight_state != fight_state_t.PLAY) {
+        if (fight_manager.fight_state != fight_state_t.PLAY) {
+            // Clear the current combo
             current_combo.Clear();
+
+            // Clear the stratagem cooldowns.
+            set_stratagem_cooldown_timers(0f);
+            
             return;
         }
 
+        // We record the number of combo entries in the last cycle.
+        // If the number of combos increased, we will play a successful
+        // input sound.
+        int combos_last_cycle = current_combo.Count;
+
         // Collect the current combo
         collect_current_combo();
-
-        // Handle effects for stratagems before the effects
-        // are emptied so 1 frame effects can be applied.
-        foreach (effect_type_t effect in active_effects) {
-            if (effect == effect_type_t.cooldown_refresh){
-                list_fill<float>(stratagem_cooldown_timers, 0f);
-            }
-            if (effect == effect_type_t.stratagem_block){
-                list_fill<float>(stratagem_cooldown_timers, 600f);
-            }
-        }
-
-        // Loop through the active effects to check if they
-        // are still valid. We loop through backwards to prevent
-        // index shifting after removal.
-        //
-        // We also check if the lists stay synced in size.
-        Debug.Assert(active_effects.Count == active_effect_timers.Count);
-        for (int i=active_effects.Count - 1; i>=0; i--) {
-            // Update the effect timer.
-            active_effect_timers[i] -= Time.deltaTime;
-
-            // If this effect has a negative effect timer, mark it for removal.
-            if (active_effect_timers[i] < 0f){
-                active_effects.RemoveAt(i);
-                active_effect_timers.RemoveAt(i);
-            }
-        }
 
         // Loop through each combo, trigger if we match.
         bool matches_available = false;
@@ -129,17 +99,18 @@ public class StratagemManagerLogic : MonoBehaviour
             }
 
             // Trigger the combo effect.
-            if (stratagem_matches[i] == stratagem_combos[i].Count) {
-                // Play the combo success sound.
-                make_combo_noise(valid_combo_noise);
-                
+            if (stratagem_matches[i] == stratagem_combos[i].Count) {                
                 // Trigger the stratagem by adding the effects.
-                Debug.Log(stratagem_names[i]);
-                active_effects.AddRange(stratagem_effects[i]);
-                active_effect_timers.AddRange(stratagem_effect_durations[i]);
+                fight_manager.add_active_effect(
+                    stratagem_effects[i], 
+                    stratagem_effect_durations[i]
+                );
 
                 // Place the stratagem on cooldwon.
                 stratagem_cooldown_timers[i] = stratagem_cooldowns[i];
+
+                // Play the sound effect for completing this stratagem.
+                make_combo_noise(stratagem_success_noises[i]);
 
                 // Clear the combo after triggering.
                 current_combo.Clear();
@@ -155,21 +126,21 @@ public class StratagemManagerLogic : MonoBehaviour
 
         // If no matching stratagems remain, clear the buffer.
         // If this happens, we wanna play a die sound effect.
-        // The location of this trigger is probably temporary.
-        // This sound is bugged for some reason... Spawns 100 of them.
         if (!matches_available) {
             make_combo_noise(invalid_combo_noise);
             current_combo.Clear();
         }
-    }
-
-    void list_fill<T>(List<T> list, T value){
-        for (int i=0; i<list.Count; i++) {
-            list[i] = value;
+        // If above fails and instead the combo count incremented,
+        // play a successful combo noise.
+        else if (current_combo.Count > combos_last_cycle){
+            make_combo_noise(
+                valid_combo_noise,
+                1f+(float)current_combo.Count/3
+            );
         }
     }
 
-    void load_stratagem_combos(){
+    void load_stratagems(){
         // Init the empty list
         stratagem_combos = new List<List<stratagem_input_t>>();
         stratagem_names = new List<string>();
@@ -178,6 +149,7 @@ public class StratagemManagerLogic : MonoBehaviour
         stratagem_matches = new List<int>();
         stratagem_effects = new List<List<effect_type_t>>();
         stratagem_effect_durations = new List<List<float>>();
+        stratagem_success_noises = new List<AudioClip>();
 
         // Grab all game objects tagged as stratagems.
         GameObject[] stratagem_objects = GameObject.FindGameObjectsWithTag("stratagem");
@@ -192,6 +164,7 @@ public class StratagemManagerLogic : MonoBehaviour
             stratagem_names.Add(stratagem.name);
             stratagem_combos.Add(stratagem.combo);
             stratagem_cooldowns.Add(stratagem.cooldown);
+            stratagem_success_noises.Add(stratagem.success_noise);
             stratagem_cooldown_timers.Add(0f);
             stratagem_matches.Add(0);
         }
@@ -221,16 +194,22 @@ public class StratagemManagerLogic : MonoBehaviour
         }
     }
 
-
-    void make_combo_noise(AudioClip noise) {
+    void make_combo_noise(AudioClip noise, float pitch = 1f) {
         // Play the audio
         GameObject tempAudio = new GameObject("TempAudioSource");
         AudioSource audioSource = tempAudio.AddComponent<AudioSource>();
         audioSource.volume = 0.6f;
         audioSource.priority = 130;
         audioSource.clip = noise;
+        audioSource.pitch = pitch;
         audioSource.Play();
 
         Destroy(tempAudio, noise.length);  // Cleanup after playing
+    }
+
+    public void set_stratagem_cooldown_timers(float time) {
+        for (int i=0; i<stratagem_cooldown_timers.Count; i++) {
+            stratagem_cooldown_timers[i] = time;
+        }
     }
 }

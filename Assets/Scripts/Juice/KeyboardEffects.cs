@@ -10,7 +10,7 @@ public class KeyboardEffects : MonoBehaviour
     public Sprite fullKey;
     private Dictionary<KeyCode, string> keyMap;
     private float maxScale = 0.6f;
-    public StratagemManagerLogic stratagemManagerLogic;
+    public FightManager fight_manager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,7 +34,7 @@ public class KeyboardEffects : MonoBehaviour
     }
 
     bool checkMashBlock(KeyCode keycode){
-        return (((keycode == KeyCode.A || keycode == KeyCode.S) && !(stratagemManagerLogic.active_effects.Contains(effect_type_t.mash_block))) ||
+        return (((keycode == KeyCode.A || keycode == KeyCode.S) && !(fight_manager.active_effects.Contains(effect_type_t.mash_block))) ||
          ((keycode == KeyCode.UpArrow || keycode == KeyCode.DownArrow || keycode == KeyCode.LeftArrow || keycode == KeyCode.RightArrow)));
     }
 

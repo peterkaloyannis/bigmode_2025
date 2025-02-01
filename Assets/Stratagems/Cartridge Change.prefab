@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ebb059eabf38b40a1996cbd24e6167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combo: 010000000000000003000000
+  combo: 010000000200000003000000
   description: Change out your heat discharge cartridge to reset your other abilities.
   cooldown: 2
   effects: 04000000
   effect_durations:
   - 0
+  success_noise: {fileID: 8300000, guid: ee8799a4b9847ae46ac2a3c2133e23d9, type: 3}
