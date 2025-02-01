@@ -19,7 +19,7 @@ public class FightAudioManager : MonoBehaviour
         MusicSources = new AudioSource[2*Loops.Length];
         initGoalTime = AudioSettings.dspTime + 1;
         goalTime = new List<double>();
-        for (int i=0; i<Loops.Length; i++){goalTime.Add(AudioSettings.dspTime + 1 + (double)(Loops[0].samples) / Loops[0].frequency);}
+        for (int i=0; i<Loops.Length; i++){goalTime.Add(AudioSettings.dspTime + 1 + (double)(Loops[i].samples) / Loops[i].frequency);}
 
         foreach (AudioClip loop in Loops){
             GameObject audioObject = new GameObject(loop.name);
@@ -37,7 +37,15 @@ public class FightAudioManager : MonoBehaviour
             MusicSources[2*System.Array.IndexOf(Loops, loop)+1].volume = 0f;
         }
 
+        StartMusic(initGoalTime);
+
         SelectTrack(0);
+    }
+
+    void StartMusic(double initGoalTime){
+        foreach (AudioClip loop in Loops){
+            MusicSources[2*System.Array.IndexOf(Loops, loop)].PlayScheduled(initGoalTime);
+        }
     }
 
 
@@ -72,6 +80,8 @@ public class FightAudioManager : MonoBehaviour
             SelectTrack(3);
         } else if (Input.GetKeyDown(KeyCode.Alpha5)){
             SelectTrack(4);
+        } else if (Input.GetKeyDown(KeyCode.Alpha6)){
+            SelectTrack(5);
         }
 
         if (fighting){
@@ -87,7 +97,7 @@ public class FightAudioManager : MonoBehaviour
         }
 
         for (int i=0; i<goalTime.Count; i++){
-            if (AudioSettings.dspTime > goalTime[i] - 1)
+            if (AudioSettings.dspTime > goalTime[i] - 2)
             {
                 if (MusicSources[2*i].isPlaying){
                     osc = 1;
@@ -96,7 +106,7 @@ public class FightAudioManager : MonoBehaviour
                 }
                 MusicSources[2*System.Array.IndexOf(Loops, Loops[i])+osc].clip = Loops[i];
                 MusicSources[2*System.Array.IndexOf(Loops, Loops[i])+osc].PlayScheduled(goalTime[i]);
-                goalTime[i] = goalTime[i] + (double)(Loops[0].samples) / Loops[0].frequency;
+                goalTime[i] = goalTime[i] + (double)(Loops[i].samples) / Loops[i].frequency;
             }
         }
     }

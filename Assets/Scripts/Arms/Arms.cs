@@ -15,6 +15,7 @@ public class Arms : MonoBehaviour
     private float last_boss_value = 0f;
     private int numberImages;
     private Dictionary<int, Sprite> ArmSprites;
+    private Dictionary<int, Sprite> ArmSpritesWife;
     public RectTransform progress_bar_transform;
     private Material barMat;
     private Material armMat;
@@ -23,8 +24,25 @@ public class Arms : MonoBehaviour
     public Transform boss;
     private Image boss_image;
     private Dictionary<int, Sprite> BossSprites;
+    private Dictionary<int, Sprite> BossSpritesWife;
+    private Sprite Background;
+    private Sprite BackgroundWife;
+    private Sprite Table;
+    private Sprite TableWife;
     private Vector3 centralPosition;
+    public Color colorMain1;
+    public Color colorMain2;
+    public Color colorVillain1;
+    public Color colorVillain2;
+    public Color colorWife1;
+    public Color colorWife2;
+    public Transform progressBar;
+    private Material progressBarMat;
+    public Transform TableTransform;
+    public Transform BackgroundTransform;
+    public bool isWife = false;
 
+    
     void Start(){
         originalPosition = transform.position;
 
@@ -38,6 +56,15 @@ public class Arms : MonoBehaviour
             count+=1;
         }
 
+        sprites = Resources.LoadAll<Sprite>("Sprites/Arms2");
+        System.Array.Reverse(sprites);
+        count = 0;
+        ArmSpritesWife = new Dictionary<int, Sprite>();
+        foreach (Sprite sprite in sprites){
+            ArmSpritesWife.Add(count, sprite);
+            count+=1;
+        }
+
         // load boss
         sprites = Resources.LoadAll<Sprite>("Sprites/Boss");
         System.Array.Reverse(sprites);
@@ -48,14 +75,55 @@ public class Arms : MonoBehaviour
             count+=1;
         }
 
+        sprites = Resources.LoadAll<Sprite>("Sprites/Wife");
+        System.Array.Reverse(sprites);
+        count = 0;
+        BossSpritesWife = new Dictionary<int, Sprite>();
+        foreach (Sprite sprite in sprites){
+            BossSpritesWife.Add(count, sprite);
+            count+=1;
+        }
+
+        Background = Resources.Load<Sprite>("Sprites/Background");
+        BackgroundWife = Resources.Load<Sprite>("Sprites/BackgroundWife");
+
+        Table = Resources.Load<Sprite>("Sprites/Table");
+        TableWife = Resources.Load<Sprite>("Sprites/TableWife");
+
         numberImages = count;
         barMat = progress_bar_transform.GetComponent<Image>().material;
         armMat = image.material;
-        last_boss_value = fight_manager.meter;
         frameMat = Frame.GetComponent<Image>().material;
-        boss_image = boss.GetComponent<Image>();
 
+        boss_image = boss.GetComponent<Image>();
+        progressBarMat = progressBar.GetComponent<Image>().material;
         centralPosition = transform.localPosition;
+
+        updateScene();
+    }
+
+    void updateScene()
+    {
+        last_boss_value = fight_manager.meter;
+        frameMat.SetColor("_Main", colorMain1);
+        frameMat.SetColor("_Main2", colorMain2);
+        progressBarMat.SetColor("_Main", colorMain1);
+        progressBarMat.SetColor("_Main2", colorMain2);
+        if (isWife){
+            frameMat.SetColor("_Villain", colorWife1);
+            frameMat.SetColor("_Villain2", colorWife2);
+            progressBarMat.SetColor("_Villain", colorWife1);
+            progressBarMat.SetColor("_Villain2", colorWife2);
+            TableTransform.GetComponent<Image>().sprite = TableWife;
+            BackgroundTransform.GetComponent<Image>().sprite = BackgroundWife;
+        } else {
+            frameMat.SetColor("_Villain", colorVillain1);
+            frameMat.SetColor("_Villain2", colorVillain2);
+            progressBarMat.SetColor("_Villain", colorVillain1);
+            progressBarMat.SetColor("_Villain2", colorVillain2);
+            TableTransform.GetComponent<Image>().sprite = Table;
+            BackgroundTransform.GetComponent<Image>().sprite = Background;
+        }
     }
 
     // Update is called once per frame
@@ -96,12 +164,20 @@ public class Arms : MonoBehaviour
     void UpdateShaderArm(){
         armMat.SetFloat("_Meter", fight_manager.meter);
         if (currentAngle != (int)(fight_manager.meter*numberImages)){
-            armMat.SetTexture("_TextureArm", ArmSprites[(int)(Mathf.Clamp(fight_manager.meter*numberImages, 0, numberImages-1))].texture);
+            if (isWife){
+                armMat.SetTexture("_TextureArm", ArmSpritesWife[(int)(Mathf.Clamp(fight_manager.meter*numberImages, 0, numberImages-1))].texture);
+            } else {
+                armMat.SetTexture("_TextureArm", ArmSprites[(int)(Mathf.Clamp(fight_manager.meter*numberImages, 0, numberImages-1))].texture);
+            }
         }
     }
 
     void UpdateBoss(){
-        boss_image.sprite = BossSprites[(int)(Mathf.Clamp(fight_manager.meter*numberImages, 0, numberImages-1))];
+        if (isWife){
+            boss_image.sprite = BossSpritesWife[(int)(Mathf.Clamp(fight_manager.meter*numberImages, 0, numberImages-1))];
+        } else {
+            boss_image.sprite = BossSprites[(int)(Mathf.Clamp(fight_manager.meter*numberImages, 0, numberImages-1))];
+        }
     }
 
     void UpdateArmPosition(){
