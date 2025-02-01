@@ -8,9 +8,10 @@ public class Bubble : MonoBehaviour
     private int numChar;
     private int tracker = 0;
     private float timer = 0;
-    private float TimeToLive = 0.1f;
-    private float TimeToLiveSpace = 0.8f;
-    private float bopFrequency = 0.1f;
+    private float TimeToLive = 0.08f;
+    private float TimeToLiveSpace = 0.1f;
+    private float TimeToLiveDot = 1f;
+    private float bopFrequency = 0.08f;
     private float bopTimer = 0f;
     private Transform BopContainer;
     private AudioClip audioClip;
@@ -48,12 +49,14 @@ public class Bubble : MonoBehaviour
     bool checkTimetoLive(float timer, string character){
         if (character == " "){
             return (timer>TimeToLiveSpace);
+        } else if (character == "."){
+            return (timer>TimeToLiveDot);
         }
         return (timer>TimeToLive);
     }
 
     bool checkforBop(float timer, string character){
-        return (timer>bopFrequency) && (character != " ");
+        return (timer>bopFrequency) && (character != " ") && (character != ".");
     }
     // Update is called once per frame
     void Update()
