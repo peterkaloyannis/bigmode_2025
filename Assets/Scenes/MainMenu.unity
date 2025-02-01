@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1249029890}
         m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: BackToMenuFromAchievements
         m_Mode: 1
@@ -3573,9 +3573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55fbb5ae25ddace459367ccb8dc97e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainScreen: {fileID: 1249029889}
   AchievementScreen: {fileID: 1601331376}
-  AchievementsLocked: 0
+  achievementsButtons: {fileID: 1601331377}
 --- !u!1 &1275566793
 GameObject:
   m_ObjectHideFlags: 0
@@ -4266,7 +4265,7 @@ MonoBehaviour:
   achievementsTitle: {fileID: 1835269542}
   achievementsQuote: {fileID: 484264163}
   achievementsText: {fileID: 1423325197}
-  achievementsImage: {fileID: 2090455246}
+  padLock: {fileID: 21300000, guid: cc4af7bebf7ebda4084130adab173f11, type: 3}
 --- !u!1 &1608136336
 GameObject:
   m_ObjectHideFlags: 0
@@ -4642,7 +4641,7 @@ GameObject:
   - component: {fileID: 1755649538}
   - component: {fileID: 1755649537}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
