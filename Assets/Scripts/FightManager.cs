@@ -37,7 +37,6 @@ public class FightManager : MonoBehaviour
     public List<effect_type_t> active_effects; // The list of active effects.
     public List<float> active_effect_timers; // The timers of each active effect.
     public float mash_addition; // The amount to add on each mash.
-    public float boss_dps; // The boss decay rate.
     public float max_pitch_integral; // The point when the pitch integral gives the max pitch.
     public float pitch_integral_decay_time; // The rate of decay of the pitch integral.
     public float base_pitch; // The base pitch of the mashing.
@@ -185,7 +184,8 @@ public class FightManager : MonoBehaviour
         // The meter chunk stratagem is applied here.
         // We check for meter_chunks and then destroy them.
         float mash_addition_modified = mash_addition;
-        float boss_dps_modified = boss_dps;
+        float boss_dps_modified = SceneResetter.Instance.boss_dps;
+        bool break_bool=false;
         foreach (effect_type_t effect in active_effects){
             switch (effect) {
                 case effect_type_t.meter_chunk:
@@ -201,7 +201,7 @@ public class FightManager : MonoBehaviour
                     boss_dps_modified += meter_chunk_power / Time.deltaTime;
                     break;
                 case effect_type_t.meter_break:
-                    boss_dps_modified *= 0;
+                    break_bool = true;
                     break;
                 case effect_type_t.cooldown_refresh:
                     stratagem_manager.set_stratagem_cooldown_timers(0f);
@@ -235,6 +235,11 @@ public class FightManager : MonoBehaviour
 
         // Compute boss damage.
         meter_subtractions += boss_dps_modified * Time.deltaTime;
+
+        // Apply the breaks
+        if (break_bool){
+            meter_subtractions = 0;
+        }
 
         // Update the meter.
         // Meter is clamped to [0,1] for other functions to use it safely.

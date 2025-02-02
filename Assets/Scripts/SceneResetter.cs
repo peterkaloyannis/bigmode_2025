@@ -24,6 +24,9 @@ public class SceneResetter : MonoBehaviour
     public Dictionary<string, Stratagem> available_stratagems = new Dictionary<string, Stratagem>();
     public Dictionary<string, BossMove> available_boss_moves = new Dictionary<string, BossMove>();
 
+    // Phase dependent boss DPS
+    public float boss_dps;
+
     // Is this a wife scene for rendering.
     public bool is_wife = false;
 
@@ -83,9 +86,9 @@ public class SceneResetter : MonoBehaviour
             )},
             {"Stratagem Block", new BossMove(
                 // Cooldown
-                20f,
+                600f,
                 // Windup Time
-                5f,
+                2f,
                 // Effects
                 new List<effect_type_t>{effect_type_t.stratagem_block},
                 // Effect durations
@@ -102,6 +105,8 @@ public class SceneResetter : MonoBehaviour
             {"Capacitor Slam", new Stratagem(
                 // Cooldown
                 5f,
+                // Max Cooldown.
+                600f,
                 // Combo
                 new List<stratagem_input_t>(){
                     stratagem_input_t.DOWN,
@@ -118,7 +123,9 @@ public class SceneResetter : MonoBehaviour
             )},
             {"Obsidian Breaks", new Stratagem(
                 // Cooldown
-                4f,
+                2f,
+                // Max Cooldown.
+                600f,
                 // Combo
                 new List<stratagem_input_t>(){
                     stratagem_input_t.LEFT,
@@ -127,13 +134,15 @@ public class SceneResetter : MonoBehaviour
                 // Effects
                 new List<effect_type_t>{effect_type_t.meter_break},
                 // Effect durations
-                new List<float>{1f},
+                new List<float>{1.5f},
                 // Trigger Noise
                 obsidian_breaks_noise
             )},
             {"Thorium Rush", new Stratagem(
                 // Cooldown
                 5f,
+                // Max Cooldown.
+                600f,
                 // Combo
                 new List<stratagem_input_t>(){
                     stratagem_input_t.UP,
@@ -148,7 +157,9 @@ public class SceneResetter : MonoBehaviour
             )},
             {"Cartridge Change", new Stratagem(
                 // Cooldown
-                5f,
+                0f,
+                // Max Cooldown.
+                0f,
                 // Combo
                 new List<stratagem_input_t>(){
                     stratagem_input_t.RIGHT,
@@ -187,7 +198,7 @@ public class SceneResetter : MonoBehaviour
                 next_fight_W = fight_scene_t.boss_0_wins_0_losses;
 
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.03f;
 
                 break;
             case fight_scene_t.wife_1:
@@ -207,7 +218,8 @@ public class SceneResetter : MonoBehaviour
                 next_fight_W = fight_scene_t.boss_0_wins_0_losses;
 
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.03f;
+
                 break;
             case fight_scene_t.wife_2:
                 // Set iswife
@@ -226,7 +238,8 @@ public class SceneResetter : MonoBehaviour
                 next_fight_W = fight_scene_t.boss_0_wins_0_losses;
 
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.03f;
+
                 break;
             case fight_scene_t.wife_3:
                 // Set iswife
@@ -245,7 +258,8 @@ public class SceneResetter : MonoBehaviour
                 next_fight_W = fight_scene_t.boss_0_wins_0_losses;
 
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.03f;
+
                 break;
             case fight_scene_t.boss_0_wins_0_losses:
                 // Set iswife
@@ -264,7 +278,8 @@ public class SceneResetter : MonoBehaviour
                 next_fight_W = fight_scene_t.boss_1_wins_0_losses;
 
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.06f;
+
                 break;
             case fight_scene_t.boss_1_wins_0_losses:
                 // Set iswife
@@ -285,7 +300,7 @@ public class SceneResetter : MonoBehaviour
                 next_fight_W = fight_scene_t.toMenu;
 
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.09f;
                 break;
             case fight_scene_t.boss_0_wins_1_losses:
                 // Set iswife
@@ -297,16 +312,14 @@ public class SceneResetter : MonoBehaviour
                 fname_fight_lose_dialogue="TestScene2.json";
 
                 // Set the boss moves.
-                available_boss_moves = new Dictionary<string, BossMove>(){
-                    {"Boss Chunk", boss_moves["Boss Chunk"]}
-                };
+                available_boss_moves = new Dictionary<string, BossMove>();
 
                 // Set the next fight scenes.
                 next_fight_L = fight_scene_t.toMenu;
                 next_fight_W = fight_scene_t.boss_1_wins_1_losses;
 
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.06f;
                 break;
             case fight_scene_t.boss_1_wins_1_losses:
                 // Set iswife
@@ -327,7 +340,7 @@ public class SceneResetter : MonoBehaviour
                 next_fight_W = fight_scene_t.toMenu;
 
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.09f;
                 break;
 
             case fight_scene_t.boss_secret:
@@ -349,9 +362,8 @@ public class SceneResetter : MonoBehaviour
                 next_fight_L = fight_scene_t.toMenu;
                 next_fight_W = fight_scene_t.endGame;
 
-
                 // Set the boss parameters
-                // TODO
+                boss_dps = 0.12f;
                 break;
             case fight_scene_t.toMenu:
                 break;
