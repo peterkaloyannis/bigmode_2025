@@ -19,11 +19,14 @@ public class FadeOut : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (alpha <= 0)
+        if (SceneResetter.Instance.fadeOut)
         {
-            Destroy(gameObject);
+            alpha -= Time.deltaTime;
+            alpha = Mathf.Max(alpha, 0f);
+        } else {
+            alpha += 10*Time.deltaTime;
+            alpha = Mathf.Min(alpha, 1f);
         }
-        alpha -= Time.deltaTime;
         color = targetImage.color;
         color.a = alpha;
         targetImage.color = color;

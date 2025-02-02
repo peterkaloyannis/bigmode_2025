@@ -130,7 +130,12 @@ public class Dialogue : MonoBehaviour
         }
         
         line_idx = 0;
-        InstantiateBubble(dialogueLines[line_idx].speaker, ConcText(dialogueLines[line_idx]), audioClip, true);
+        InstantiateBubble(dialogueLines[line_idx].speaker, ConcText(dialogueLines[line_idx]), audioClip, isVillain());
+    }
+
+    bool isVillain()
+    {
+        return dialogueLines[line_idx].speaker == "Villain";
     }
 
     // Update is called once per frame
@@ -147,7 +152,7 @@ public class Dialogue : MonoBehaviour
                     Destroy(gameObject);
                     return;
                 }
-                InstantiateBubble(dialogueLines[line_idx].speaker, ConcText(dialogueLines[line_idx]), audioClip, true);
+                InstantiateBubble(dialogueLines[line_idx].speaker, ConcText(dialogueLines[line_idx]), audioClip, isVillain());
             }
             else
             {

@@ -52,6 +52,8 @@ public class FightManager : MonoBehaviour
     private float pitch_integral = 0f; // An integral of the mashing.
     private GameObject dialogue_object;
     private bool is_dialogue_running = false;
+    private bool is_inner_dialogue_running = false;
+    private bool is_inner_dialogue_done = false;
     private AsyncOperation operation;
 
     // Update is called once per frame
@@ -61,13 +63,24 @@ public class FightManager : MonoBehaviour
         {
             case fight_state_t.INIT:
             {
-                // Tansition to play in INIT
-                meter= 0.5f;
-                clear_active_effects();
-                bool is_dialogue_done = play_dialogue(SceneResetter.Instance.fname_pre_fight_dialogue);
+                if (SceneResetter.Instance.fname_prefight_monologue != null && !is_inner_dialogue_done){
+                    is_inner_dialogue_done = play_inner_dialogue(SceneResetter.Instance.fname_prefight_monologue);
+                } else {
+                    is_inner_dialogue_done = true;
+                }
+                if (is_inner_dialogue_done){
+                    if (!SceneResetter.Instance.fadeOut){
+                        SceneResetter.Instance.fadeOut = true;
+                    }
+                    // Tansition to play in INIT
+                    meter= 0.5f;
+                    clear_active_effects();
+                    bool is_dialogue_done = play_dialogue(SceneResetter.Instance.fname_pre_fight_dialogue);
 
-                if (is_dialogue_done){
-                    fight_state = fight_state_t.PLAY;
+                    if (is_dialogue_done){
+                        is_inner_dialogue_done = false;
+                        fight_state = fight_state_t.PLAY;
+                    }
                 }
                 break;
             }
@@ -97,7 +110,15 @@ public class FightManager : MonoBehaviour
                 break;
             }  
             case fight_state_t.WON_AFTER_DIALOGUE:
-                loadNextFight(true);
+                SceneResetter.Instance.fadeOut = false;
+                if (SceneResetter.Instance.fname_postfight_monologue_W != null && !is_inner_dialogue_done){
+                    is_inner_dialogue_done = play_inner_dialogue(SceneResetter.Instance.fname_postfight_monologue_W);
+                    if (is_inner_dialogue_done){
+                        loadNextFight(true);
+                    }
+                } else {
+                    loadNextFight(true);
+                }
                 break;
 
             case fight_state_t.LOST:
@@ -115,7 +136,15 @@ public class FightManager : MonoBehaviour
             }
 
             case fight_state_t.LOST_AFTER_DIALOGUE:
-                loadNextFight(false);
+                SceneResetter.Instance.fadeOut = false;
+                if (SceneResetter.Instance.fname_postfight_monologue_L != null && !is_inner_dialogue_done){
+                    is_inner_dialogue_done = play_inner_dialogue(SceneResetter.Instance.fname_postfight_monologue_L);
+                    if (is_inner_dialogue_done){
+                        loadNextFight(false);
+                    }
+                } else {
+                    loadNextFight(false);
+                }
                 break;
 
             default:
@@ -161,9 +190,11 @@ public class FightManager : MonoBehaviour
                 nextSceneString = "FightScene";
             }
         }
+        SceneResetter.Instance.fadeOut = false;
         operation = SceneManager.LoadSceneAsync(nextSceneString);
         operation.allowSceneActivation = true;
         fight_state = fight_state_t.INIT;
+        is_inner_dialogue_done = false;
     }
 
     void fight_state_update() {
@@ -295,6 +326,25 @@ public class FightManager : MonoBehaviour
         // Check if the game object has destroyed itself.
         if (dialogue_object == null && is_dialogue_running){
             is_dialogue_running = false;
+            return true;
+        }
+
+        return false;
+    }
+
+    bool play_inner_dialogue(string fname) {
+        // Play pre fight dialogue
+        if (!is_inner_dialogue_running){
+            dialogue_object = Instantiate(dialogue_prefab, UI_transform);
+            Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
+            dialogue_script.dialogueFile = fname;
+            dialogue_object.gameObject.SetActive(true);
+            is_inner_dialogue_running = true;
+        }
+        
+        // Check if the game object has destroyed itself.
+        if (dialogue_object == null && is_inner_dialogue_running){
+            is_inner_dialogue_running = false;
             return true;
         }
 

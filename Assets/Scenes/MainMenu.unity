@@ -282,6 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abc8f40df9f88e408102366966fc5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boss_dps: 0
   is_wife: 0
   fname_pre_fight_dialogue: 
   fname_fight_win_dialogue: 
@@ -297,6 +298,10 @@ MonoBehaviour:
   next_fight_W: 0
   next_fight_L: 0
   current_fight: 0
+  fname_prefight_monologue: 
+  fname_postfight_monologue_W: 
+  fname_postfight_monologue_L: 
+  fadeOut: 0
 --- !u!1 &219553287
 GameObject:
   m_ObjectHideFlags: 0
