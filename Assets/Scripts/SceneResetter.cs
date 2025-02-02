@@ -371,13 +371,13 @@ public class SceneResetter : MonoBehaviour
         available_stratagems["Capacitor Slam"] = stratagems["Capacitor Slam"];
 
         // Check all achievements and have them then add the corresponding stratagem.
-        if (PlayerPrefs.GetInt("ACH1")==1){
+        if (PlayerPrefs.GetInt("Ach1")==1){
             available_stratagems["Obsidian Breaks"] = stratagems["Obsidian Breaks"];
         }
-        if (PlayerPrefs.GetInt("ACH2")==1){
+        if (PlayerPrefs.GetInt("Ach2")==1){
             available_stratagems["Thorium Rush"] = stratagems["Thorium Rush"];
         }
-        if (PlayerPrefs.GetInt("ACH3")==1){
+        if (PlayerPrefs.GetInt("Ach3")==1){
             available_stratagems["Cartridge Change"] = stratagems["Cartridge Change"];
         }
     }

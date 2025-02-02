@@ -88,8 +88,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Kick things off with the initial advanceScene() call.
-        Debug.Log("GameManager Start() called. Initial advanceScene() call.");
-        advanceScene();
+        // Debug.Log("GameManager Start() called. Initial advanceScene() call.");
+        // advanceScene();
     }
 
     // Add a Dialogue instance to the global registry.

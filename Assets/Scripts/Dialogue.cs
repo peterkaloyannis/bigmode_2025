@@ -112,10 +112,10 @@ public class Dialogue : MonoBehaviour
                 dialogueLines = candidateBranch.lines;
             }
         }
-        Debug.Assert(false, "[ERROR] The block of code just before this selects what dialogue "
-        + "to display based on the unlocked set of achievments. This decision will probably "
-        + "need to happen somewhere else than the Start() function, which only runs once, "
-        + "in order to support dynamically changing the dialogue in a given scene.");
+        // Debug.Assert(false, "[ERROR] The block of code just before this selects what dialogue "
+        // + "to display based on the unlocked set of achievments. This decision will probably "
+        // + "need to happen somewhere else than the Start() function, which only runs once, "
+        // + "in order to support dynamically changing the dialogue in a given scene.");
 
         // Now we have our desired dialogueLines! Set the text boxes to empty, then start.
         // textComponent.text = string.Empty;
