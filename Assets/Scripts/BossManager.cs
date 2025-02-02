@@ -30,18 +30,18 @@ public class BossManager : MonoBehaviour
         move_trigger_noises = new List<AudioClip>();
         move_activation_noises = new List<AudioClip>();
 
-        // Grab all game objects tagged as moves.
-        GameObject[] move_objects = GameObject.FindGameObjectsWithTag("boss_move");
+        // Grab the list of available stratagems from the singleton.
+        Dictionary<string, BossMove> available_boss_moves = SceneResetter.Instance.available_boss_moves;
 
         // Put something in here, worry about JSON loading later.
-        for (int i = 0; i < move_objects.Length; i++){
-            // Extract the move information
-            BossMove move = move_objects[i].GetComponent<BossMove>();
+        foreach(KeyValuePair<string, BossMove> entry in available_boss_moves){
+            BossMove move = entry.Value;
+            string move_name = entry.Key;
    
             move_effects.Add(move.effects);
             move_windup_times.Add(move.windup_time);
             move_effect_durations.Add(move.effect_durations);
-            move_names.Add(move.name);
+            move_names.Add(move_name);
             move_trigger_noises.Add(move.trigger_noise);
             move_activation_noises.Add(move.activation_noise);
             move_cooldowns.Add(move.cooldown);
@@ -61,6 +61,12 @@ public class BossManager : MonoBehaviour
             // Clear the move cooldowns.
             set_move_cooldown_timers(0f);
 
+            return;
+        }
+
+        // If there are no moves available to the boss,
+        // return
+        if (move_names.Count == 0){
             return;
         }
 
@@ -116,7 +122,7 @@ public class BossManager : MonoBehaviour
                 next_move_countdown
             );
         if (next_move_countdown_timer == 0f){
-            Debug.Log("BOSS MOVE");
+            Debug.Log("BOSS MOVE AVAILABLE");
             // Loop through all the moves, recording the indices
             // of available moves.
             List<int> valid_moves = new List<int>();
@@ -137,7 +143,7 @@ public class BossManager : MonoBehaviour
             // Small subtraction offset to prevent bad flooring.
             float randomFloat = UnityEngine.Random.Range(0f, ((float)n_valid_moves)-0.001f);
             int selected_move_index = Mathf.FloorToInt(randomFloat);
-            Debug.Assert(selected_move_index < move_names.Count, "[ERROR] Bad boss move index.");
+            Debug.Assert(selected_move_index < move_names.Count - 1, "[ERROR] Bad boss move index.");
 
             // Execute the move and play the activation noise.
             active_move = selected_move_index;

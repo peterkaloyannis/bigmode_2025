@@ -1109,11 +1109,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!4 &406769863 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-  m_PrefabInstance: {fileID: 1639463133}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &406949087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,8 +2294,7 @@ Transform:
   m_LocalPosition: {x: 1125.3069, y: 529.27576, z: 915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 406769863}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1290783057
@@ -2620,63 +2614,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403230129}
   m_CullTransparentMesh: 1
---- !u!1001 &1639463133
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1254251914}
-    m_Modifications:
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 130.052
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -224.1022
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -303.68964
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3863751899299149963, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7437691707829092249, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
-      propertyPath: m_Name
-      value: Meter Chunk (Boss)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: eca79b8af3919a248a78168f63f06ada, type: 3}
 --- !u!1 &1671985343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,6 +2644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbee560f144ee7d4e9e4c678e67c4ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneSequenceFile: 
 --- !u!4 &1671985345
 Transform:
   m_ObjectHideFlags: 0
@@ -2734,6 +2672,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abc8f40df9f88e408102366966fc5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meter_chunk_boss_trigger_noise: {fileID: 0}
+  meter_chunk_boss_activation_noise: {fileID: 0}
+  stratagem_block_boss_trigger_noise: {fileID: 0}
+  stratagem_block_boss_activation_noise: {fileID: 0}
+  capacitor_slam_noise: {fileID: 0}
+  obsidian_breaks_noise: {fileID: 0}
+  thorium_rush_noise: {fileID: 0}
+  cartridge_change_slam_noise: {fileID: 0}
 --- !u!224 &1830430916 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6105706249916476344, guid: b7880734955b6c649b07d7d1a4a7f4bc, type: 3}
