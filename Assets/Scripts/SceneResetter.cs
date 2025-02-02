@@ -166,8 +166,7 @@ public class SceneResetter : MonoBehaviour
 
     public void setup_fight_scene(fight_scene_t fight_scene) {
         // Get the list of available stratagems from achievements
-        // TODO -- For now we will use the complete set.
-        available_stratagems = stratagems;
+        get_active_stratagems_from_achievements();
 
         // Switch case
         switch (fight_scene){
@@ -361,6 +360,25 @@ public class SceneResetter : MonoBehaviour
             default:
                 Debug.Log("[ERROR]: Invalid Fight State.");
                 break;
+        }
+    }
+
+    void get_active_stratagems_from_achievements() {
+        // Create the available stratagems dictionary.
+        available_stratagems = new Dictionary<string, Stratagem>();
+
+        // We will always have capacitor slam.
+        available_stratagems["Capacitor Slam"] = stratagems["Capacitor Slam"];
+
+        // Check all achievements and have them then add the corresponding stratagem.
+        if (PlayerPrefs.GetInt("ACH1")==1){
+            available_stratagems["Obsidian Breaks"] = stratagems["Obsidian Breaks"];
+        }
+        if (PlayerPrefs.GetInt("ACH2")==1){
+            available_stratagems["Thorium Rush"] = stratagems["Thorium Rush"];
+        }
+        if (PlayerPrefs.GetInt("ACH3")==1){
+            available_stratagems["Cartridge Change"] = stratagems["Cartridge Change"];
         }
     }
 
