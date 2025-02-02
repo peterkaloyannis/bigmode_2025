@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3628501169930323341
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79,6 +79,7 @@ MonoBehaviour:
   bubblePrefab: {fileID: 1327159867596504029, guid: 9a2cb344b73b25e419ce89417f7ff7d0, type: 3}
   audioClip: {fileID: 8300000, guid: 3d90cefdf8c3e8141bed12898757cdee, type: 3}
   dialogueFile: test.json
+  sceneNumber: 0
 --- !u!1001 &4495081252118570468
 PrefabInstance:
   m_ObjectHideFlags: 0

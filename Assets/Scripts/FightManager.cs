@@ -14,7 +14,9 @@ public enum fight_state_t {
     PAUSED,
     PLAY,
     WON,
+    WON_AFTER_DIALOGUE,
     LOST,
+    LOST_AFTER_DIALOGUE,
 }
 
 // These are the effects.
@@ -44,8 +46,12 @@ public class FightManager : MonoBehaviour
     public StratagemManager stratagem_manager; // The stratagem manager
     public float mash_rush_multiplier; // Mash Rush Multiplier
     public float meter_chunk_power; // Meter chunk
+    public GameObject dialogue_prefab;
+    public Transform UI_transform;
     private last_key_pressed_t last_key_pressed = last_key_pressed_t.NONE; // The last key pressed for the mash logic.
     private float pitch_integral = 0f; // An integral of the mashing.
+    private GameObject dialogue_object;
+    private bool is_dialogue_running = false;
 
     // Update is called once per frame
     void Update()
@@ -53,12 +59,18 @@ public class FightManager : MonoBehaviour
         switch (fight_state)
         {
             case fight_state_t.INIT:
+            {
                 // Tansition to play in INIT
-                fight_state = fight_state_t.PLAY;
                 meter= 0.5f;
                 clear_active_effects();
-                break;
+                bool is_dialogue_done = play_dialogue(SceneResetter.Instance.fname_pre_fight_dialogue);
 
+                if (is_dialogue_done){
+                    fight_state = fight_state_t.PLAY;
+                }
+                break;
+            }
+                
             case fight_state_t.PAUSED:
                 // Idle in PAUSED
                 // This is where dialogue triggers happen.
@@ -70,15 +82,39 @@ public class FightManager : MonoBehaviour
                 break;
 
             case fight_state_t.WON:
+            {
                 // Idle in WON
                 clear_active_effects();
                 meter = 1f;
+
+                // Play win dialogue
+                bool is_dialogue_done = play_dialogue(SceneResetter.Instance.fname_fight_win_dialogue);
+                if (is_dialogue_done){
+                    fight_state = fight_state_t.WON_AFTER_DIALOGUE;
+                }
+
+                break;
+            }  
+            case fight_state_t.WON_AFTER_DIALOGUE:
+                // Sit here forever.
                 break;
 
             case fight_state_t.LOST:
+            {
                 // Idle in LOST
                 clear_active_effects();
                 meter = 0f;
+
+                // Play lose dialogue
+                bool is_dialogue_done = play_dialogue(SceneResetter.Instance.fname_fight_lose_dialogue);
+                if (is_dialogue_done){
+                    fight_state = fight_state_t.LOST_AFTER_DIALOGUE;
+                }
+                break;
+            }
+
+            case fight_state_t.LOST_AFTER_DIALOGUE:
+                // Sit here forever.
                 break;
 
             default:
@@ -196,6 +232,25 @@ public class FightManager : MonoBehaviour
     public void clear_active_effects() {
         active_effect_timers.Clear();
         active_effects.Clear();
+    }
+
+    bool play_dialogue(string fname) {
+        // Play pre fight dialogue
+        if (!is_dialogue_running){
+            dialogue_object = Instantiate(dialogue_prefab, UI_transform);
+            Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
+            dialogue_script.dialogueFile = fname;
+            dialogue_object.gameObject.SetActive(true);
+            is_dialogue_running = true;
+        }
+        
+        // Check if the game object has destroyed itself.
+        if (dialogue_object == null && is_dialogue_running){
+            is_dialogue_running = false;
+            return true;
+        }
+
+        return false;
     }
 
     void mash_ding() {

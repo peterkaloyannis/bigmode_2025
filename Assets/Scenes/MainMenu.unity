@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 144544539}
   - component: {fileID: 144544538}
   - component: {fileID: 144544540}
+  - component: {fileID: 144544541}
   m_Layer: 0
   m_Name: GameLogic
   m_TagString: Untagged
@@ -224,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbee560f144ee7d4e9e4c678e67c4ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneSequenceFile: 
+  sceneSequenceFile: testSceneSequence.json
 --- !u!4 &144544539
 Transform:
   m_ObjectHideFlags: 0
@@ -259,12 +260,31 @@ MonoBehaviour:
   Ending4: {fileID: 8300000, guid: b0e99bc709b1cc041811f0c9ce56e1fd, type: 3}
   IntroMusic: {fileID: 8300000, guid: 42c8c33be1797124c91ec572089755e1, type: 3}
   MainMenuPrefab: {fileID: 1949226076150151999, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-  Achievements: {fileID: 1601331376}
   achievement1: {fileID: 21300000, guid: 193c8a3b25e25f141a76e42062fdbac9, type: 3}
   achievement2: {fileID: 21300000, guid: 6e01d5f8e08934544b3bdfd17799ede6, type: 3}
   achievement3: {fileID: 21300000, guid: 214b2b37f4f93124eb0240d9524a8bec, type: 3}
   achievement4: {fileID: 21300000, guid: 96a2b059c7c459146aa608731d33662f, type: 3}
   achievementLogos: []
+--- !u!114 &144544541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144544537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7abc8f40df9f88e408102366966fc5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meter_chunk_boss_trigger_noise: {fileID: 8300000, guid: f02d8c0118cab054fb95b07501342909, type: 3}
+  meter_chunk_boss_activation_noise: {fileID: 8300000, guid: 4d329c189dd641344acce335323afa96, type: 3}
+  stratagem_block_boss_trigger_noise: {fileID: 8300000, guid: f02d8c0118cab054fb95b07501342909, type: 3}
+  stratagem_block_boss_activation_noise: {fileID: 8300000, guid: 4d329c189dd641344acce335323afa96, type: 3}
+  capacitor_slam_noise: {fileID: 8300000, guid: ee8799a4b9847ae46ac2a3c2133e23d9, type: 3}
+  obsidian_breaks_noise: {fileID: 8300000, guid: ee8799a4b9847ae46ac2a3c2133e23d9, type: 3}
+  thorium_rush_noise: {fileID: 8300000, guid: b6d026dc53c30db429c7c4a52aaedd2e, type: 3}
+  cartridge_change_slam_noise: {fileID: 8300000, guid: ee8799a4b9847ae46ac2a3c2133e23d9, type: 3}
 --- !u!1 &219553287
 GameObject:
   m_ObjectHideFlags: 0

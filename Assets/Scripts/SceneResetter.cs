@@ -4,14 +4,16 @@ using UnityEngine.UIElements;
 
 // Define all the fight scenes.
 
-enum fight_scene_t {
+public enum fight_scene_t {
     wife_0,
     wife_1,
     wife_2,
     wife_3,
-    boss_0_wins,
-    boss_1_wins,
-    boss_2_wins,
+    boss_0_wins_0_losses,
+    boss_0_wins_1_losses,
+    boss_1_wins_0_losses,
+    boss_1_wins_1_losses,
+    boss_secret,
 };
 
 public class SceneResetter : MonoBehaviour
@@ -19,6 +21,14 @@ public class SceneResetter : MonoBehaviour
     // The available boss moves to be set before scene transitions.
     public Dictionary<string, Stratagem> available_stratagems = new Dictionary<string, Stratagem>();
     public Dictionary<string, BossMove> available_boss_moves = new Dictionary<string, BossMove>();
+
+    // Is this a wife scene for rendering.
+    public bool is_wife = false;
+
+    // Dialogue outputs.
+    public string fname_pre_fight_dialogue ="";
+    public string fname_fight_win_dialogue ="";
+    public string fname_fight_lose_dialogue ="";
 
     // Boss Noises
     public AudioClip meter_chunk_boss_trigger_noise;
@@ -150,7 +160,7 @@ public class SceneResetter : MonoBehaviour
         };
     }
 
-    void setup_fight_scene(fight_scene_t fight_scene) {
+    public void setup_fight_scene(fight_scene_t fight_scene) {
         // Get the list of available stratagems from achievements
         // TODO -- For now we will use the complete set.
         available_stratagems = stratagems;
@@ -158,6 +168,14 @@ public class SceneResetter : MonoBehaviour
         // Switch case
         switch (fight_scene){
             case fight_scene_t.wife_0:
+                // Set iswife
+                is_wife = true;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
 
@@ -166,6 +184,14 @@ public class SceneResetter : MonoBehaviour
 
                 break;
             case fight_scene_t.wife_1:
+                // Set iswife
+                is_wife = true;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
 
@@ -173,6 +199,14 @@ public class SceneResetter : MonoBehaviour
                 // TODO
                 break;
             case fight_scene_t.wife_2:
+                // Set iswife
+                is_wife = true;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
 
@@ -180,32 +214,99 @@ public class SceneResetter : MonoBehaviour
                 // TODO
                 break;
             case fight_scene_t.wife_3:
+                // Set iswife
+                is_wife = true;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
 
                 // Set the boss parameters
                 // TODO
                 break;
-            case fight_scene_t.boss_0_wins:
+            case fight_scene_t.boss_0_wins_0_losses:
+                // Set iswife
+                is_wife = false;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
 
                 // Set the boss parameters
                 // TODO
                 break;
-            case fight_scene_t.boss_1_wins:
+            case fight_scene_t.boss_1_wins_0_losses:
+                // Set iswife
+                is_wife = false;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>(){
-                    {"Boss_Chunk", boss_moves["Boss_Chunk"]}
+                    {"Boss Chunk", boss_moves["Boss Chunk"]}
                 };
 
                 // Set the boss parameters
                 // TODO
                 break;
-            case fight_scene_t.boss_2_wins:
+            case fight_scene_t.boss_0_wins_1_losses:
+                // Set iswife
+                is_wife = false;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>(){
-                    {"Boss_Chunk", boss_moves["Boss_Chunk"]},
+                    {"Boss Chunk", boss_moves["Boss Chunk"]}
+                };
+
+                // Set the boss parameters
+                // TODO
+                break;
+            case fight_scene_t.boss_1_wins_1_losses:
+                // Set iswife
+                is_wife = false;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
+                // Set the boss moves.
+                available_boss_moves = new Dictionary<string, BossMove>(){
+                    {"Boss Chunk", boss_moves["Boss Chunk"]}
+                };
+
+                // Set the boss parameters
+                // TODO
+                break;
+
+            case fight_scene_t.boss_secret:
+                // Set iswife
+                is_wife = false;
+
+                // Set the file paths for each dialogue tree.
+                fname_pre_fight_dialogue="test.json";
+                fname_fight_win_dialogue="TestScene1.json";
+                fname_fight_lose_dialogue="TestScene2.json";
+
+                // Set the boss moves.
+                available_boss_moves = new Dictionary<string, BossMove>(){
+                    {"Boss Chunk", boss_moves["Boss Chunk"]},
                     {"Stratagem Block", boss_moves["Stratagem Block"]}
                 };
 

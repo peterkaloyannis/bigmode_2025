@@ -143,7 +143,7 @@ public class BossManager : MonoBehaviour
             // Small subtraction offset to prevent bad flooring.
             float randomFloat = UnityEngine.Random.Range(0f, ((float)n_valid_moves)-0.001f);
             int selected_move_index = Mathf.FloorToInt(randomFloat);
-            Debug.Assert(selected_move_index < move_names.Count - 1, "[ERROR] Bad boss move index.");
+            Debug.Assert(selected_move_index < move_names.Count, "[ERROR] Bad boss move index.");
 
             // Execute the move and play the activation noise.
             active_move = selected_move_index;
