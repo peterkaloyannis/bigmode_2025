@@ -7,9 +7,10 @@ public class AchievementsButtons : MonoBehaviour
 {
     private Dictionary<int, string> Achievements;
     public Transform AchievementEncloser;
-    public TextMeshProUGUI achievementsTitle;
-    public TextMeshProUGUI achievementsQuote;
-    public TextMeshProUGUI achievementsText;
+    private TextMeshProUGUI achievementsTitle;
+    private TextMeshProUGUI achievementsQuote;
+    private TextMeshProUGUI achievementsText;
+    private Image achievementsImage;
     public Sprite padLock;
     private List<Sprite> achievementsSprites;
     private List<Transform> achievementsButtons;
@@ -22,8 +23,11 @@ public class AchievementsButtons : MonoBehaviour
 
     void initialize()
     {
+        achievementsTitle = AchievementEncloser.Find("A_desc_title").GetComponent<TextMeshProUGUI>();
+        achievementsQuote = AchievementEncloser.Find("A_desc_quote").GetComponent<TextMeshProUGUI>();
+        achievementsText = AchievementEncloser.Find("A_desc_description").GetComponent<TextMeshProUGUI>();
+        achievementsImage = AchievementEncloser.Find("A_desc_image").GetComponent<Image>();
         Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Achievements");
-        System.Array.Reverse(sprites);
         int count = 0;
         achievementsSprites = new List<Sprite>();
         foreach (Sprite sprite in sprites){
@@ -36,6 +40,11 @@ public class AchievementsButtons : MonoBehaviour
         achievementsButtons.Add(transform.Find("AchievementsImages").Find("Ach2"));
         achievementsButtons.Add(transform.Find("AchievementsImages").Find("Ach3"));
         achievementsButtons.Add(transform.Find("AchievementsImages").Find("Ach4"));
+
+        for (int i=0; i< achievementsButtons.Count; i++){
+            achievementsButtons[i].Find("Inside").GetComponent<Image>().sprite = padLock;
+            achievementsButtons[i].Find("Logo").GetComponent<Image>().sprite = achievementsSprites[i];
+        }
 
         Achievements = new Dictionary<int, string>();
         Achievements.Add(0, "Defeat the first boss");
@@ -60,10 +69,12 @@ public class AchievementsButtons : MonoBehaviour
     public void UpdateDisplay()
     {
         for (int i=0; i< Achievements.Count; i++){
-            if (PlayerPrefs.GetInt("Achievements") > i){
-                achievementsButtons[i].Find("Inside").GetComponent<Image>().sprite = achievementsSprites[i];
+            if (PlayerPrefs.GetInt(GameManager.Instance.achsNames[i]) > 0){
+                achievementsButtons[i].Find("Inside").GetComponent<Image>().gameObject.SetActive(false);
+                achievementsButtons[i].Find("Logo").GetComponent<Image>().gameObject.SetActive(true);
             } else {
-                achievementsButtons[i].Find("Inside").GetComponent<Image>().sprite = padLock;
+                achievementsButtons[i].Find("Inside").GetComponent<Image>().gameObject.SetActive(true);
+                achievementsButtons[i].Find("Logo").GetComponent<Image>().gameObject.SetActive(false);
             }
         }
     }
@@ -73,9 +84,10 @@ public class AchievementsButtons : MonoBehaviour
     }
 
     public void AchivementPress(int achnumber){
-        if (PlayerPrefs.GetInt("Achievements") > achnumber){
+        if (PlayerPrefs.GetInt(GameManager.Instance.achsNames[achnumber]) > 0){
             AchievementEncloser.gameObject.SetActive(true);
             achievementsText.text = Achievements[achnumber];
+            achievementsImage.sprite = achievementsSprites[achnumber];
         } else {
             AchievementEncloser.gameObject.SetActive(false);
         }

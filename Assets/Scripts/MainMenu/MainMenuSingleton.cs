@@ -63,7 +63,6 @@ public class MainMenuSingleton : MonoBehaviour
 
     void Initialize()
     {
-        Debug.Log("hi");
         achievementLogos = new List<Sprite>();
         achievementLogos.Add(achievement1);
         achievementLogos.Add(achievement2);
@@ -78,7 +77,10 @@ public class MainMenuSingleton : MonoBehaviour
         Achievements = GameObject.Find("Achievements").transform;
         achievementsButtons = Achievements.GetComponent<AchievementsButtons>();
         Achievements.gameObject.SetActive(false);
-        if (state != 0){
+
+        if (PlayerPrefs.GetInt(GameManager.Instance.achsNames[state]) == 0){
+            Debug.Log("Should notify");
+            PlayerPrefs.SetInt(GameManager.Instance.achsNames[state],1);
             achievementNotification.transform.Find("Logo").GetComponent<Image>().sprite = achievementLogos[state-1];
             achievementNotification.display = true;
             achievementNotification.transform.Find("AchievementTitle").GetComponent<TextMeshProUGUI>().text = achivementTitles[state-1];

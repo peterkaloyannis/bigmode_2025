@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -25,7 +27,7 @@ public class MenuButtons : MonoBehaviour
 
     void RefreshButtons()
     {
-        if (PlayerPrefs.GetInt("Achievements") > 0){
+        if (GameManager.Instance.checkForAnyAchievements()){
             ResetProgressButton.Find("Padlock").gameObject.SetActive(false);
             ResetProgressButton.Find("Text").gameObject.SetActive(true);
             AchievementsButton.Find("Padlock").gameObject.SetActive(false);
@@ -40,7 +42,15 @@ public class MenuButtons : MonoBehaviour
 
     public void StartGame()
     {
-        SceneResetter.Instance.setup_fight_scene(fight_scene_t.boss_1_wins);
+        if (PlayerPrefs.GetInt("Ach4") == 1 && PlayerPrefs.GetInt("Ach3") == 1){
+            SceneResetter.Instance.setup_fight_scene(fight_scene_t.wife_3);
+        } else if (PlayerPrefs.GetInt("Ach2") == 1){
+            SceneResetter.Instance.setup_fight_scene(fight_scene_t.wife_2);
+        } else if (PlayerPrefs.GetInt("Ach1") == 1){
+            SceneResetter.Instance.setup_fight_scene(fight_scene_t.wife_1);
+        } else {
+            SceneResetter.Instance.setup_fight_scene(fight_scene_t.wife_0);
+        }
         AsyncOperation operation = SceneManager.LoadSceneAsync("FightScene");
         operation.allowSceneActivation = true; // Prevent immediate activation
     }
@@ -56,7 +66,7 @@ public class MenuButtons : MonoBehaviour
 
     public void OpenAchievements()
     {
-        if (PlayerPrefs.GetInt("Achievements") > 0){
+        if (GameManager.Instance.checkForAnyAchievements()){
             AchievementScreen.gameObject.SetActive(true);
             AchievementScreen.GetComponent<AchievementsButtons>().ResetBox();
             achievementsButtons.UpdateDisplay();
@@ -70,14 +80,17 @@ public class MenuButtons : MonoBehaviour
 
     public void ResetProgress()
     {
-        PlayerPrefs.SetInt("Achievements", 0);
+        GameManager.Instance.resetAchievements();
         RefreshButtons();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O)){ 
-            PlayerPrefs.SetInt("Achievements", PlayerPrefs.GetInt("Achievements") + 1);
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            for (int i = 0; i < GameManager.Instance.achsNames.Count; i++){
+                PlayerPrefs.SetInt(GameManager.Instance.achsNames[i], 1);
+            }
             RefreshButtons();
         }
     }

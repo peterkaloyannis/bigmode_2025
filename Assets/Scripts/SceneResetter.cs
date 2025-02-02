@@ -14,6 +14,7 @@ public enum fight_scene_t {
     boss_1_wins_0_losses,
     boss_1_wins_1_losses,
     boss_secret,
+    toMenu,
 };
 
 public class SceneResetter : MonoBehaviour
@@ -47,6 +48,10 @@ public class SceneResetter : MonoBehaviour
     private Dictionary<string, Stratagem> stratagems;
 
     public static SceneResetter Instance { get; private set; }
+    public fight_scene_t next_fight_W;
+    public fight_scene_t next_fight_L;
+    public int achW = 0;
+    public int achL = 0;
     private void Awake()
     {
         if (Instance == null)
@@ -179,6 +184,12 @@ public class SceneResetter : MonoBehaviour
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
 
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.wife_0;
+                next_fight_W = fight_scene_t.boss_0_wins_0_losses;
+                achW = 0;
+                achL = 0;
+
                 // Set the boss parameters
                 // TODO
 
@@ -195,6 +206,12 @@ public class SceneResetter : MonoBehaviour
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
 
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.wife_1;
+                next_fight_W = fight_scene_t.boss_1_wins_0_losses;
+                achW = 0;
+                achL = 0;
+
                 // Set the boss parameters
                 // TODO
                 break;
@@ -209,6 +226,12 @@ public class SceneResetter : MonoBehaviour
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
+
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.wife_2;
+                next_fight_W = fight_scene_t.boss_0_wins_1_losses;
+                achW = 0;
+                achL = 0;
 
                 // Set the boss parameters
                 // TODO
@@ -225,6 +248,12 @@ public class SceneResetter : MonoBehaviour
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
 
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.wife_3;
+                next_fight_W = fight_scene_t.boss_0_wins_1_losses;
+                achW = 0;
+                achL = 0;
+
                 // Set the boss parameters
                 // TODO
                 break;
@@ -239,6 +268,12 @@ public class SceneResetter : MonoBehaviour
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
+
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.toMenu;
+                next_fight_W = fight_scene_t.toMenu;
+                achW = 2;
+                achL = 1;
 
                 // Set the boss parameters
                 // TODO
@@ -257,6 +292,12 @@ public class SceneResetter : MonoBehaviour
                     {"Boss Chunk", boss_moves["Boss Chunk"]}
                 };
 
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.toMenu;
+                next_fight_W = fight_scene_t.boss_secret;
+                achW = 0;
+                achL = 1;
+
                 // Set the boss parameters
                 // TODO
                 break;
@@ -274,6 +315,12 @@ public class SceneResetter : MonoBehaviour
                     {"Boss Chunk", boss_moves["Boss Chunk"]}
                 };
 
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.toMenu;
+                next_fight_W = fight_scene_t.toMenu;
+                achW = 2;
+                achL = 1;
+
                 // Set the boss parameters
                 // TODO
                 break;
@@ -290,6 +337,12 @@ public class SceneResetter : MonoBehaviour
                 available_boss_moves = new Dictionary<string, BossMove>(){
                     {"Boss Chunk", boss_moves["Boss Chunk"]}
                 };
+
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.toMenu;
+                next_fight_W = fight_scene_t.boss_secret;
+                achW = 0;
+                achL = 1;
 
                 // Set the boss parameters
                 // TODO
@@ -310,8 +363,16 @@ public class SceneResetter : MonoBehaviour
                     {"Stratagem Block", boss_moves["Stratagem Block"]}
                 };
 
+                // Set the next fight scenes.
+                next_fight_L = fight_scene_t.toMenu;
+                next_fight_W = fight_scene_t.toMenu;
+                achW = 4;
+                achL = 3;
+
                 // Set the boss parameters
                 // TODO
+                break;
+            case fight_scene_t.toMenu:
                 break;
             default:
                 Debug.Log("[ERROR]: Invalid Fight State.");

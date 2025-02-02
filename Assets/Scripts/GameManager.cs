@@ -80,17 +80,7 @@ public class GameManager : MonoBehaviour
         // Extract and store the list of scenes.
         sceneList = sceneSequence.scenes;
 
-        // Printout for visibility/debugging.
-        /*
-        foreach (Scene scene in sceneList)
-        {
-            Debug.Log("Scene name: " + scene.name + ", achievement_unlocked: " + scene.achievement_unlocked);
-            foreach (NextSceneOption nOpt in scene.next_scene_options)
-            {
-                Debug.Log("Possible target: " + nOpt.target_scene_idx + ", Achievement conditions: " + string.Join(", ", nOpt.achievement_conditions));
-            }
-        }
-        */
+        AchievementsCheck();
 
         Debug.Assert(sceneList.Count > 0, "[ERROR] Zero-length scene sequence.");
     }
@@ -132,10 +122,32 @@ public class GameManager : MonoBehaviour
         return filePath;
     }
 
+
+    public List<string> achsNames = new List<string>(){"Ach1","Ach2","Ach3","Ach4"};
     private void AchievementsCheck()
     {
-        if (!PlayerPrefs.HasKey("Achievements")){
-            PlayerPrefs.SetInt("Achievements", 0);
+        if (!PlayerPrefs.HasKey("Ach1")){
+            for (int i = 0; i < achsNames.Count; i++){
+                PlayerPrefs.SetInt(achsNames[i], 1);
+            }
+        }
+    }
+
+    public bool checkForAnyAchievements()
+    {
+        bool hasAchievements = false;
+        for (int i = 0; i < achsNames.Count; i++){
+            if (PlayerPrefs.GetInt(achsNames[i]) > 0){
+                hasAchievements = true;
+            }
+        }
+        return hasAchievements;
+    }
+
+    public void resetAchievements()
+    {
+        for (int i = 0; i < achsNames.Count; i++){
+            PlayerPrefs.SetInt(achsNames[i], 0);
         }
     }
 

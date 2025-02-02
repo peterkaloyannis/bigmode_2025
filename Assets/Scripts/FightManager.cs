@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 enum last_key_pressed_t {
     NONE,
@@ -52,6 +53,7 @@ public class FightManager : MonoBehaviour
     private float pitch_integral = 0f; // An integral of the mashing.
     private GameObject dialogue_object;
     private bool is_dialogue_running = false;
+    private AsyncOperation operation;
 
     // Update is called once per frame
     void Update()
@@ -96,7 +98,7 @@ public class FightManager : MonoBehaviour
                 break;
             }  
             case fight_state_t.WON_AFTER_DIALOGUE:
-                // Sit here forever.
+                loadNextFight(true);
                 break;
 
             case fight_state_t.LOST:
@@ -114,7 +116,7 @@ public class FightManager : MonoBehaviour
             }
 
             case fight_state_t.LOST_AFTER_DIALOGUE:
-                // Sit here forever.
+                loadNextFight(false);
                 break;
 
             default:
@@ -122,6 +124,33 @@ public class FightManager : MonoBehaviour
                 Debug.Assert(false, "[ERROR]: Invalid boss state reached.");
                 break;            
         }
+    }
+
+
+    void loadNextFight(bool won = true)
+    {
+        if (won){
+            if (SceneResetter.Instance.next_fight_W == fight_scene_t.toMenu){
+                MainMenuSingleton.Instance.state = SceneResetter.Instance.achW;
+                SceneManager.LoadSceneAsync("MainMenu");
+                operation.allowSceneActivation = true;
+            } else {
+                SceneResetter.Instance.setup_fight_scene(SceneResetter.Instance.next_fight_W);
+                operation = SceneManager.LoadSceneAsync("FightScene");
+                operation.allowSceneActivation = true;
+            }
+        } else {
+            if (SceneResetter.Instance.next_fight_L == fight_scene_t.toMenu){
+                MainMenuSingleton.Instance.state = SceneResetter.Instance.achL;
+                SceneManager.LoadSceneAsync("MainMenu");
+                operation.allowSceneActivation = true;
+            } else {
+                SceneResetter.Instance.setup_fight_scene(SceneResetter.Instance.next_fight_L);
+                operation = SceneManager.LoadSceneAsync("FightScene");
+                operation.allowSceneActivation = true;
+            }
+        }
+        fight_state = fight_state_t.INIT;
     }
 
     void fight_state_update() {
