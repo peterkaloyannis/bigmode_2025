@@ -72,9 +72,6 @@ public class Dialogue : MonoBehaviour
     private DialogueLine[] dialogueLines;
     private int line_idx;
 
-    // Index denoting which line of text is currently active.
-    private int text_idx = 0;
-
     // Check that the desired file exists and register with the GameManager.
     void Awake()
     {
@@ -171,49 +168,6 @@ public class Dialogue : MonoBehaviour
 
     void InstantiateBubble(string speaker, string text, AudioClip tempSound, bool alignmentLeft)
     {
-        // Type each character 1 by 1
-        foreach (char c in dialogueLines[line_idx].text[text_idx].ToCharArray())
-        {
-            textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
-        }
-    }
-
-    void NextLine()
-    {
-        if (text_idx < dialogueLines[line_idx].text.Length - 1)
-        {
-            // If we haven't reached the end of the current block of text,
-            // we need to display the next bit of text in this block.
-            // Increment the text index, empty the displayed text in this component,
-            // and start displaying the next line.
-            text_idx++;
-            textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
-        }
-        else if (line_idx < dialogueLines.Length - 1)
-        {
-            // In this case, we have reached the end of the current speaker's block
-            // of text, and there exists another speaker.
-            // Reset the text index, and increment the line index.
-            // Empty the component's text, and set the new speaker.
-            // Finally, start displaying the next line.
-            text_idx = 0;
-            line_idx++;
-            textComponent.text = string.Empty;
-            speakerComponent.text = getCurrentSpeaker();
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
-            // The dialogue is done. De-activate this and tell the GameManager
-            // to advance.
-            // setGameObjectActive(false);
-            Debug.Assert(false, "This gameObject.SetActive() call can probably go inside the setGameObjectActive(false) once that function is working.");
-            gameObject.SetActive(false);
-
-            GameManager.Instance.advanceScene();
-        }
         Transform bubble = Instantiate(bubblePrefab, transform);
         bubble.gameObject.SetActive(true);
         bubble.GetComponent<Bubble>().AssignVariables(speaker, text, tempSound, true);
