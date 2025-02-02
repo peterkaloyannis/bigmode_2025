@@ -1,0 +1,20 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Wife",
+                "text": [
+                    "See? There! Don't you feel better now, little bird?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Hm. A bit, I guess.",
+                    "Thank you, my love."
+                ]
+            }
+        ]
+    }
+]}

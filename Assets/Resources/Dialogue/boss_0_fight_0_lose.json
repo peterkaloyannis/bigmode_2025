@@ -1,0 +1,38 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "Say it."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "..."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "I won't let you leave until you say it."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I am a pathetic, worthless, unlovable waste of space."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "HA-HA-HA!!! VERY GOOD! YOU'VE LEARNED!",
+                    "And don't worry. If you ever start to forget that lesson, I'll be right here waiting to remind you."
+                ]
+            }
+        ]
+    }
+]}
