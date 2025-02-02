@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 236c3fc59f4092a4c8a0ca1bd5a633fb
   - enabled: 1
-    path: Assets/Scenes/FightScene1.unity
+    path: Assets/Scenes/FightScene.unity
     guid: aa0d24ae8c3e32f41a45fff6d151298b
   - enabled: 1
     path: Assets/Scenes/testContinuity.unity

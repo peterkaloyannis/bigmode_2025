@@ -40,7 +40,8 @@ public class MenuButtons : MonoBehaviour
 
     public void StartGame()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync("FightScene1");
+        SceneResetter.Instance.setup_fight_scene(fight_scene_t.boss_1_wins);
+        AsyncOperation operation = SceneManager.LoadSceneAsync("FightScene");
         operation.allowSceneActivation = true; // Prevent immediate activation
     }
 

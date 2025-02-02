@@ -40,11 +40,14 @@ public class Arms : MonoBehaviour
     private Material progressBarMat;
     public Transform TableTransform;
     public Transform BackgroundTransform;
-    public bool isWife = false;
+    private bool isWife = false;
 
     
     void Start(){
         originalPosition = transform.position;
+
+        // Load if this is the wife
+        isWife = SceneResetter.Instance.is_wife;
 
         // load arm
         Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Arms");

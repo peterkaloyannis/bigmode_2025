@@ -78,12 +78,6 @@ public class Dialogue : MonoBehaviour
         Debug.Log("Checking Dialogue File Existence.");
         dialogueFilePath = GameManager.checkFileExists(dialogueFileDir, dialogueFile);
 
-        if (!GameManager.Instance.registerDialogueInstance(this))
-        {
-            // If registration fails, throw an exception since this is a configuration error.
-            throw new System.Exception("Failed to register Dialogue with sceneNumber: " + sceneNumber);
-        }
-
         // Read the JSON file.
         string json = File.ReadAllText(dialogueFilePath);
 
@@ -140,19 +134,23 @@ public class Dialogue : MonoBehaviour
     void Update()
     {
         // Click spacebar to proceed.
-        if (Input.GetKeyDown(KeyCode.Space) && currentBubble != null && line_idx <= dialogueLines.Length - 1)
+        if (Input.GetKeyDown(KeyCode.Space) && currentBubble != null && line_idx < dialogueLines.Length)
         {
             // Extract the current set of lines for convenience.
-            string[] text_lines = dialogueLines[line_idx].text;
-            if (currentBubble.GetComponent<Bubble>().tracker >= currentBubble.GetComponent<Bubble>().numChar && line_idx <= dialogueLines.Length - 2)
+            if (currentBubble.GetComponent<Bubble>().tracker >= currentBubble.GetComponent<Bubble>().numChar)
             {
                 line_idx++;
+                if (line_idx > dialogueLines.Length-1) {
+                    Destroy(gameObject);
+                    return;
+                }
                 InstantiateBubble(dialogueLines[line_idx].speaker, ConcText(dialogueLines[line_idx]), audioClip, true);
             }
             else
             {
                 currentBubble.GetComponent<Bubble>().FinishSentence();
             }
+            
         }
     }
 

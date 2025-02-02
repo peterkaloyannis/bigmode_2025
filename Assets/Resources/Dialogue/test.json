@@ -20,7 +20,7 @@
         ]
     },
     {
-        "achievements_needed": [0],
+        "achievements_needed": [],
         "lines": [
             {
                 "speaker": "NPC",
@@ -37,7 +37,7 @@
         ]
     },
     {
-        "achievements_needed": [0, 1],
+        "achievements_needed": [],
         "lines": [
             {
                 "speaker": "NPC",

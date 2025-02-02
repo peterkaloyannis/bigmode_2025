@@ -31,7 +31,33 @@ public class StratagemManager : MonoBehaviour
         current_combo = new List<stratagem_input_t>();
 
         // Load in the stratagems
-        load_stratagems();
+        // Init the empty list
+        stratagem_combos = new List<List<stratagem_input_t>>();
+        stratagem_names = new List<string>();
+        stratagem_cooldowns = new List<float>();
+        stratagem_cooldown_timers = new List<float>();
+        stratagem_matches = new List<int>();
+        stratagem_effects = new List<List<effect_type_t>>();
+        stratagem_effect_durations = new List<List<float>>();
+        stratagem_success_noises = new List<AudioClip>();
+
+        // Grab the list of available stratagems from the singleton.
+        Dictionary<string, Stratagem> available_stratagems = SceneResetter.Instance.available_stratagems;
+
+        // Put something in here, worry about JSON loading later.
+        foreach(KeyValuePair<string, Stratagem> entry in available_stratagems){
+            Stratagem stratagem = entry.Value;
+            string stratagem_name = entry.Key;
+
+            stratagem_effects.Add(stratagem.effects);
+            stratagem_effect_durations.Add(stratagem.effect_durations);
+            stratagem_names.Add(stratagem_name);
+            stratagem_combos.Add(stratagem.combo);
+            stratagem_cooldowns.Add(stratagem.cooldown);
+            stratagem_success_noises.Add(stratagem.success_noise);
+            stratagem_cooldown_timers.Add(0f);
+            stratagem_matches.Add(0);
+        }
     }
 
     // Update is called once per frame
@@ -55,6 +81,17 @@ public class StratagemManager : MonoBehaviour
 
         // Collect the current combo
         collect_current_combo();
+
+        // If there are no stratagems available,
+        // and the user made an input, make a failure noise,
+        // clear, and return.
+        if (stratagem_names.Count == 0){
+            if (combos_last_cycle < current_combo.Count){
+                make_combo_noise(invalid_combo_noise);
+                current_combo.Clear();
+            }
+            return;
+        }
 
         // Loop through each combo, trigger if we match.
         bool matches_available = false;
@@ -137,36 +174,6 @@ public class StratagemManager : MonoBehaviour
                 valid_combo_noise,
                 1f+(float)current_combo.Count/3
             );
-        }
-    }
-
-    void load_stratagems(){
-        // Init the empty list
-        stratagem_combos = new List<List<stratagem_input_t>>();
-        stratagem_names = new List<string>();
-        stratagem_cooldowns = new List<float>();
-        stratagem_cooldown_timers = new List<float>();
-        stratagem_matches = new List<int>();
-        stratagem_effects = new List<List<effect_type_t>>();
-        stratagem_effect_durations = new List<List<float>>();
-        stratagem_success_noises = new List<AudioClip>();
-
-        // Grab all game objects tagged as stratagems.
-        GameObject[] stratagem_objects = GameObject.FindGameObjectsWithTag("stratagem");
-
-        // Put something in here, worry about JSON loading later.
-        for (int i = 0; i < stratagem_objects.Length; i++){
-            // Extract the stratagem information
-            Stratagem stratagem = stratagem_objects[i].GetComponent<Stratagem>();
-   
-            stratagem_effects.Add(stratagem.effects);
-            stratagem_effect_durations.Add(stratagem.effect_durations);
-            stratagem_names.Add(stratagem.name);
-            stratagem_combos.Add(stratagem.combo);
-            stratagem_cooldowns.Add(stratagem.cooldown);
-            stratagem_success_noises.Add(stratagem.success_noise);
-            stratagem_cooldown_timers.Add(0f);
-            stratagem_matches.Add(0);
         }
     }
 
