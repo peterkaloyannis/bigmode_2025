@@ -9,14 +9,33 @@ using UnityEditor;
 
 public class MenuButtons : MonoBehaviour
 {
-    public Transform MainScreen;
     public Transform AchievementScreen;
-    public bool AchievementsLocked;
+    private Transform ResetProgressButton;
+    private Transform AchievementsButton;
+    public AchievementsButtons achievementsButtons;
 
     void Start()
     {
-        AchievementsLocked = false;
         AchievementScreen.gameObject.SetActive(false);
+        ResetProgressButton = transform.Find("Buttons").Find("ResetProgressButton");
+        AchievementsButton = transform.Find("Buttons").Find("AchievementsButton");
+
+        RefreshButtons();
+    }
+
+    void RefreshButtons()
+    {
+        if (PlayerPrefs.GetInt("Achievements") > 0){
+            ResetProgressButton.Find("Padlock").gameObject.SetActive(false);
+            ResetProgressButton.Find("Text").gameObject.SetActive(true);
+            AchievementsButton.Find("Padlock").gameObject.SetActive(false);
+            AchievementsButton.Find("Text").gameObject.SetActive(true);
+        } else {
+            ResetProgressButton.Find("Padlock").gameObject.SetActive(true);
+            ResetProgressButton.Find("Text").gameObject.SetActive(false);
+            AchievementsButton.Find("Padlock").gameObject.SetActive(true);
+            AchievementsButton.Find("Text").gameObject.SetActive(false);
+        }
     }
 
     public void StartGame()
@@ -25,7 +44,7 @@ public class MenuButtons : MonoBehaviour
         operation.allowSceneActivation = true; // Prevent immediate activation
     }
 
-    public static void QuitButton()
+    public void QuitButton()
     {
         #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
@@ -36,9 +55,10 @@ public class MenuButtons : MonoBehaviour
 
     public void OpenAchievements()
     {
-        if (!AchievementsLocked){
+        if (PlayerPrefs.GetInt("Achievements") > 0){
             AchievementScreen.gameObject.SetActive(true);
             AchievementScreen.GetComponent<AchievementsButtons>().ResetBox();
+            achievementsButtons.UpdateDisplay();
         }
     }
 
@@ -49,6 +69,15 @@ public class MenuButtons : MonoBehaviour
 
     public void ResetProgress()
     {
-        
+        PlayerPrefs.SetInt("Achievements", 0);
+        RefreshButtons();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O)){ 
+            PlayerPrefs.SetInt("Achievements", PlayerPrefs.GetInt("Achievements") + 1);
+            RefreshButtons();
+        }
     }
 }

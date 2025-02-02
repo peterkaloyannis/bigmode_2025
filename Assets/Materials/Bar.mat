@@ -98,7 +98,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Angle: 0.25470367
+    - _Angle: 0.5
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -149,11 +149,11 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Dimensions: {r: 10, g: 200, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Main: {r: 0, g: 1, b: 0.037037134, a: 1}
-    - _Main2: {r: 0.2274434, g: 0.5786162, b: 0.24396917, a: 1}
+    - _Main: {r: 0, g: 1, b: 0.18681312, a: 1}
+    - _Main2: {r: 0.0015425569, g: 0.49056602, b: 0.057156958, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Villain: {r: 1, g: 0, b: 0.5675678, a: 1}
-    - _Villain2: {r: 0.76729554, g: 0.16166274, b: 0.5060421, a: 1}
+    - _Villain: {r: 1, g: 0.7994705, b: 0, a: 1}
+    - _Villain2: {r: 0.54088044, g: 0.39988318, b: 0, a: 1}
     - _electricitySpeed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

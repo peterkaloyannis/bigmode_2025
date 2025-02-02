@@ -520,6 +520,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130317489}
   m_CullTransparentMesh: 1
+--- !u!1 &144544537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 144544539}
+  - component: {fileID: 144544538}
+  m_Layer: 0
+  m_Name: GameLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &144544538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144544537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbee560f144ee7d4e9e4c678e67c4ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &144544539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144544537}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.699859, y: 0.17870331, z: 90.46799}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &219553287
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -583,7 +627,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.26666668, g: 0.4392157, b: 0.47843137, a: 0}
     m_HighlightedColor: {r: 0.26666668, g: 0.4392157, b: 0.47843137, a: 0.47058824}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -706,7 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1116,7 +1160,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1249029890}
         m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: BackToMenuFromAchievements
         m_Mode: 1
@@ -1965,7 +2009,7 @@ GameObject:
   - component: {fileID: 846357741}
   - component: {fileID: 846357740}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2651,7 +2695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -3196,7 +3240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -3529,9 +3573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55fbb5ae25ddace459367ccb8dc97e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainScreen: {fileID: 1249029889}
   AchievementScreen: {fileID: 1601331376}
-  AchievementsLocked: 0
+  achievementsButtons: {fileID: 1601331377}
 --- !u!1 &1275566793
 GameObject:
   m_ObjectHideFlags: 0
@@ -4222,7 +4265,7 @@ MonoBehaviour:
   achievementsTitle: {fileID: 1835269542}
   achievementsQuote: {fileID: 484264163}
   achievementsText: {fileID: 1423325197}
-  achievementsImage: {fileID: 2090455246}
+  padLock: {fileID: 21300000, guid: cc4af7bebf7ebda4084130adab173f11, type: 3}
 --- !u!1 &1608136336
 GameObject:
   m_ObjectHideFlags: 0
@@ -4598,7 +4641,7 @@ GameObject:
   - component: {fileID: 1755649538}
   - component: {fileID: 1755649537}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5655,3 +5698,4 @@ SceneRoots:
   - {fileID: 53300973}
   - {fileID: 1935861478}
   - {fileID: 1805892766}
+  - {fileID: 144544539}
