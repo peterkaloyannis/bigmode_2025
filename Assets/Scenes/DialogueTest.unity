@@ -426,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbee560f144ee7d4e9e4c678e67c4ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneSequenceFile: testSceneSequence.json
 --- !u!4 &1238995111
 Transform:
   m_ObjectHideFlags: 0

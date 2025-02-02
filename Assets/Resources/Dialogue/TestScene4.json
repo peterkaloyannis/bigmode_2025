@@ -1,0 +1,13 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Protagonist",
+                "text": [
+                    "I won the fight! Time to loop."
+                ]
+            }
+        ]
+    }
+]}

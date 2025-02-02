@@ -16,7 +16,7 @@ public class DialogueLine
 [System.Serializable]
 public class DialogueBranch
 {
-    public int[] achievements_needed;
+    public List<int> achievements_needed;
     public DialogueLine[] lines;
 }
 
@@ -52,50 +52,58 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     public string dialogueFile;
 
+    // Which scene in a scene sequence this instance is associated with.
+    // This is here so that a dev can specify this value in the Unity GUI.
+    // This allows the GameManager to uniquely identify each dialogue instance,
+    // and to associate it with a "scene", which is one of the entries in a json
+    // file in Assets/Resources/SceneSequence/ that defines the course of states
+    // that the game steps through.
+    public int sceneNumber;
+
     // On Start(), dialogue is loaded in from a json file at "Assets/Resources/Dialogue/" + dialogueFile
     private string dialogueFileDir = Application.dataPath + "/Resources/Dialogue/";
     private string dialogueFilePath;
 
     // The currently active DialogueLine, and an index for tracking how far along
     // that set of Lines you are.
+    private DialogueBranch[] dialogueBranches;
     private DialogueLine[] dialogueLines;
     private int line_idx;
 
     // Index denoting which line of text is currently active.
     private int text_idx;
 
-
-    // Check that the desired file exists.
+    // Check that the desired file exists and register with the GameManager.
     void Awake()
     {
-        dialogueFilePath = dialogueFileDir + dialogueFile;
-        if (File.Exists(dialogueFilePath))
+        Debug.Log("Checking Dialogue File Existence.");
+        dialogueFilePath = GameManager.checkFileExists(dialogueFileDir, dialogueFile);
+        
+        if (!GameManager.Instance.registerDialogueInstance(this))
         {
-            Debug.Log("Found Dialogue File: " + dialogueFilePath);
+            // If registration fails, throw an exception since this is a configuration error.
+            throw new System.Exception("Failed to register Dialogue with sceneNumber: " + sceneNumber);
         }
-        else
-        {
-           throw new System.Exception("Did not find Dialogue File: " + dialogueFilePath);
-        }
-    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
         // Read the JSON file.
         string json = File.ReadAllText(dialogueFilePath);
 
         // Deserialize the JSON into an array of DialogueBranch objects.
-        DialogueBranch[] dialogueBranches = DialogueJsonHelper.FromJson<DialogueBranch>(json);
+        dialogueBranches = DialogueJsonHelper.FromJson<DialogueBranch>(json);
         Debug.Assert(
             dialogueBranches.Length > 0,
             "Got no dialogue branches in dialogue file: " + dialogueFilePath
         );
         Debug.Assert(
-            dialogueBranches[0].achievements_needed.Length == 0,
+            dialogueBranches[0].achievements_needed.Count == 0,
             "First branch in dialogue file must require no achievements: " + dialogueFilePath
         );
+    }
 
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
         // Select which dialogue branch to choose. The selection logic is as follows:
         // Iterate through all branches and check the achievements_needed set.
         // If the set is a subset of the total set (known by GameManager.Instance),
@@ -111,6 +119,10 @@ public class Dialogue : MonoBehaviour
                 dialogueLines = candidateBranch.lines;
             }
         }
+        Debug.Assert(false, "[ERROR] The block of code just before this selects what dialogue "
+        + "to display based on the unlocked set of achievments. This decision will probably "
+        + "need to happen somewhere else than the Start() function, which only runs once, "
+        + "in order to support dynamically changing the dialogue in a given scene.");
 
         // Now we have our desired dialogueLines! Set the text boxes to empty, then start.
         textComponent.text = string.Empty;
@@ -187,15 +199,27 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            // This logic defines whatever should happen after the dialogue
-            // is done; i.e. "move to the next screen".
+            // The dialogue is done. De-activate this and tell the GameManager
+            // to advance.
+            // setGameObjectActive(false);
+            Debug.Assert(false, "This gameObject.SetActive() call can probably go inside the setGameObjectActive(false) once that function is working.");
             gameObject.SetActive(false);
+
+            GameManager.Instance.advanceScene();
         }
     }
 
     // Getter for the currently active speaker.
-    string getCurrentSpeaker()
+    public string getCurrentSpeaker()
     {
         return dialogueLines[line_idx].speaker;
+    }
+
+    public void setGameObjectActive(bool active)
+    {
+        Debug.Assert(false, "This is a function that the GameManager can call to disable "
+        + "this Dialogue component, i.e. by setting the gameObject to inactive or something. "
+        + "My idea was that components would be enabled/disabled by the GameManager, but "
+        + "I couldn't make it work.");
     }
 }

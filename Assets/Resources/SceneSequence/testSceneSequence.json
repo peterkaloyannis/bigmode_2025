@@ -1,0 +1,61 @@
+{"scenes": [
+    {
+        "name": "An init-state. This isn't real but idk how else to start but by advancing out of it.",
+        "achievement_unlocked": 0,
+        "next_scene_options": [
+            {
+                "target_scene_idx": 1,
+                "achievement_conditions": []
+            }
+        ]
+    },
+    {
+        "name": "A human-readable name for visibility. target_scene_idx is an index in this list.",
+        "achievement_unlocked": 0,
+        "next_scene_options": [
+            {
+                "target_scene_idx": 2,
+                "achievement_conditions": []
+            }
+        ]
+    },
+    {
+        "name": "This scene is a branch point.",
+        "achievement_unlocked": 0,
+        "next_scene_options": [
+            {
+                "target_scene_idx": 3,
+                "achievement_conditions": [],
+                "outcome_condition": "this isn't currently used but could say 'win' or 'lose'"
+            },
+            {
+                "target_scene_idx": 3,
+                "achievement_conditions": []
+            },
+            {
+                "target_scene_idx": 4,
+                "achievement_conditions": [1]
+            }
+        ]
+    },
+    {
+        "name": "After completing this scene, you'll unlock an achievement and loop back to 0.",
+        "achievement_unlocked": 1,
+        "next_scene_options": [
+            {
+                "target_scene_idx": 1,
+                "achievement_conditions": []
+            }
+        ]
+    },
+    {
+        "name": "End of the line!",
+        "achievement_unlocked": 2,
+        "next_scene_options": [
+            {
+                "target_scene_idx": 1,
+                "achievement_conditions": []
+            }
+        ]
+    }
+]}

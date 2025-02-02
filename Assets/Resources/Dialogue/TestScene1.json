@@ -1,0 +1,53 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Protagonist",
+                "text": [
+                    "Here is where I start my journey."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Good luck on your journey!"
+                ]
+            }
+        ]
+    },
+    {
+        "achievements_needed": [1],
+        "lines": [
+            {
+                "speaker": "Protagonist",
+                "text": [
+                    "I'm back with an achievement."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Congrats on the achievement!"
+                ]
+            }
+        ]
+    },
+    {
+        "achievements_needed": [1, 2],
+        "lines": [
+            {
+                "speaker": "Protagonist",
+                "text": [
+                    "Two whole achievements. Nice."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Wowowow!"
+                ]
+            }
+        ]
+    }
+]}
