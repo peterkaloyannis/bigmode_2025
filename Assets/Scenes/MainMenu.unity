@@ -259,7 +259,6 @@ MonoBehaviour:
   Ending4: {fileID: 8300000, guid: b0e99bc709b1cc041811f0c9ce56e1fd, type: 3}
   IntroMusic: {fileID: 8300000, guid: 42c8c33be1797124c91ec572089755e1, type: 3}
   MainMenuPrefab: {fileID: 1949226076150151999, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-  Achievements: {fileID: 1601331376}
   achievement1: {fileID: 21300000, guid: 193c8a3b25e25f141a76e42062fdbac9, type: 3}
   achievement2: {fileID: 21300000, guid: 6e01d5f8e08934544b3bdfd17799ede6, type: 3}
   achievement3: {fileID: 21300000, guid: 214b2b37f4f93124eb0240d9524a8bec, type: 3}
