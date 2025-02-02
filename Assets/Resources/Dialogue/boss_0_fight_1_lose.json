@@ -1,0 +1,26 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "HA-HA-HA!!! So much for the strength of your love, Hero."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "...I really did love her..."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "And what was your love worth?",
+                    "Nothing. It was worth nothing."
+                ]
+            }
+        ]
+    }
+]}

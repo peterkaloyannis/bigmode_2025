@@ -1,0 +1,17 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "",
+                "text": [
+                    "It's not true.",
+                    "I KNOW it's not true.",
+                    "I won't let him win like that.",
+                    "[EDITOR'S NOTE]: AFTER THIS DIALOGUE DISPLAYS, IS IT POSSIBLE TO LOOP BACK TO THE ",
+                    "START OF boss_0_fight_1? LIKE SKIPPING THE WIFE CUTSCENE AND JUST GOING STRAIGHT BACK TO THE FIGHT."
+                ]
+            }
+        ]
+    }
+]}

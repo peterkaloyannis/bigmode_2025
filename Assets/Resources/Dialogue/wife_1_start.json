@@ -1,0 +1,64 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Wife",
+                "text": [
+                    "You know, I can tell that you aren't taking our practice seriously. It makes me sad."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "My love, don't be sad! You KNOW how much I care about you!"
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Of course I know that! That's not why I'm sad at all!",
+                    "I'm sad because I can see that you're trapped, right now. My little bird, caught in a cage. But you're the one holding the key."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I don't understand..."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Then for once, listen to me when I try to teach you! Will you try?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Of course. For you."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "No! I want you to try not for me, but for YOURSELF!"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "...",
+                    "I'll try."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Good. I'm going to teach you a new Overdrive combo now, okay? This one is called Obsidian Break.",
+                    "It stuns your opponent for a moment, so try using it before they activate a special move."
+                ]
+            }
+        ]
+    }
+]}
