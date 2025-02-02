@@ -8,24 +8,16 @@ public class AudioManager : MonoBehaviour
     public AudioSource Source1;
     public AudioSource Source2;
     private List<AudioSource> Sources;
-
-    // Menu
-    public AudioClip TitleMusic;
     public AudioClip TransitionMusic;
     public AudioClip MenuMusic;
-
-    // Endings
-    public AudioClip Ending1;
-    public AudioClip Ending2;
-    public AudioClip Ending3;
-    public AudioClip Ending4;
+    public AudioClip TitleMusic;
 
     // Other
     public bool looping = false;
     private AudioClip loopingClip;
 
 
-    void Start()
+    void Awake()
     {
         Sources = new List<AudioSource>();
         Sources.Add(Source1);

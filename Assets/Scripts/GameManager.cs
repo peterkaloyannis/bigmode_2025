@@ -15,13 +15,13 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SceneSequence
 {
-    public List<Scene> scenes;
+    public List<Scene_> scenes;
 }
 
 #nullable enable  // Enable nullable reference types
 // Classes for json deserialization
 [System.Serializable]
-public class Scene
+public class Scene_
 {
     public string name = "";
     public List<NextSceneOption> next_scene_options = new List<NextSceneOption>();
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     // On Awake(), the scene sequence is loaded in from a json file at "Assets/Resources/SceneSequence/" + sceneSequenceFile
     private string sceneSequenceDir = Application.dataPath + "/Resources/SceneSequence/";
     private string sceneSequenceFilepath;
-    private List<Scene> sceneList;
+    private List<Scene_> sceneList;
 
     // Track the current scene via its index.
     private int currentSceneIdx = 0;
@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
     public void advanceScene(string outcome = null)
     {
         int? targetSceneIdx = null;
-        Scene currentScene = sceneList[currentSceneIdx];
+        Scene_ currentScene = sceneList[currentSceneIdx];
 
         foreach (NextSceneOption nextSceneOption in currentScene.next_scene_options)
         {
@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Advance to the next scene.
-        Scene targetScene = sceneList[targetSceneIdxInt];
+        Scene_ targetScene = sceneList[targetSceneIdxInt];
         Debug.Log("Advancing to scene " + targetSceneIdxInt + ": " + targetScene.name);
         currentSceneIdx = targetSceneIdxInt;
 
