@@ -1,0 +1,33 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Hah... Ha-ha! HAH! WORTHLESS? PATHETIC?!?",
+                    "WHO'S WORTHLESS AND PATHETIC NOW???"
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "Look at you. Consumed by anger and rage. Do you know what she'd think, if she saw you like this?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "SHUT UP! YOU DON'T KNOW ANYTHING ABOUT HER!!"
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "She'd know that it takes a monster to beat a monster, FOOL!",
+                    "You're no different from me. No different at all."
+                ]
+            }
+        ]
+    }
+]}
