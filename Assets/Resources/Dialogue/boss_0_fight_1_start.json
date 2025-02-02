@@ -1,0 +1,41 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "Well, well, well. You've learned a new trick. Just like the old days, isn't it?",
+                    "Training and training and training, all so you could \"protect her\".",
+                    "You failed, of course. It almost makes me wonder whether that was your real reason..."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Don't you DARE say that. Don't you DARE say I didn't care about her."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "HA-HA-HA!!! Struck a nerve, have I?",
+                    "Aren't you just a LITTLE concerned thinking about it?",
+                    "About how maybe, if you had TRULY loved her, you would have been able to save her?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "SHUT UP!!!"
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "Prove me wrong."
+                ]
+            }
+        ]
+    }
+]}

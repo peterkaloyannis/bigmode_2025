@@ -1,0 +1,27 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Your strength comes from within, my little bird.",
+                    "I know you would never have given up on me. So don't you DARE give up on yourself!"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I don't want to, but...",
+                    "It was easier to fight when you were here."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "I know... I know."
+                ]
+            }
+        ]
+    }
+]}

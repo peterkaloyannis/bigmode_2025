@@ -1,0 +1,33 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Hero",
+                "text": [
+                    "SEE! I LOVED HER! I'D GIVE ANYTHING FOR HER!!"
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "Would you? Would you really?",
+                    "Tell me what this victory is worth to her."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Not. Another. Word."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "That's what I thought. This fight wasn't for her at all.",
+                    "It was for you. Just like it always has been..."
+                ]
+            }
+        ]
+    }
+]}
