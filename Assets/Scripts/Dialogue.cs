@@ -76,10 +76,13 @@ public class Dialogue : MonoBehaviour
     void Awake()
     {
         Debug.Log("Checking Dialogue File Existence.");
-        dialogueFilePath = GameManager.checkFileExists(dialogueFileDir, dialogueFile);
+        // dialogueFilePath = GameManager.checkFileExists("/Resources/Dialogue/", dialogueFile);
 
         // Read the JSON file.
-        string json = File.ReadAllText(dialogueFilePath);
+        TextAsset jsonFile = Resources.Load<TextAsset>("Dialogue/" + Path.GetFileNameWithoutExtension(dialogueFile));
+        Debug.Assert(jsonFile != null, "Dialogue file not found: " + Path.GetFileNameWithoutExtension(dialogueFile));
+
+        string json = jsonFile.text;
 
         // Deserialize the JSON into an array of DialogueBranch objects.
         dialogueBranches = DialogueJsonHelper.FromJson<DialogueBranch>(json);

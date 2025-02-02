@@ -51,6 +51,7 @@ public class SceneResetter : MonoBehaviour
     public static SceneResetter Instance { get; private set; }
     public fight_scene_t next_fight_W;
     public fight_scene_t next_fight_L;
+    public fight_scene_t current_fight;
     private void Awake()
     {
         if (Instance == null)
@@ -173,6 +174,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.wife_0:
                 // Set iswife
                 is_wife = true;
+                current_fight = fight_scene_t.wife_0;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";
@@ -193,6 +195,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.wife_1:
                 // Set iswife
                 is_wife = true;
+                current_fight = fight_scene_t.wife_1;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";
@@ -212,6 +215,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.wife_2:
                 // Set iswife
                 is_wife = true;
+                current_fight = fight_scene_t.wife_2;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";
@@ -231,6 +235,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.wife_3:
                 // Set iswife
                 is_wife = true;
+                current_fight = fight_scene_t.wife_3;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";
@@ -250,6 +255,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_0_wins_0_losses:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_0_wins_0_losses;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";
@@ -269,6 +275,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_1_wins_0_losses:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_1_wins_0_losses;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";
@@ -290,6 +297,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_0_wins_1_losses:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_0_wins_1_losses;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";
@@ -311,6 +319,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_1_wins_1_losses:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_1_wins_1_losses;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";
@@ -333,6 +342,7 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_secret:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_secret;
 
                 // Set the file paths for each dialogue tree.
                 fname_pre_fight_dialogue="test.json";

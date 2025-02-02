@@ -296,6 +296,7 @@ MonoBehaviour:
   cartridge_change_slam_noise: {fileID: 8300000, guid: ee8799a4b9847ae46ac2a3c2133e23d9, type: 3}
   next_fight_W: 0
   next_fight_L: 0
+  current_fight: 0
 --- !u!1 &219553287
 GameObject:
   m_ObjectHideFlags: 0
