@@ -16,6 +16,7 @@ public class StratagemManager : MonoBehaviour
     public List<stratagem_input_t> current_combo; // The current stratagem combo
     public List<string> stratagem_names; // List of human readable stratagem names.
     public List<float> stratagem_cooldowns; // List of stratagem cooldowns.
+    public List<float> stratagem_max_cooldown; // List of the max cooldown of each stratagem.
     public List<float> stratagem_cooldown_timers; // List of stratagem cooldown timers.
     public List<List<stratagem_input_t>> stratagem_combos; // List of the stratagem combos.
     public List<int> stratagem_matches; // List encoding how many stratagem inputs match
@@ -35,6 +36,7 @@ public class StratagemManager : MonoBehaviour
         stratagem_combos = new List<List<stratagem_input_t>>();
         stratagem_names = new List<string>();
         stratagem_cooldowns = new List<float>();
+        stratagem_max_cooldown = new List<float>();
         stratagem_cooldown_timers = new List<float>();
         stratagem_matches = new List<int>();
         stratagem_effects = new List<List<effect_type_t>>();
@@ -54,6 +56,7 @@ public class StratagemManager : MonoBehaviour
             stratagem_names.Add(stratagem_name);
             stratagem_combos.Add(stratagem.combo);
             stratagem_cooldowns.Add(stratagem.cooldown);
+            stratagem_max_cooldown.Add(stratagem.max_cooldown);
             stratagem_success_noises.Add(stratagem.success_noise);
             stratagem_cooldown_timers.Add(0f);
             stratagem_matches.Add(0);
@@ -103,7 +106,7 @@ public class StratagemManager : MonoBehaviour
             cooldown_timer = Mathf.Clamp(
                 cooldown_timer - Time.deltaTime,
                 0,
-                600
+                stratagem_max_cooldown[i]
             );
             stratagem_cooldown_timers[i] = cooldown_timer;
 
