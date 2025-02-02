@@ -27,7 +27,7 @@ public class MenuManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !titledisappear)
         {
             if (Cinema.gameObject.activeSelf)
             {

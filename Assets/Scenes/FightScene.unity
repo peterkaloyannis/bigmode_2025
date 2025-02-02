@@ -2530,6 +2530,7 @@ MonoBehaviour:
   current_combo: 
   stratagem_names: []
   stratagem_cooldowns: []
+  stratagem_max_cooldown: []
   stratagem_cooldown_timers: []
   stratagem_matches: 
   stratagem_success_noises: []
@@ -2551,7 +2552,6 @@ MonoBehaviour:
   active_effects: 
   active_effect_timers: []
   mash_addition: 0.01
-  boss_dps: 0.03
   max_pitch_integral: 15
   pitch_integral_decay_time: 0.7
   base_pitch: 0.5
@@ -2596,7 +2596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1371736934
 RectTransform:
   m_ObjectHideFlags: 0
