@@ -103,6 +103,11 @@ public class FightAudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!shouldBePlaying && fight_manager.fight_state != fight_state_t.INIT){
+            shouldBePlaying = true;
+            ResetAll(0);
+        }
+
         if (shouldBePlaying){
             if (fighting){
                 if (fight_manager.fight_state == fight_state_t.PAUSED || fight_manager.fight_state == fight_state_t.WON || fight_manager.fight_state == fight_state_t.LOST){

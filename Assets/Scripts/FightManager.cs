@@ -127,29 +127,43 @@ public class FightManager : MonoBehaviour
     }
 
 
+    string nextSceneString;
     void loadNextFight(bool won = true)
     {
         if (won){
             if (SceneResetter.Instance.next_fight_W == fight_scene_t.toMenu){
-                MainMenuSingleton.Instance.state = SceneResetter.Instance.achW;
-                SceneManager.LoadSceneAsync("MainMenu");
-                operation.allowSceneActivation = true;
+                foreach (string ach in GameManager.Instance.achsNames){
+                    Debug.Log(PlayerPrefs.GetInt(ach));
+                }
+                if (PlayerPrefs.GetInt("Ach2") > 0){
+                    SceneResetter.Instance.setup_fight_scene(fight_scene_t.boss_secret);
+                    nextSceneString = "FightScene";
+                } else {
+                    nextSceneString = "MainMenu";
+                    MainMenuSingleton.Instance.state = 2;
+                }
+            } else if (SceneResetter.Instance.next_fight_W == fight_scene_t.endGame){
+                nextSceneString = "MainMenu";
+                MainMenuSingleton.Instance.state = 4;
             } else {
                 SceneResetter.Instance.setup_fight_scene(SceneResetter.Instance.next_fight_W);
-                operation = SceneManager.LoadSceneAsync("FightScene");
-                operation.allowSceneActivation = true;
+                nextSceneString = "FightScene";
             }
         } else {
             if (SceneResetter.Instance.next_fight_L == fight_scene_t.toMenu){
-                MainMenuSingleton.Instance.state = SceneResetter.Instance.achL;
-                SceneManager.LoadSceneAsync("MainMenu");
-                operation.allowSceneActivation = true;
+                if (PlayerPrefs.GetInt("Ach2") > 0){
+                    MainMenuSingleton.Instance.state = 3;
+                } else {
+                    MainMenuSingleton.Instance.state = 1;
+                }
+                nextSceneString = "MainMenu";
             } else {
                 SceneResetter.Instance.setup_fight_scene(SceneResetter.Instance.next_fight_L);
-                operation = SceneManager.LoadSceneAsync("FightScene");
-                operation.allowSceneActivation = true;
+                nextSceneString = "FightScene";
             }
         }
+        operation = SceneManager.LoadSceneAsync(nextSceneString);
+        operation.allowSceneActivation = true;
         fight_state = fight_state_t.INIT;
     }
 

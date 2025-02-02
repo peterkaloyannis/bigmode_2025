@@ -6,6 +6,9 @@ public class FadeOut : MonoBehaviour
     private Image targetImage;
     private Color color;
     private float alpha = 1f;
+    void Awake()
+    {
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

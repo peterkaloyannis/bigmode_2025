@@ -72,17 +72,17 @@ public class GameManager : MonoBehaviour
         }
 
         // Load in json from the file.
-        Debug.Log("Checking Scene Sequence File Existence.");
-        sceneSequenceFilepath = checkFileExists(sceneSequenceDir, sceneSequenceFile);
-        string json = File.ReadAllText(sceneSequenceFilepath);
-        SceneSequence sceneSequence = JsonUtility.FromJson<SceneSequence>(json);
+        // Debug.Log("Checking Scene Sequence File Existence.");
+        // sceneSequenceFilepath = checkFileExists(sceneSequenceDir, sceneSequenceFile);
+        // string json = File.ReadAllText(sceneSequenceFilepath);
+        // SceneSequence sceneSequence = JsonUtility.FromJson<SceneSequence>(json);
 
-        // Extract and store the list of scenes.
-        sceneList = sceneSequence.scenes;
+        // // Extract and store the list of scenes.
+        // sceneList = sceneSequence.scenes;
 
         AchievementsCheck();
 
-        Debug.Assert(sceneList.Count > 0, "[ERROR] Zero-length scene sequence.");
+        // Debug.Assert(sceneList.Count > 0, "[ERROR] Zero-length scene sequence.");
     }
 
     private void Start()

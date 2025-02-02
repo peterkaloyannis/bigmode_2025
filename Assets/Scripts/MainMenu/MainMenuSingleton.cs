@@ -78,13 +78,15 @@ public class MainMenuSingleton : MonoBehaviour
         achievementsButtons = Achievements.GetComponent<AchievementsButtons>();
         Achievements.gameObject.SetActive(false);
 
-        if (PlayerPrefs.GetInt(GameManager.Instance.achsNames[state]) == 0){
-            Debug.Log("Should notify");
-            PlayerPrefs.SetInt(GameManager.Instance.achsNames[state],1);
-            achievementNotification.transform.Find("Logo").GetComponent<Image>().sprite = achievementLogos[state-1];
-            achievementNotification.display = true;
-            achievementNotification.transform.Find("AchievementTitle").GetComponent<TextMeshProUGUI>().text = achivementTitles[state-1];
-            achievementNotification.transform.Find("AchievementText").GetComponent<TextMeshProUGUI>().text = achievementDescriptions[state-1];
+        if (state != 0){
+            if (PlayerPrefs.GetInt(GameManager.Instance.achsNames[state-1]) == 0){
+                Debug.Log("Should notify");
+                PlayerPrefs.SetInt(GameManager.Instance.achsNames[state-1],1);
+                achievementNotification.transform.Find("Logo").GetComponent<Image>().sprite = achievementLogos[state-1];
+                achievementNotification.display = true;
+                achievementNotification.transform.Find("AchievementTitle").GetComponent<TextMeshProUGUI>().text = achivementTitles[state-1];
+                achievementNotification.transform.Find("AchievementText").GetComponent<TextMeshProUGUI>().text = achievementDescriptions[state-1];
+            }
         }
     }
 
