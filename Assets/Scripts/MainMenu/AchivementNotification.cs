@@ -1,3 +1,4 @@
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class AchivementNotification : MonoBehaviour
     private bool isOnScreen = false;
     private float countDown = 6f;
     private float trackerCountDown = 0f;
+    private float waitTimer = 0f;
+    public bool display = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,13 +23,20 @@ public class AchivementNotification : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (display)
         {
-            ShowNotification();
+            waitTimer += Time.deltaTime;
+            if (waitTimer > 1f)
+            {
+                if (!isOnScreen)
+                {
+                    isOnScreen = true;
+                    trackerCountDown = 0f;
+                    notifSource.PlayOneShot(notifSound);
+                }
+                display = false;
+            }
         }
-
-
-
         if (isOnScreen)
         {
             if (Mathf.Abs(transform.localPosition.y - onScreenPosition_y) < 0.1f)
@@ -41,17 +51,6 @@ public class AchivementNotification : MonoBehaviour
             }
         } else {
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(transform.localPosition.x, offScreenPosition_y, transform.localPosition.z), 0.1f);
-        }
-        
-    }
-
-    public void ShowNotification()
-    {
-        if (!isOnScreen)
-        {
-            isOnScreen = true;
-            trackerCountDown = 0f;
-            notifSource.PlayOneShot(notifSound);
         }
     }
 }
