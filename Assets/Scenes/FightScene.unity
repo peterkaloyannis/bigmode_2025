@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_names: []
-  next_move_countdown: 0
+  next_move_countdown: 3
   next_move_countdown_timer: 0
   move_windup_times: []
   move_cooldowns: []
