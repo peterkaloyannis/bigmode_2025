@@ -15,3 +15,4 @@ Unlock new ​power-ups!
 ​Do you have what it takes to overcome yourself?
 
 This is the github repo for the [Big Mode 2025](https://itch.io/jam/bigmode-game-jam-2025) game jam!
+Here is the [Itch.io](https://redshrimp.itch.io/diamond-drive).
