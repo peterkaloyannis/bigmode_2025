@@ -51,6 +51,7 @@ public class FightManager : MonoBehaviour
     private last_key_pressed_t last_key_pressed = last_key_pressed_t.NONE; // The last key pressed for the mash logic.
     private float pitch_integral = 0f; // An integral of the mashing.
     private GameObject dialogue_object;
+    public AudioClip start_play_audio;
     private bool is_dialogue_running = false;
     private bool is_inner_dialogue_running = false;
     private bool is_inner_dialogue_done = false;
@@ -80,6 +81,7 @@ public class FightManager : MonoBehaviour
 
                     if (is_dialogue_done){
                         is_inner_dialogue_done = false;
+                        stratagem_manager.make_combo_noise(start_play_audio);
                         fight_state = fight_state_t.PLAY;
                     }
                 }

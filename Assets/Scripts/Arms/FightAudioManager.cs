@@ -51,8 +51,8 @@ public class FightAudioManager : MonoBehaviour
             MusicSources[2*i].volume = 0f;
             MusicSources[2*i+1].volume = 0f;
         }
-        MusicSources[2*track].volume = 1f;
-        MusicSources[2*track+1].volume = 1f;
+        MusicSources[2*track].volume = 0.5f;
+        MusicSources[2*track+1].volume = 0.5f;
     }
 
     public void ResetAll(int track){

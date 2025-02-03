@@ -79,7 +79,7 @@ public class SceneResetter : MonoBehaviour
                 // Cooldown
                 20f,
                 // Windup Time
-                5f,
+                1.3f,
                 // Effects
                 new List<effect_type_t>{effect_type_t.boss_chunk},
                 // Effect durations

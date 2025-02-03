@@ -204,12 +204,12 @@ public class StratagemManager : MonoBehaviour
         }
     }
 
-    void make_combo_noise(AudioClip noise, float pitch = 1f) {
+    public void make_combo_noise(AudioClip noise, float pitch = 1f) {
         // Play the audio
         GameObject tempAudio = new GameObject("TempAudioSource");
         AudioSource audioSource = tempAudio.AddComponent<AudioSource>();
-        audioSource.volume = 0.6f;
-        audioSource.priority = 130;
+        audioSource.volume = 1f;
+        audioSource.priority = 0;
         audioSource.clip = noise;
         audioSource.pitch = pitch;
         audioSource.Play();

@@ -287,14 +287,14 @@ MonoBehaviour:
   fname_pre_fight_dialogue: 
   fname_fight_win_dialogue: 
   fname_fight_lose_dialogue: 
-  meter_chunk_boss_trigger_noise: {fileID: 8300000, guid: f02d8c0118cab054fb95b07501342909, type: 3}
-  meter_chunk_boss_activation_noise: {fileID: 8300000, guid: 4d329c189dd641344acce335323afa96, type: 3}
+  meter_chunk_boss_trigger_noise: {fileID: 8300000, guid: 7f49b6a9aa7ebfd4b9b37ec9cc2ee65a, type: 3}
+  meter_chunk_boss_activation_noise: {fileID: 8300000, guid: 84f8068fc09eb00478940858cc585397, type: 3}
   stratagem_block_boss_trigger_noise: {fileID: 8300000, guid: f02d8c0118cab054fb95b07501342909, type: 3}
   stratagem_block_boss_activation_noise: {fileID: 8300000, guid: 4d329c189dd641344acce335323afa96, type: 3}
-  capacitor_slam_noise: {fileID: 8300000, guid: ee8799a4b9847ae46ac2a3c2133e23d9, type: 3}
-  obsidian_breaks_noise: {fileID: 8300000, guid: ee8799a4b9847ae46ac2a3c2133e23d9, type: 3}
+  capacitor_slam_noise: {fileID: 8300000, guid: 84f8068fc09eb00478940858cc585397, type: 3}
+  obsidian_breaks_noise: {fileID: 8300000, guid: 3a79612dd02f34940b7391a26c9efef6, type: 3}
   thorium_rush_noise: {fileID: 8300000, guid: b6d026dc53c30db429c7c4a52aaedd2e, type: 3}
-  cartridge_change_slam_noise: {fileID: 8300000, guid: ee8799a4b9847ae46ac2a3c2133e23d9, type: 3}
+  cartridge_change_slam_noise: {fileID: 8300000, guid: 03e83824de079374789f9200b26190b0, type: 3}
   next_fight_W: 0
   next_fight_L: 0
   current_fight: 0
