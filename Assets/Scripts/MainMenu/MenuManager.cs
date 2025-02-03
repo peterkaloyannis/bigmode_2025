@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
         pressStartText = GameObject.Find("PressStart").GetComponent<TMPro.TextMeshProUGUI>();
         
         // Spawn a dialogue object.
-        dialogue_object = Instantiate(dialogue_prefab, gameObject.transform);
+        dialogue_object = Instantiate(dialogue_prefab, Cinema);
         Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
         dialogue_script.dialogueFile = "credits.json";
         dialogue_object.gameObject.SetActive(true);
@@ -42,7 +42,7 @@ public class MenuManager : MonoBehaviour
             n_dialogues ++;
             
             // Spawn the second dialogue.
-            dialogue_object = Instantiate(dialogue_prefab, gameObject.transform);
+            dialogue_object = Instantiate(dialogue_prefab, Cinema);
             Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
             dialogue_script.dialogueFile = "intro.json";
             dialogue_object.gameObject.SetActive(true);
