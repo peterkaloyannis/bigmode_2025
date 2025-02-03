@@ -16,8 +16,8 @@ public class AchivementNotification : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        offScreenPosition_y = 377.2f;
-        onScreenPosition_y = 240.79f;
+        offScreenPosition_y = -390.25f;
+        onScreenPosition_y = -232.2f;
     }
 
     // Update is called once per frame

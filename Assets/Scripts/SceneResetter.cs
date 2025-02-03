@@ -413,7 +413,11 @@ public class SceneResetter : MonoBehaviour
                 };
 
                 // Set the next fight scenes.
-                next_fight_L = fight_scene_t.toMenu;
+                if (PlayerPrefs.GetInt("Ach3")==1){
+                    next_fight_L = fight_scene_t.boss_secret;
+                } else {
+                    next_fight_L = fight_scene_t.toMenu;
+                }
                 next_fight_W = fight_scene_t.endGame;
 
                 // Set the boss parameters
