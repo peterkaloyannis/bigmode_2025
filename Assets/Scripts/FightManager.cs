@@ -338,7 +338,6 @@ public class FightManager : MonoBehaviour
     }
 
     bool play_inner_dialogue(string fname) {
-        Debug.Log(fname);
         if (fname == ""){
             Debug.Log("No inner dialogue");
             is_inner_dialogue_running = false;

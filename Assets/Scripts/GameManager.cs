@@ -144,6 +144,18 @@ public class GameManager : MonoBehaviour
         return highest;
     }
 
+    public string setPathDialogue(string in_)
+    {
+        if (Resources.Load("Dialogue/" + Path.GetFileNameWithoutExtension(in_)) != null)
+        {
+            return in_;
+        }
+        else
+        {
+            return "";
+        }
+    }
+
 
 
     public bool checkForAnyAchievements()
