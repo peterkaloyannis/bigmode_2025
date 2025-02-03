@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
                 highest = i + 1;
             }
         }
-        return highest;
+        return Mathf.Max(2, highest);
     }
 
     public string setPathDialogue(string in_)

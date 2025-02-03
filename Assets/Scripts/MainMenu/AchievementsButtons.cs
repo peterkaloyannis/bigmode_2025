@@ -47,10 +47,10 @@ public class AchievementsButtons : MonoBehaviour
         }
 
         Achievements = new Dictionary<int, string>();
-        Achievements.Add(0, "Defeat the first boss");
-        Achievements.Add(1, "Defeat the second boss");
-        Achievements.Add(2, "Defeat the third boss");
-        Achievements.Add(3, "Defeat the fourth boss");
+        Achievements.Add(0, "Unlock Obsidian Break");
+        Achievements.Add(1, "Unlock Thorium Rush");
+        Achievements.Add(2, "Unlock Cartridge Change");
+        Achievements.Add(3, "Finish the Game");
 
         UpdateDisplay();
     }
