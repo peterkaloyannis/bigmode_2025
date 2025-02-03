@@ -133,6 +133,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int getHighestAchievement()
+    {
+        int highest = 0;
+        for (int i = 0; i < achsNames.Count; i++){
+            if (PlayerPrefs.GetInt(achsNames[i]) > highest){
+                highest = PlayerPrefs.GetInt(achsNames[i]) + 1;
+            }
+        }
+        return highest;
+    }
+
+
+
     public bool checkForAnyAchievements()
     {
         bool hasAchievements = false;

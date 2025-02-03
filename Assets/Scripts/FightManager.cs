@@ -63,7 +63,7 @@ public class FightManager : MonoBehaviour
         {
             case fight_state_t.INIT:
             {
-                if (SceneResetter.Instance.fname_prefight_monologue != null && !is_inner_dialogue_done){
+                if (!is_inner_dialogue_done){
                     is_inner_dialogue_done = play_inner_dialogue(SceneResetter.Instance.fname_prefight_monologue);
                 } else {
                     is_inner_dialogue_done = true;
@@ -75,6 +75,7 @@ public class FightManager : MonoBehaviour
                     // Tansition to play in INIT
                     meter= 0.5f;
                     clear_active_effects();
+
                     bool is_dialogue_done = play_dialogue(SceneResetter.Instance.fname_pre_fight_dialogue);
 
                     if (is_dialogue_done){
@@ -111,7 +112,7 @@ public class FightManager : MonoBehaviour
             }  
             case fight_state_t.WON_AFTER_DIALOGUE:
                 SceneResetter.Instance.fadeOut = false;
-                if (SceneResetter.Instance.fname_postfight_monologue_W != null && !is_inner_dialogue_done){
+                if (!is_inner_dialogue_done){
                     is_inner_dialogue_done = play_inner_dialogue(SceneResetter.Instance.fname_postfight_monologue_W);
                     if (is_inner_dialogue_done){
                         loadNextFight(true);
@@ -137,7 +138,7 @@ public class FightManager : MonoBehaviour
 
             case fight_state_t.LOST_AFTER_DIALOGUE:
                 SceneResetter.Instance.fadeOut = false;
-                if (SceneResetter.Instance.fname_postfight_monologue_L != null && !is_inner_dialogue_done){
+                if (!is_inner_dialogue_done){
                     is_inner_dialogue_done = play_inner_dialogue(SceneResetter.Instance.fname_postfight_monologue_L);
                     if (is_inner_dialogue_done){
                         loadNextFight(false);
@@ -314,6 +315,10 @@ public class FightManager : MonoBehaviour
     }
 
     bool play_dialogue(string fname) {
+        if (fname == ""){
+            is_dialogue_running = false;
+            return true;
+        }
         // Play pre fight dialogue
         if (!is_dialogue_running){
             dialogue_object = Instantiate(dialogue_prefab, UI_transform);
@@ -333,6 +338,12 @@ public class FightManager : MonoBehaviour
     }
 
     bool play_inner_dialogue(string fname) {
+        Debug.Log(fname);
+        if (fname == ""){
+            Debug.Log("No inner dialogue");
+            is_inner_dialogue_running = false;
+            return true;
+        }
         // Play pre fight dialogue
         if (!is_inner_dialogue_running){
             dialogue_object = Instantiate(dialogue_prefab, UI_transform);
