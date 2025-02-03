@@ -23,17 +23,17 @@ public class MainMenuSingleton : MonoBehaviour
     public Sprite achievement3;
     public Sprite achievement4;
     public List<Sprite> achievementLogos;
-    private List<string> achivementTitles = new List<string>(){
-        "Achievement 1",
-        "Achievement 2",
-        "Achievement 3",
-        "Achievement 4"
+    private List<string> achievementTitles = new List<string>(){
+        "Gone Hollow",
+        "Reach Heaven Through Violence",
+        "One Step Further From Home",
+        "Diamond Dream"
     };
     private List<string> achievementDescriptions = new List<string>(){
-        "Unlock the second overdrive",
-        "Unlock the third overdrive",
-        "Unlock the fourth overdrive",
-        "Finish the game"
+        "An ember barely flickers among the ash.\n\nUnlock the Obsidian Break Overdrive.",
+        "One down, 5,999,999,999 to go.\n\nUnlock the Thorium Rush Overdrive.",
+        "There's some good in this world, Mr. Frodo, and it's worth fighting for.\n\nUnlock the Cartridge Charge Overdrive.",
+        "Go gently into that good night.\n\nThanks for playing!"
     };
     void Awake()
     {
@@ -84,7 +84,7 @@ public class MainMenuSingleton : MonoBehaviour
                 PlayerPrefs.SetInt(GameManager.Instance.achsNames[state-1],1);
                 achievementNotification.transform.Find("Logo").GetComponent<Image>().sprite = achievementLogos[state-1];
                 achievementNotification.display = true;
-                achievementNotification.transform.Find("AchievementTitle").GetComponent<TextMeshProUGUI>().text = achivementTitles[state-1];
+                achievementNotification.transform.Find("AchievementTitle").GetComponent<TextMeshProUGUI>().text = achievementTitles[state-1];
                 achievementNotification.transform.Find("AchievementText").GetComponent<TextMeshProUGUI>().text = achievementDescriptions[state-1];
             }
         }
