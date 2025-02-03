@@ -1,0 +1,32 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "I'm still not ready to let her go."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I don't think we'll ever be ready.",
+                    "I think we just have to keep trying until it works."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "..."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Follow my lead."
+                ]
+            }
+        ]
+    }
+]}

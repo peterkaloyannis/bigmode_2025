@@ -1,0 +1,55 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "HA-HA-HA!!! Welcome back to the self-righteous, all-important Hero.",
+                    "So, you've conveniently decided that she doesn't matter anymore, have you? How easy that must've been for you.",
+                    "You're the center of the universe, after all, and everything else is below you - even her."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "That's not what this is, and I think you know that.",
+                    "I'm not a bad person for accepting that she's gone, and that it's not my fault."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "OHHH, NO NO NO. That's NOT how this works.",
+                    "YOU don't tell ME what you are. I'M the one who tells YOU."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "...",
+                    "...",
+                    "You're scared of me, aren't you?"
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "HAH! SCARED!!! OF YOU!?! THE PATHETIC, WORTHLESS, UNLOVABLE WASTE OF SPACE!?!"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Those words don't hurt me anymore."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "THEN MY ARM WILL HAVE TO DO THE TALKING."
+                ]
+            }
+        ]
+    }
+]}

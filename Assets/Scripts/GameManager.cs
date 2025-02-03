@@ -137,8 +137,8 @@ public class GameManager : MonoBehaviour
     {
         int highest = 0;
         for (int i = 0; i < achsNames.Count; i++){
-            if (PlayerPrefs.GetInt(achsNames[i]) > highest){
-                highest = PlayerPrefs.GetInt(achsNames[i]) + 1;
+            if (PlayerPrefs.GetInt(achsNames[i]) > 0){
+                highest = i + 1;
             }
         }
         return highest;

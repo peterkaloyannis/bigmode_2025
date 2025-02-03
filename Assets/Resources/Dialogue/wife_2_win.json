@@ -1,0 +1,29 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Wife",
+                "text": [
+                    "I knew that no matter what, you would keep fighting for me.",
+                    "Whether you succeeded or failed... won or lost... didn't matter to me.",
+                    "Because I knew that you would always try as hard as you could."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Of course I would try as hard as I could. I love... I loved you."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "I know. That's what love IS.",
+                    "And, little bird...",
+                    "It's okay to love yourself, too."
+                ]
+            }
+        ]
+    }
+]}

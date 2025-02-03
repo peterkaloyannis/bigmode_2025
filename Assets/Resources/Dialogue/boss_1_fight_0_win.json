@@ -1,0 +1,45 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "...If we accept that she's gone, then she'll really BE gone."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Yes."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "And then we'll be all alone.",
+                    "That's terrifying."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I don't think so."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "How can it not be terrifying?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "To borrow the words of a very smart woman...",
+                    "\"I'll help you understand.\""
+                ]
+            }
+        ]
+    }
+]}

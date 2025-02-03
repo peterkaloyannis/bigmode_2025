@@ -179,7 +179,7 @@ public class Dialogue : MonoBehaviour
         bubble.gameObject.SetActive(true);
         bubble.GetComponent<Bubble>().AssignVariables(speaker, text, tempSound, true);
         RectTransform rt = bubble.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(rt.sizeDelta.x, 40 + 18*text.Split('\n').Length);
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, 40 + 24*text.Split('\n').Length);
         currentBubble = bubble;
     }
 

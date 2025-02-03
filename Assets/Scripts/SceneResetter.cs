@@ -195,10 +195,10 @@ public class SceneResetter : MonoBehaviour
                 current_fight = fight_scene_t.wife_0;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="wife_0_start.json";
-                fname_prefight_monologue = "intro_0_internal_dialogue.json";
-                fname_fight_win_dialogue="wife_0_win.json";
-                fname_postfight_monologue_W = "wife_0_internal_dialogue.json";
+                fname_pre_fight_dialogue= GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_start.json");
+                fname_prefight_monologue = GameManager.Instance.setPathDialogue("intro_" + highest_achievement.ToString() + "_internal_dialogue.json");
+                fname_fight_win_dialogue=GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_win.json");;
+                fname_postfight_monologue_W = GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_internal_dialogue.json");;
                 fname_fight_lose_dialogue="";
                 fname_postfight_monologue_L = "";
 
@@ -219,10 +219,10 @@ public class SceneResetter : MonoBehaviour
                 current_fight = fight_scene_t.wife_1;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="wife_1_start.json";
-                fname_prefight_monologue = "intro_1_internal_dialogue.json";
-                fname_fight_win_dialogue="wife_1_win.json";
-                fname_postfight_monologue_W = "wife_1_internal_dialogue.json";
+                fname_pre_fight_dialogue= GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_start.json");
+                fname_prefight_monologue = GameManager.Instance.setPathDialogue("intro_" + highest_achievement.ToString() + "_internal_dialogue.json");
+                fname_fight_win_dialogue=GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_win.json");;
+                fname_postfight_monologue_W = GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_internal_dialogue.json");;
                 fname_fight_lose_dialogue="";
                 fname_postfight_monologue_L = "";
 
@@ -243,10 +243,10 @@ public class SceneResetter : MonoBehaviour
                 current_fight = fight_scene_t.wife_2;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="";
-                fname_prefight_monologue = "intro_2_internal_dialogue.json";
-                fname_fight_win_dialogue="";
-                fname_postfight_monologue_W = "";
+                fname_pre_fight_dialogue= GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_start.json");
+                fname_prefight_monologue = GameManager.Instance.setPathDialogue("intro_" + highest_achievement.ToString() + "_internal_dialogue.json");
+                fname_fight_win_dialogue=GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_win.json");;
+                fname_postfight_monologue_W = GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_internal_dialogue.json");;
                 fname_fight_lose_dialogue="";
                 fname_postfight_monologue_L = "";
 
@@ -267,10 +267,10 @@ public class SceneResetter : MonoBehaviour
                 current_fight = fight_scene_t.wife_3;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="";
-                fname_prefight_monologue = "";
-                fname_fight_win_dialogue="";
-                fname_postfight_monologue_W = "";
+                fname_pre_fight_dialogue= GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_start.json");
+                fname_prefight_monologue = GameManager.Instance.setPathDialogue("intro_" + highest_achievement.ToString() + "_internal_dialogue.json");
+                fname_fight_win_dialogue=GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_win.json");;
+                fname_postfight_monologue_W = GameManager.Instance.setPathDialogue("wife_" + highest_achievement.ToString() + "_internal_dialogue.json");;
                 fname_fight_lose_dialogue="";
                 fname_postfight_monologue_L = "";
 
