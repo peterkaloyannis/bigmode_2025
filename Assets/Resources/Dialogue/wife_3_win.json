@@ -1,0 +1,25 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Wife",
+                "text": [
+                    "That's all I needed."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Then I'm off."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "I'll be seeing you then. Fly, fly away."
+                ]
+            }
+        ]
+    }
+]}

@@ -1,0 +1,32 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "HA-HA-HA!!! BACK AGAIN ARE WE?",
+                    "You really are hopeless."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Make fun of me all you want. By the end you will see how far we've come."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "CAN YOU REALLY BE SAYING THAT IF YOU JUST LOST TO ME AGAIN?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Just fight me."
+                ]
+            }
+        ]
+    }
+]}

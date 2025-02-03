@@ -1,0 +1,31 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "We know how this goes. You are too weak to kill me off."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Mercy isn't weakness, it's the strenght to let go."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "YOU DON'T HAVE THAT STRENGTH! YOU ARE A LIAR."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Let me show you what true power is."
+                ]
+            }
+        ]
+    }
+]}

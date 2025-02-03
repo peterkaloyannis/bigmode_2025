@@ -1,0 +1,48 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Hero",
+                "text": [
+                    "You're really gone aren't you?"
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "I am.",
+                    "There was nothing you could have done."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I can see that now.",
+                    "I need to carry on without you"
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Those are the words I have waited for this whole time.",
+                    "End this cycle. Be free of this cage."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I'm glad you have found peace."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "As my final gift, accept the overdrive Cartridge Change.",
+                    "With it, you can refresh all your abilities to your heart's content!",
+                    "Practice it once with me before you go."
+                ]
+            }
+        ]
+    }
+]}

@@ -1,0 +1,25 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "HA! I guess this was all for nothing."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I will be back. This isn't the end."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "I WAIT WITH BAITED BREATH."
+                ]
+            }
+        ]
+    }
+]}
