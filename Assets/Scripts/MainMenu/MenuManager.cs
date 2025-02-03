@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class MenuManager : MonoBehaviour
     private GameObject dialogue_object;
     private int n_dialogues = 0;
     private TMPro.TextMeshProUGUI pressStartText;
+    public Sprite winImage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,13 +26,20 @@ public class MenuManager : MonoBehaviour
         Buttons.gameObject.SetActive(false);
         pressStartText = GameObject.Find("PressStart").GetComponent<TMPro.TextMeshProUGUI>();
         
-        if (MainMenuSingleton.Instance.state == 0)
+        if (MainMenuSingleton.Instance.state == 4)
         {
             // Spawn a dialogue object.
             dialogue_object = Instantiate(dialogue_prefab, Cinema);
             Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
             dialogue_script.dialogueFile = "credits.json";
             dialogue_object.gameObject.SetActive(true);
+        }
+
+        if (MainMenuSingleton.Instance.state >=0)
+        {
+            Cinema.Find("Image").GetComponent<Image>().sprite = winImage;
+        } else {
+            Cinema.Find("Image").GetComponent<Image>().sprite = null;
         }
 
         startTitleScreen();

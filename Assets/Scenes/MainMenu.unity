@@ -4902,10 +4902,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 435445760489972803, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-      propertyPath: dialogue_prefab
-      value: 
-      objectReference: {fileID: 3186934537172322259, guid: 73647623ae047f44e991e76b3df2dd57, type: 3}
     - target: {fileID: 1698776170700169632, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_Name
       value: MainMenuPrefab
@@ -4950,26 +4946,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5217165946813130195, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-      propertyPath: m_Name
-      value: DialoguePrefab
-      objectReference: {fileID: 0}
     - target: {fileID: 5474496198687475806, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1608136337}
-    - target: {fileID: 7812710101093694437, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-      propertyPath: dialogueFile
-      value: intro.json
-      objectReference: {fileID: 0}
     - target: {fileID: 8013507209460755587, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1608136337}
+    - target: {fileID: 8834380858001676431, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834380858001676431, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834380858001676431, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 496209077901199780, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-    - {fileID: 5217165946813130195, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
