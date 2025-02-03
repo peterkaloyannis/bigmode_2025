@@ -2565,7 +2565,7 @@ MonoBehaviour:
   UI_transform: {fileID: 2357349}
   start_play_audio: {fileID: 8300000, guid: beb2c212044d08c4cb8216f8f176bd2b, type: 3}
   win_audio: {fileID: 8300000, guid: 5a82a18e58d9dbe48b7f435d572c29bf, type: 3}
-  lose_audio: {fileID: 8300000, guid: 5a82a18e58d9dbe48b7f435d572c29bf, type: 3}
+  lose_audio: {fileID: 8300000, guid: 14a5fa218ceae6d4293b34dc444eefc1, type: 3}
 --- !u!4 &1254251914
 Transform:
   m_ObjectHideFlags: 0
