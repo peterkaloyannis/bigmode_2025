@@ -1,0 +1,31 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "SEE!?! I'M THE ONE WHO'S IN CONTROL."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "For now."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "FOREVER!!!"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "For now."
+                ]
+            }
+        ]
+    }
+]}

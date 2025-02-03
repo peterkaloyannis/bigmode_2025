@@ -1,0 +1,40 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "Alright, Mr. Untouchable Hero. Kill me, then.",
+                    "That's all you're good for. Beating people down to make yourself feel good."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "...",
+                    "No."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "No?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "No, I won't kill you. You're a part of me.",
+                    "Why would I kill you, when I can accept you?"
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "..."
+                ]
+            }
+        ]
+    }
+]}
