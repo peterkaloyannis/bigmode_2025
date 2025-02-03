@@ -1,0 +1,20 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "YOU WERE WRONG! YOU WEREN'T READY.",
+                    "YOU COULDN'T SAVE HER OR YOURSELF."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I will save us both, given enough time."
+                ]
+            }
+        ]
+    }
+]}
