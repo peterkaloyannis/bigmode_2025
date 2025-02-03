@@ -368,7 +368,7 @@ public class SceneResetter : MonoBehaviour
                 current_fight = fight_scene_t.boss_1_wins_1_losses;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue=GameManager.Instance.setPathDialogue("boss_1_fight_" + highest_achievement.ToString() + "_start.json");
+                fname_pre_fight_dialogue="";
                 fname_prefight_monologue = "";
 
                 fname_fight_win_dialogue=GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_win.json");

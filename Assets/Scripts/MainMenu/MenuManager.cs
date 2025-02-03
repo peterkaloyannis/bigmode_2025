@@ -24,17 +24,22 @@ public class MenuManager : MonoBehaviour
         Buttons.gameObject.SetActive(false);
         pressStartText = GameObject.Find("PressStart").GetComponent<TMPro.TextMeshProUGUI>();
         
-        // Spawn a dialogue object.
-        dialogue_object = Instantiate(dialogue_prefab, Cinema);
-        Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
-        dialogue_script.dialogueFile = "credits.json";
-        dialogue_object.gameObject.SetActive(true);
+        if (MainMenuSingleton.Instance.state == 0)
+        {
+            // Spawn a dialogue object.
+            dialogue_object = Instantiate(dialogue_prefab, Cinema);
+            Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
+            dialogue_script.dialogueFile = "credits.json";
+            dialogue_object.gameObject.SetActive(true);
+        }
+
+        startTitleScreen();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (dialogue_object != null){
             return;
         }
@@ -49,36 +54,29 @@ public class MenuManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !titledisappear)
+        // if (Input.GetKeyDown(KeyCode.Space) && !titledisappear)
+        // {
+        if (Cinema.gameObject.activeSelf)
         {
-            if (Cinema.gameObject.activeSelf)
-            {
-                Cinema.gameObject.SetActive(false);
-
-            }
-            else if (TitleScreen.gameObject.activeSelf)
-            {
-                audioManager.startClip(audioManager.TransitionMusic, 0.01);
-                audioManager.switchTrack();
-                audioManager.startLoopClip(audioManager.MenuMusic, 0.01 + (double)audioManager.TransitionMusic.samples / audioManager.TransitionMusic.frequency);
-                titledisappear = true;
-            }
+            Cinema.gameObject.SetActive(false);
         }
-
-        if (titledisappear)
+        if (!titledisappear){
+            audioManager.startClip(audioManager.TransitionMusic, 0.01);
+            audioManager.switchTrack();
+            audioManager.startLoopClip(audioManager.MenuMusic, 0.01 + (double)audioManager.TransitionMusic.samples / audioManager.TransitionMusic.frequency);
+            titledisappear = true;
+        }
+        trackerCountDown += Time.deltaTime;
+        flicker += Time.deltaTime;
+        if (flicker > 0.1f)
         {
-            trackerCountDown += Time.deltaTime;
-            flicker += Time.deltaTime;
-            if (flicker > 0.1f)
-            {
-                flicker = 0f;
-                pressStartText.alpha = 1-pressStartText.alpha;
-            }
-            if (trackerCountDown > countDown)
-            {
-                TitleScreen.gameObject.SetActive(false);
-                Buttons.gameObject.SetActive(true);
-            }
+            flicker = 0f;
+            pressStartText.alpha = 1-pressStartText.alpha;
+        }
+        if (trackerCountDown > countDown)
+        {
+            TitleScreen.gameObject.SetActive(false);
+            Buttons.gameObject.SetActive(true);
         }
     }
 
