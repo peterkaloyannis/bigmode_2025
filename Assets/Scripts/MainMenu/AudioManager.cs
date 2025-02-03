@@ -21,7 +21,9 @@ public class AudioManager : MonoBehaviour
     {
         Sources = new List<AudioSource>();
         Sources.Add(Source1);
+        Source1.volume = 0.5f;
         Sources.Add(Source2);
+        Source2.volume = 0.5f;
     }
 
     public int trackSwitch = 0;

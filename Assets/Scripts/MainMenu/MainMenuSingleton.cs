@@ -23,17 +23,17 @@ public class MainMenuSingleton : MonoBehaviour
     public Sprite achievement3;
     public Sprite achievement4;
     public List<Sprite> achievementLogos;
-    private List<string> achievementTitles = new List<string>(){
+    public List<string> achievementTitles = new List<string>(){
         "Gone Hollow",
         "Reach Heaven Through Violence",
         "One Step Further From Home",
         "Diamond Dream"
     };
-    private List<string> achievementDescriptions = new List<string>(){
-        "An ember barely flickers among the ash.\n\nUnlock the Obsidian Break Overdrive.",
-        "One down, 5,999,999,999 to go.\n\nUnlock the Thorium Rush Overdrive.",
-        "There's some good in this world, Mr. Frodo, and it's worth fighting for.\n\nUnlock the Cartridge Charge Overdrive.",
-        "Go gently into that good night.\n\nThanks for playing!"
+    public List<string> achievementDescriptions = new List<string>(){
+        "An ember barely flickers among the ash.\nUnlock the Obsidian Break Overdrive.",
+        "One down, 5,999,999,999 to go.\nUnlock the Thorium Rush Overdrive.",
+        "There's some good in this world, Mr. Frodo, and it's worth fighting for.\nUnlock the Cartridge Charge Overdrive.",
+        "Go gently into that good night.\nThanks for playing!"
     };
     void Awake()
     {
