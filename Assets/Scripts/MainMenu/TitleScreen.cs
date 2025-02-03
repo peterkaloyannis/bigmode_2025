@@ -29,26 +29,26 @@ public class TitleScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !Cinema.gameObject.activeSelf)
-        {
-            Source1.PlayOneShot(pressStart);
-            disappear = true;
-        }
+        // if (Input.GetKeyDown(KeyCode.Space) && !Cinema.gameObject.activeSelf)
+        // {
+        //     Source1.PlayOneShot(pressStart);
+        //     disappear = true;
+        // }
 
-        if (disappear)
-        {
-            trackerCountDown += Time.deltaTime;
-            flicker += Time.deltaTime;
-            if (flicker > 0.1f)
-            {
-                flicker = 0f;
-                pressStartText.alpha = 1-pressStartText.alpha;
-            }
-            if (trackerCountDown > countDown)
-            {
-                gameObject.SetActive(false);
-                Buttons.gameObject.SetActive(true);
-            }
-        }
+        // if (disappear)
+        // {
+        //     trackerCountDown += Time.deltaTime;
+        //     flicker += Time.deltaTime;
+        //     if (flicker > 0.1f)
+        //     {
+        //         flicker = 0f;
+        //         pressStartText.alpha = 1-pressStartText.alpha;
+        //     }
+        //     if (trackerCountDown > countDown)
+        //     {
+        //         gameObject.SetActive(false);
+        //         Buttons.gameObject.SetActive(true);
+        //     }
+        // }
     }
 }
