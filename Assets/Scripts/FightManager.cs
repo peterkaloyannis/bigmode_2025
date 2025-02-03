@@ -52,6 +52,8 @@ public class FightManager : MonoBehaviour
     private float pitch_integral = 0f; // An integral of the mashing.
     private GameObject dialogue_object;
     public AudioClip start_play_audio;
+    public AudioClip win_audio;
+    public AudioClip lose_audio;
     private bool is_dialogue_running = false;
     private bool is_inner_dialogue_running = false;
     private bool is_inner_dialogue_done = false;
@@ -204,10 +206,12 @@ public class FightManager : MonoBehaviour
         // Before evaluating the boss score calculations, check for loss or win.
         if (meter == 1f) {
             fight_state = fight_state_t.WON;
+            stratagem_manager.make_combo_noise(win_audio);
             return;
         }
         else if (meter == 0f){
             fight_state = fight_state_t.LOST;
+            stratagem_manager.make_combo_noise(lose_audio);
             return;
         }
 

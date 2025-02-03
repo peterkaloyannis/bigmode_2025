@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_names: []
-  next_move_countdown: 3
+  next_move_countdown: 4
   next_move_countdown_timer: 0
   move_windup_times: []
   move_cooldowns: []
@@ -2563,7 +2563,9 @@ MonoBehaviour:
   meter_chunk_power: 0.2
   dialogue_prefab: {fileID: 3186934537172322259, guid: 73647623ae047f44e991e76b3df2dd57, type: 3}
   UI_transform: {fileID: 2357349}
-  start_play_audio: {fileID: 8300000, guid: 38dccba047a421e4094344d441f0bf95, type: 3}
+  start_play_audio: {fileID: 8300000, guid: beb2c212044d08c4cb8216f8f176bd2b, type: 3}
+  win_audio: {fileID: 8300000, guid: 5a82a18e58d9dbe48b7f435d572c29bf, type: 3}
+  lose_audio: {fileID: 8300000, guid: 5a82a18e58d9dbe48b7f435d572c29bf, type: 3}
 --- !u!4 &1254251914
 Transform:
   m_ObjectHideFlags: 0
