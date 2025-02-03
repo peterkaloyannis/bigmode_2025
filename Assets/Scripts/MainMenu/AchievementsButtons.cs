@@ -47,10 +47,10 @@ public class AchievementsButtons : MonoBehaviour
         }
 
         Achievements = new Dictionary<int, string>();
-        Achievements.Add(0, "Unlock Obsidian Break");
-        Achievements.Add(1, "Unlock Thorium Rush");
-        Achievements.Add(2, "Unlock Cartridge Change");
-        Achievements.Add(3, "Finish the Game");
+        Achievements.Add(0, "Unlock Obsidian Break. \n Clamp your obsidian breaks to stop your enemy in their tracks for a short time.");
+        Achievements.Add(1, "Unlock Thorium Rush. \n Accelerate your thorium reactor to double your power for a short time.");
+        Achievements.Add(2, "Unlock Cartridge Change.\n Change out your heat discharge cartridge to reset your other abilities.");
+        Achievements.Add(3, "Finish the Game.");
 
         UpdateDisplay();
     }
@@ -86,6 +86,8 @@ public class AchievementsButtons : MonoBehaviour
     public void AchivementPress(int achnumber){
         if (PlayerPrefs.GetInt(GameManager.Instance.achsNames[achnumber]) > 0){
             AchievementEncloser.gameObject.SetActive(true);
+            achievementsTitle.text = MainMenuSingleton.Instance.achievementTitles[achnumber];
+            achievementsQuote.text = MainMenuSingleton.Instance.achievementDescriptions[achnumber];
             achievementsText.text = Achievements[achnumber];
             achievementsImage.sprite = achievementsSprites[achnumber];
         } else {

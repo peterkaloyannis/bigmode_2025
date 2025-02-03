@@ -1,0 +1,38 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "I miss her. I miss her so, so much."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "I know. So do I."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "WE CAN'T LEAVE HER BEHIND!!!"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "We have to.",
+                    "It's what she would want for us."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "I WON'T LET US!!!"
+                ]
+            }
+        ]
+    }
+]}

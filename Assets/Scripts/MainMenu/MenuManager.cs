@@ -72,9 +72,11 @@ public class MenuManager : MonoBehaviour
             Cinema.gameObject.SetActive(false);
         }
         if (!titledisappear){
-            audioManager.startClip(audioManager.TransitionMusic, 0.01);
-            audioManager.switchTrack();
-            audioManager.startLoopClip(audioManager.MenuMusic, 0.01 + (double)audioManager.TransitionMusic.samples / audioManager.TransitionMusic.frequency);
+            if (MainMenuSingleton.Instance.state == 0){
+                audioManager.startClip(audioManager.TransitionMusic, 0.01);
+                audioManager.switchTrack();
+                audioManager.startLoopClip(audioManager.MenuMusic, 0.01 + (double)audioManager.TransitionMusic.samples / audioManager.TransitionMusic.frequency);
+            }
             titledisappear = true;
         }
         trackerCountDown += Time.deltaTime;

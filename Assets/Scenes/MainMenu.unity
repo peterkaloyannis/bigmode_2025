@@ -270,6 +270,25 @@ MonoBehaviour:
   achievement3: {fileID: 21300000, guid: 214b2b37f4f93124eb0240d9524a8bec, type: 3}
   achievement4: {fileID: 21300000, guid: 96a2b059c7c459146aa608731d33662f, type: 3}
   achievementLogos: []
+  achievementTitles:
+  - Gone Hollow
+  - Reach Heaven Through Violence
+  - One Step Further From Home
+  - Diamond Dream
+  achievementDescriptions:
+  - 'An ember barely flickers among the ash.
+
+    Unlock the Obsidian Break Overdrive.'
+  - 'One down, 5,999,999,999 to go.
+
+    Unlock the Thorium Rush Overdrive.'
+  - 'There''s some good in this world, Mr. Frodo, and it''s worth fighting for.
+
+    Unlock
+    the Cartridge Charge Overdrive.'
+  - 'Go gently into that good night.
+
+    Thanks for playing!'
 --- !u!114 &144544541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4902,9 +4921,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1164035579367846823, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164035579367846823, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164035579367846823, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164035579367846823, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -312.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1698776170700169632, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_Name
       value: MainMenuPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698776170700169632, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1949226076150151999, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4946,6 +4985,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3646287039841302176, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646287039841302176, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 5474496198687475806, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_Camera
       value: 
@@ -4954,18 +5001,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1608136337}
-    - target: {fileID: 8834380858001676431, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8834380858001676431, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8834380858001676431, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

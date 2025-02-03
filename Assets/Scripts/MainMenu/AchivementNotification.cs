@@ -17,7 +17,7 @@ public class AchivementNotification : MonoBehaviour
     void Start()
     {
         offScreenPosition_y = 377.2f;
-        onScreenPosition_y = 255.79f;
+        onScreenPosition_y = 240.79f;
     }
 
     // Update is called once per frame
