@@ -1,0 +1,65 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Wife",
+                "text": [
+                    "You know, this might be weird to hear, but...",
+                    "You're good."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "What?"
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "You might not believe it right now, but you're good. You're a good person."
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "How can that be possible? Everything he said was true... I couldn't protect you when it really counted.",
+                    "And now... even if I fight, even if I WIN... It's nothing but selfishness."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "My dear... you know me, right? And you know that I knew you? Down to your core?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "Of course."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Do you think that I would blame you for failing to protect me?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "...I don't know."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "I'll teach you, then.",
+                    "This is a new Overdrive combo. It's called Thorium Rush.",
+                    "When you activate it, your button-mashing will be twice as effective. Let's give it a try."
+                ]
+            }
+        ]
+    }
+]}

@@ -122,7 +122,7 @@ public class SceneResetter : MonoBehaviour
                     effect_type_t.meter_chunk,
                     effect_type_t.mash_block},
                 // Effect durations
-                new List<float>{0f, 3f},
+                new List<float>{0f, 2f},
                 // Trigger Noise
                 capacitor_slam_noise
             )},
