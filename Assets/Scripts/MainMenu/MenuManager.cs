@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
         Buttons.gameObject.SetActive(false);
         pressStartText = GameObject.Find("PressStart").GetComponent<TMPro.TextMeshProUGUI>();
         
-        if (MainMenuSingleton.Instance.state == 4)
+        if (MainMenuSingleton.Instance.state == 0)
         {
             // Spawn a dialogue object.
             dialogue_object = Instantiate(dialogue_prefab, Cinema);
@@ -35,11 +35,13 @@ public class MenuManager : MonoBehaviour
             dialogue_object.gameObject.SetActive(true);
         }
 
-        if (MainMenuSingleton.Instance.state >=0)
+        if (MainMenuSingleton.Instance.state == 4)
         {
             Cinema.Find("Image").GetComponent<Image>().sprite = winImage;
+            Cinema.Find("Image").GetComponent<Image>().color = Color.white;
         } else {
             Cinema.Find("Image").GetComponent<Image>().sprite = null;
+            Cinema.Find("Image").GetComponent<Image>().color = Color.black;
         }
 
         startTitleScreen();
