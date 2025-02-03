@@ -1,0 +1,39 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Wife",
+                "text": [
+                    "You seem distracted, little bird. Aren't you going to practice your Overdrive combo?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "There's no point. It's not powerful enough."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "Sigh... you always were so dramatic.",
+                    "Please. Won't you practice?"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "...Fine. For you."
+                ]
+            },
+            {
+                "speaker": "Wife",
+                "text": [
+                    "That'll have to do. Now, just in case you've forgotten, you can arm-wrestle by mashing A and D as quickly as you can.",
+                    "At the same time, you can use the arrow keys to activate your Overdrive combos. Let's give it a try!"
+                ]
+            }
+        ]
+    }
+]}

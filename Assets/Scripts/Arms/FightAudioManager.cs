@@ -61,9 +61,9 @@ public class FightAudioManager : MonoBehaviour
         }
         
         goalTime = new List<double>();
-        for (int i=0; i<Loops.Length; i++){goalTime.Add(AudioSettings.dspTime + 1 + (double)(Loops[i].samples) / Loops[i].frequency);}
+        for (int i=0; i<Loops.Length; i++){goalTime.Add(AudioSettings.dspTime + 0.1 + (double)(Loops[i].samples) / Loops[i].frequency);}
         
-        StartMusic(AudioSettings.dspTime + 1);
+        StartMusic(AudioSettings.dspTime + 0.1);
         SelectTrack(track);
         shouldBePlaying = true;
     }
@@ -105,7 +105,29 @@ public class FightAudioManager : MonoBehaviour
     {
         if (!shouldBePlaying && fight_manager.fight_state != fight_state_t.INIT){
             shouldBePlaying = true;
-            ResetAll(0);
+            if (SceneResetter.Instance.is_wife){
+                ResetAll(5);
+            } else {
+                if (SceneResetter.Instance.current_fight == fight_scene_t.boss_0_wins_0_losses)
+                {
+                    ResetAll(0);
+                } else if (SceneResetter.Instance.current_fight == fight_scene_t.boss_1_wins_0_losses)
+                {
+                    ResetAll(1);
+                } else if (SceneResetter.Instance.current_fight == fight_scene_t.boss_1_wins_0_losses)
+                {
+                    ResetAll(2);
+                } else if (SceneResetter.Instance.current_fight == fight_scene_t.boss_1_wins_1_losses)
+                {
+                    ResetAll(3);
+                } else if (SceneResetter.Instance.current_fight == fight_scene_t.boss_0_wins_1_losses)
+                {
+                    ResetAll(3);
+                } else if (SceneResetter.Instance.current_fight == fight_scene_t.boss_secret)
+                {
+                    ResetAll(4);
+                }
+            }
         }
 
         if (shouldBePlaying){

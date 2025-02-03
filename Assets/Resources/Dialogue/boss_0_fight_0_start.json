@@ -1,0 +1,50 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Villain",
+                "text": [
+                    "LOOK WHO'S BACK!!! THE PATHETIC, WORTHLESS, UNLOVABLE WASTE OF SPACE!"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "..."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "HA-HA-HA! Nothing to say, as usual. Well, don't worry. I'll do the talking for you.",
+                    "\"Boo-hoo! My wife died, and I was too weak to save her! Now I'm a pathetic, worthless, unlovable waste of space!\""
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "..."
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "And so, wallowing in self-pity, you come crawling back to me. Pathetic --"
+                ]
+            },
+            {
+                "speaker": "Hero",
+                "text": [
+                    "-- worthless, unlovable waste of space, yeah, I get it. Can we just get this over with?"
+                ]
+            },
+            {
+                "speaker": "Villain",
+                "text": [
+                    "With pleasure."
+                ]
+            }
+        ]
+    }
+]}

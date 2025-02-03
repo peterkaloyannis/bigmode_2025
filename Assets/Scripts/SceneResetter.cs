@@ -54,6 +54,11 @@ public class SceneResetter : MonoBehaviour
     public static SceneResetter Instance { get; private set; }
     public fight_scene_t next_fight_W;
     public fight_scene_t next_fight_L;
+    public fight_scene_t current_fight;
+    public string fname_prefight_monologue = null;
+    public string fname_postfight_monologue_W = null;
+    public string fname_postfight_monologue_L = null;
+    public bool fadeOut = false;
     private void Awake()
     {
         if (Instance == null)
@@ -178,17 +183,24 @@ public class SceneResetter : MonoBehaviour
     public void setup_fight_scene(fight_scene_t fight_scene) {
         // Get the list of available stratagems from achievements
         get_active_stratagems_from_achievements();
-
+        int highest_achievement = GameManager.Instance.getHighestAchievement();
+        if (highest_achievement == 5){
+            highest_achievement = 4;
+        }
         // Switch case
         switch (fight_scene){
             case fight_scene_t.wife_0:
                 // Set iswife
                 is_wife = true;
+                current_fight = fight_scene_t.wife_0;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue="wife_0_start.json";
+                fname_prefight_monologue = "intro_0_internal_dialogue.json";
+                fname_fight_win_dialogue="wife_0_win.json";
+                fname_postfight_monologue_W = "wife_0_internal_dialogue.json";
+                fname_fight_lose_dialogue="";
+                fname_postfight_monologue_L = "";
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
@@ -204,11 +216,15 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.wife_1:
                 // Set iswife
                 is_wife = true;
+                current_fight = fight_scene_t.wife_1;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue="wife_1_start.json";
+                fname_prefight_monologue = "intro_1_internal_dialogue.json";
+                fname_fight_win_dialogue="wife_1_win.json";
+                fname_postfight_monologue_W = "wife_1_internal_dialogue.json";
+                fname_fight_lose_dialogue="";
+                fname_postfight_monologue_L = "";
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
@@ -224,11 +240,15 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.wife_2:
                 // Set iswife
                 is_wife = true;
+                current_fight = fight_scene_t.wife_2;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue="";
+                fname_prefight_monologue = "intro_2_internal_dialogue.json";
+                fname_fight_win_dialogue="";
+                fname_postfight_monologue_W = "";
+                fname_fight_lose_dialogue="";
+                fname_postfight_monologue_L = "";
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
@@ -244,11 +264,15 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.wife_3:
                 // Set iswife
                 is_wife = true;
+                current_fight = fight_scene_t.wife_3;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue="";
+                fname_prefight_monologue = "";
+                fname_fight_win_dialogue="";
+                fname_postfight_monologue_W = "";
+                fname_fight_lose_dialogue="";
+                fname_postfight_monologue_L = "";
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
@@ -264,11 +288,16 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_0_wins_0_losses:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_0_wins_0_losses;
 
-                // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue=GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_start.json");
+                fname_prefight_monologue = "";
+
+                fname_fight_win_dialogue="in_between_rounds_W.json";
+                fname_postfight_monologue_W = "";
+
+                fname_fight_lose_dialogue="in_between_rounds_L.json";
+                fname_postfight_monologue_L = "";
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
@@ -284,11 +313,17 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_1_wins_0_losses:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_1_wins_0_losses;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue="";
+                fname_prefight_monologue = "";
+
+                fname_fight_win_dialogue=GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_win.json");
+                fname_postfight_monologue_W = "";
+
+                fname_fight_lose_dialogue="in_between_rounds_L.json";
+                fname_postfight_monologue_L = "";
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>(){
@@ -305,11 +340,17 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_0_wins_1_losses:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_0_wins_1_losses;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue="";
+                fname_prefight_monologue = "";
+
+                fname_fight_win_dialogue="in_between_rounds_W.json";
+                fname_postfight_monologue_W = "";
+
+                fname_fight_lose_dialogue= GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_win_internal_dialogue.json");
+                fname_postfight_monologue_L = GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_lose_internal_dialogue.json");
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>();
@@ -324,11 +365,17 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_1_wins_1_losses:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_1_wins_1_losses;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue="";
+                fname_prefight_monologue = "";
+
+                fname_fight_win_dialogue=GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_win.json");
+                fname_postfight_monologue_W = GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_win_internal_dialogue.json");
+
+                fname_fight_lose_dialogue=GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_lose.json");
+                fname_postfight_monologue_L = GameManager.Instance.setPathDialogue("boss_0_fight_" + highest_achievement.ToString() + "_lose_internal_dialogue.json");
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>(){
@@ -346,11 +393,17 @@ public class SceneResetter : MonoBehaviour
             case fight_scene_t.boss_secret:
                 // Set iswife
                 is_wife = false;
+                current_fight = fight_scene_t.boss_secret;
 
                 // Set the file paths for each dialogue tree.
-                fname_pre_fight_dialogue="test.json";
-                fname_fight_win_dialogue="TestScene1.json";
-                fname_fight_lose_dialogue="TestScene2.json";
+                fname_pre_fight_dialogue="";
+                fname_prefight_monologue = "";
+
+                fname_fight_win_dialogue="";
+                fname_postfight_monologue_W = "";
+
+                fname_fight_lose_dialogue="";
+                fname_postfight_monologue_L = "";
 
                 // Set the boss moves.
                 available_boss_moves = new Dictionary<string, BossMove>(){

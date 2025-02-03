@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,7 @@ public class Arms : MonoBehaviour
     public Transform TableTransform;
     public Transform BackgroundTransform;
     private bool isWife = false;
+    private Transform Rounds;
 
     
     void Start(){
@@ -48,6 +50,8 @@ public class Arms : MonoBehaviour
 
         // Load if this is the wife
         isWife = SceneResetter.Instance.is_wife;
+
+        Rounds = GameObject.Find("Rounds").transform;
 
         // load arm
         Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Arms");
@@ -119,6 +123,7 @@ public class Arms : MonoBehaviour
             progressBarMat.SetColor("_Villain2", colorWife2);
             TableTransform.GetComponent<Image>().sprite = TableWife;
             BackgroundTransform.GetComponent<Image>().sprite = BackgroundWife;
+            Rounds.gameObject.SetActive(false);
         } else {
             frameMat.SetColor("_Villain", colorVillain1);
             frameMat.SetColor("_Villain2", colorVillain2);
@@ -126,6 +131,30 @@ public class Arms : MonoBehaviour
             progressBarMat.SetColor("_Villain2", colorVillain2);
             TableTransform.GetComponent<Image>().sprite = Table;
             BackgroundTransform.GetComponent<Image>().sprite = Background;
+            Rounds.gameObject.SetActive(true);
+            if (SceneResetter.Instance.current_fight == fight_scene_t.boss_0_wins_0_losses || 
+                SceneResetter.Instance.current_fight == fight_scene_t.boss_0_wins_1_losses)
+            {
+                Rounds.Find("Rounds Won").Find("Won").GetComponent<TextMeshProUGUI>().text = "0";
+            } else if (SceneResetter.Instance.current_fight == fight_scene_t.boss_1_wins_0_losses || 
+                SceneResetter.Instance.current_fight == fight_scene_t.boss_1_wins_1_losses)
+            {
+                Rounds.Find("Rounds Won").Find("Won").GetComponent<TextMeshProUGUI>().text = "1";
+            }
+
+            if (SceneResetter.Instance.current_fight == fight_scene_t.boss_0_wins_1_losses || 
+                SceneResetter.Instance.current_fight == fight_scene_t.boss_1_wins_1_losses)
+            {
+                Rounds.Find("Rounds Lost").Find("Lost").GetComponent<TextMeshProUGUI>().text = "1";
+            } else if (SceneResetter.Instance.current_fight == fight_scene_t.boss_0_wins_0_losses || 
+                SceneResetter.Instance.current_fight == fight_scene_t.boss_1_wins_0_losses)
+            {
+                Rounds.Find("Rounds Lost").Find("Lost").GetComponent<TextMeshProUGUI>().text = "0";
+            }
+
+            if (SceneResetter.Instance.current_fight == fight_scene_t.boss_secret){
+                Rounds.gameObject.SetActive(false);
+            }
         }
     }
 
