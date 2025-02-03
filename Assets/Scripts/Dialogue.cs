@@ -149,6 +149,7 @@ public class Dialogue : MonoBehaviour
             {
                 line_idx++;
                 if (line_idx > dialogueLines.Length-1) {
+                    Debug.Log("I should have died");
                     Destroy(gameObject);
                     return;
                 }

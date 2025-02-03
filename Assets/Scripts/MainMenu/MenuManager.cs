@@ -10,6 +10,9 @@ public class MenuManager : MonoBehaviour
     private float countDown = 2f;
     private float trackerCountDown = 0f;
     private float flicker = 0f;
+    public GameObject dialogue_prefab;
+    private GameObject dialogue_object;
+    private int n_dialogues = 0;
     private TMPro.TextMeshProUGUI pressStartText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,12 +23,31 @@ public class MenuManager : MonoBehaviour
         Buttons = GameObject.Find("Buttons").transform;
         Buttons.gameObject.SetActive(false);
         pressStartText = GameObject.Find("PressStart").GetComponent<TMPro.TextMeshProUGUI>();
-        startTitleScreen();
+        
+        // Spawn a dialogue object.
+        dialogue_object = Instantiate(dialogue_prefab, gameObject.transform);
+        Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
+        dialogue_script.dialogueFile = "credits.json";
+        dialogue_object.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (dialogue_object != null){
+            return;
+        }
+        else if (dialogue_object == null && n_dialogues == 0){
+            n_dialogues ++;
+            
+            // Spawn the second dialogue.
+            dialogue_object = Instantiate(dialogue_prefab, gameObject.transform);
+            Dialogue dialogue_script = dialogue_object.GetComponent<Dialogue>();
+            dialogue_script.dialogueFile = "intro.json";
+            dialogue_object.gameObject.SetActive(true);
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && !titledisappear)
         {

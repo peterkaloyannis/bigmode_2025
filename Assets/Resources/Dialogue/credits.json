@@ -1,0 +1,49 @@
+{ "branches": [
+    {
+        "achievements_needed": [],
+        "lines": [
+            {
+                "speaker": "Narrator",
+                "text": [
+                    "This game was made with love by"
+                ]
+            },
+            {
+                "speaker": "Henri",
+                "text": [
+                    "I worked on the visuals, gameplay and soundtrack!"
+            ]
+            },
+            {
+                "speaker": "Peter",
+                "text": [
+                    "I worked on the gameplay, story and visuals!"
+                ]
+            },
+            {
+                "speaker": "Franco",
+                "text": [
+                    "I worked on the sound effects, story and visuals!"
+                ]
+            },
+            {
+                "speaker": "Kevin",
+                "text": [
+                    "I worked on the writing and story!"
+                ]
+            },
+            {
+                "speaker": "Laurier",
+                "text": [
+                    "I worked on the animation and modelling!"
+                ]
+            },
+            {
+                "speaker": "All of Us",
+                "text": [
+                    "Please Enjoy!"
+                ]
+            }
+        ]
+    }
+]}

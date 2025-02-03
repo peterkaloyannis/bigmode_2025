@@ -2045,7 +2045,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 988317579}
-  - component: {fileID: 988317581}
   - component: {fileID: 988317580}
   m_Layer: 0
   m_Name: TitleScreen
@@ -2167,23 +2166,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &988317581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988317578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1af9c7428f7e03d41a54fa0ceb005bc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Source1: {fileID: 988317580}
-  pressStart: {fileID: 8300000, guid: 0be21e417c6fc2d4b91bdbf95be3a2d1, type: 3}
-  pressStartText: {fileID: 1504240799}
-  Cinema: {fileID: 1427631786}
-  Buttons: {fileID: 1275566794}
 --- !u!1 &995931585
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,11 +3305,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423325195}
   m_CullTransparentMesh: 1
---- !u!224 &1427631786 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6622975558245858466, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-  m_PrefabInstance: {fileID: 4549618828654852247}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1504240797
 GameObject:
   m_ObjectHideFlags: 0
@@ -4912,6 +4889,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 435445760489972803, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: dialogue_prefab
+      value: 
+      objectReference: {fileID: 3186934537172322259, guid: 73647623ae047f44e991e76b3df2dd57, type: 3}
     - target: {fileID: 1698776170700169632, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_Name
       value: MainMenuPrefab
@@ -4956,20 +4937,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4779023309148339105, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
-      propertyPath: display
-      value: 0
+    - target: {fileID: 5217165946813130195, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: m_Name
+      value: DialoguePrefab
       objectReference: {fileID: 0}
     - target: {fileID: 5474496198687475806, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1608136337}
+    - target: {fileID: 7812710101093694437, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+      propertyPath: dialogueFile
+      value: intro.json
+      objectReference: {fileID: 0}
     - target: {fileID: 8013507209460755587, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1608136337}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 496209077901199780, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
+    - {fileID: 5217165946813130195, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e459b48989aa234ba73bc96efd5f017, type: 3}
